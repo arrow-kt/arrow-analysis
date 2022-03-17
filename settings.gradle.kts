@@ -18,7 +18,7 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "arrow-meta-workspace"
+rootProject.name = "arrow-analysis"
 
 // Libraries
 
@@ -37,16 +37,6 @@ include(":arrow-meta-docs")
 project(":arrow-meta-docs").projectDir = File("docs")
 
 //Plugins
-
-// Proofs
-// include(":arrow-proofs-plugin")
-// project(":arrow-proofs-plugin").projectDir = File("plugins/proofs/proofs-plugin")
-
-// include(":arrow-proofs-gradle-plugin")
-// project(":arrow-proofs-gradle-plugin").projectDir = File("plugins/proofs/proofs-gradle-plugin")
-
-// include(":arrow-meta-prelude")
-// project(":arrow-meta-prelude").projectDir = File("plugins/proofs/prelude")
 
 // Analysis
 
