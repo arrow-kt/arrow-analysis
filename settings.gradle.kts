@@ -31,11 +31,6 @@ project(":arrow-meta-test").projectDir = File("libs/meta-test")
 include(":arrow-gradle-plugin-commons")
 project(":arrow-gradle-plugin-commons").projectDir = File("libs/gradle-plugin-commons")
 
-// Docs
-
-include(":arrow-meta-docs")
-project(":arrow-meta-docs").projectDir = File("docs")
-
 //Plugins
 
 // Analysis
