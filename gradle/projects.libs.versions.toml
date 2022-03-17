@@ -2,17 +2,13 @@
 arrow = "1.0.1"
 arrowMeta = "1.6.1-SNAPSHOT"
 arrowGradleConfig = "0.10.0"
-assertj = "3.22.0"
 classgraph = "4.8.141"
 dokka = "1.6.10"
-intellijOpenApi = "7.0.3"
-javaAssist = "3.28.0-GA"
 junit = "5.8.2"
 junitLauncher = "1.8.2"
 kotlin = "1.6.10"
 kotest = "3.4.2"
 javaSmt = "3.12.0"
-kotlinCompileTesting = "1.4.7"
 javaCompileTesting = "0.19"
 apacheCommonsText = "1.9"
 sarif4k = "0.0.1"
@@ -24,27 +20,17 @@ arrowOptics = { module = "io.arrow-kt:arrow-optics", version.ref = "arrow" }
 arrowMeta = { module = "io.arrow-kt:arrow-meta", version.ref = "arrowMeta" }
 arrowMetaTest = { module = "io.arrow-kt:arrow-meta-test", version.ref = "arrowMeta" }
 arrowGradlePluginCommons = { module = "io.arrow-kt:arrow-gradle-plugin-commons", version.ref = "arrowMeta" }
-assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
 classgraph = { module = "io.github.classgraph:classgraph", version.ref = "classgraph" }
-intellijOpenApi = { module = "com.intellij:openapi", version.ref = "intellijOpenApi" }
-javaAssist = { module = "org.javassist:javassist", version.ref = "javaAssist" }
 javaSmt = { module = "org.sosy-lab:java-smt", version.ref = "javaSmt" }
 junit = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
 junitEngine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
 junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher", version.ref = "junitLauncher" }
-kotlin-annotationProcessingEmbeddable = { module = "org.jetbrains.kotlin:kotlin-annotation-processing-embeddable" }
-kotlin-compiler = { module = "org.jetbrains.kotlin:kotlin-compiler" }
-kotlin-compilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable" }
 kotlin-stdlibCommon = { module = "org.jetbrains.kotlin:kotlin-stdlib-common", version.ref = "kotlin" }
 kotlin-stdlibJDK8 = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlin-stdlibJS = { module = "org.jetbrains.kotlin:kotlin-stdlib-js" }
-kotlin-scriptingCompilerEmbeddable = { module = "org.jetbrains.kotlin:kotlin-scripting-compiler-embeddable" }
-kotlin-scriptUtil = { module = "org.jetbrains.kotlin:kotlin-script-util" }
 kotlin-gradlePluginX = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
 kotlin-gradlePluginApi = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin-api" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
-kotlinCompileTesting = { module = "com.github.tschuchortdev:kotlin-compile-testing", version.ref = "kotlinCompileTesting" }
-kotlinCompileTestingKsp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "kotlinCompileTesting" }
 javaCompileTesting = { module = "com.google.testing.compile:compile-testing", version.ref = "javaCompileTesting" }
 apacheCommonsText = { module = "org.apache.commons:commons-text", version.ref = "apacheCommonsText" }
 sarif4k = { module = "io.github.detekt.sarif4k:sarif4k", version.ref = "sarif4k" }
