@@ -1,6 +1,6 @@
 name: Build Artifacts
 
-on: pull_request
+on: [pull_request, push]
 
 env:
   JAVA_OPTS: -Xms512m -Xmx1024m

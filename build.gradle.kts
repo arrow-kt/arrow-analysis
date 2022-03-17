@@ -18,7 +18,7 @@ allprojects {
   group = property("projects.group").toString()
 }
 
-version = property("projects.meta_version").toString()
+version = property("projects.analysis_version").toString()
 
 allprojects {
   this.tasks.withType<Test>() {
