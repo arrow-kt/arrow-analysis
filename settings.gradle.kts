@@ -20,19 +20,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "arrow-analysis"
 
-// Libraries
-
-include(":arrow-meta")
-project(":arrow-meta").projectDir = File("libs/arrow-meta")
-
-include(":arrow-meta-test")
-project(":arrow-meta-test").projectDir = File("libs/meta-test")
-
-include(":arrow-gradle-plugin-commons")
-project(":arrow-gradle-plugin-commons").projectDir = File("libs/gradle-plugin-commons")
-
-//Plugins
-
 // Analysis
 
 include(":arrow-analysis-types")
@@ -61,6 +48,3 @@ project(":arrow-analysis-example").projectDir = File("analysis/example")
 
 include(":arrow-analysis-java-example")
 project(":arrow-analysis-java-example").projectDir = File("analysis/java-example")
-
-//includeBuild("arrow-analysis-sample")
-//includeBuild("arrow-proofs-example")
