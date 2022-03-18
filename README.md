@@ -2,8 +2,7 @@
 
 [![Kotlin version badge](https://img.shields.io/badge/kotlin-1.6-blue.svg)](https://kotlinlang.org/docs/whatsnew16.html)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-[![Latest snapshot](https://img.shields.io/maven-metadata/v?color=0576b6&label=latest%20snapshot&metadataUrl=https%3A%2F%2Foss.sonatype.org%2Fservice%2Flocal%2Frepositories%2Fsnapshots%2Fcontent%2Fio%2Farrow-kt%2Farrow-analysis-common%2Fmaven-metadata.xml)](https://oss.sonatype.org/service/local/repositories/snapshots/content/io/arrow-kt/arrow-analysis-common/)
-
+[![Maven Central](https://img.shields.io/maven-central/v/io.arrow-kt/arrow-analysis-common?color=4caf50&label=latest%20release)](https://maven-badges.herokuapp.com/maven-central/io.arrow-kt/arrow-analysis-common)
 ## Contributing
 
 Λrrow Meta is an inclusive community powered by awesome individuals like you. As an actively growing ecosystem, Λrrow Meta and its associated libraries and toolsets are in need of new contributors! We have issues suited for all levels, from entry to advanced, and our maintainers are happy to provide 1:1 mentoring. All are welcome in Λrrow Meta.
