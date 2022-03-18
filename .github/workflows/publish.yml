@@ -48,7 +48,9 @@ jobs:
 
       - id: get-analysis-version
         name: Get Analysis version
-        run: echo "::set-output name=analysis-version::$(head -n 1 build/semver/version.txt)"
+        run: |
+          ./gradlew
+          echo "::set-output name=analysis-version::$(head -n 1 build/semver/version.txt)"
 
       - name: Upload reports
         uses: actions/upload-artifact@v3.0.0
@@ -86,14 +88,14 @@ jobs:
         java-version: '15'
         cache: 'gradle'
 
-    - name: Publish alpha/beta/rc artifacts and gradle plugins
+    - name: Publish alpha/beta/rc artifacts
       if: |
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
       run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
 
-    - name: Publish final artifacts and gradle plugins
+    - name: Publish final artifacts
       if: |
         !contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
@@ -113,3 +115,6 @@ jobs:
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')
       run: ./gradlew --full-stacktrace publishPlugins
+
+    - name: Stop Gradle daemons
+      run: ./gradlew --stop
