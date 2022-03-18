@@ -58,6 +58,9 @@ jobs:
           name: 'reports-${{ matrix.os }}'
           path: '**/build/reports/**'
 
+      - name: Stop Gradle daemons
+        run: ./gradlew --stop
+
 #      - name: Bundle SARIF report
 #        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
 #
@@ -93,7 +96,7 @@ jobs:
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
-      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: ./gradlew --full-stacktrace publishToSonatype closeAndReleaseSonatypeStagingRepository
 
     - name: Publish final artifacts
       if: |
