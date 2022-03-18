@@ -92,37 +92,29 @@ jobs:
         cache: 'gradle'
 
     - name: Publish alpha/beta/rc artifacts and gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
 
     - name: Publish final artifacts and gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         !contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
 
     - name: Publish alpha/beta/rc gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishPlugins
+      run: ./gradlew --full-stacktrace publishPlugins
 
     - name: Publish final gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         !contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishPlugins
+      run: ./gradlew --full-stacktrace publishPlugins
