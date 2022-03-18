@@ -50,16 +50,11 @@ jobs:
         name: Get Analysis version
         run: echo "::set-output name=analysis-version::$(head -n 1 build/semver/version.txt)"
 
-      - name: Bundle the build report
-        if: failure()
-        run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
-
-      - name: Upload the build report
-        if: failure()
-        uses: actions/upload-artifact@master
+      - name: Upload reports
+        uses: actions/upload-artifact@v3.0.0
         with:
-          name: error-report
-          path: build-reports.zip
+          name: 'reports-${{ matrix.os }}'
+          path: '**/build/reports/**'
 
 #      - name: Bundle SARIF report
 #        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
