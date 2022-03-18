@@ -50,27 +50,22 @@ jobs:
         name: Get Analysis version
         run: echo "::set-output name=analysis-version::$(head -n 1 build/semver/version.txt)"
 
-      - name: Bundle the build report
-        if: failure()
-        run: find . -type d -name 'reports' | zip -@ -r build-reports.zip
-
-      - name: Upload the build report
-        if: failure()
-        uses: actions/upload-artifact@master
+      - name: Upload reports
+        uses: actions/upload-artifact@v3.0.0
         with:
-          name: error-report
-          path: build-reports.zip
+          name: 'reports-${{ matrix.os }}'
+          path: '**/build/reports/**'
 
-      - name: Bundle SARIF report
-        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
-
-      - name: Upload SARIF report
-        uses: github/codeql-action/upload-sarif@v1.1.5
-        continue-on-error: true
-        with:
-          # Path to SARIF file relative to the root of the repository
-          sarif_file: sarif
-
+#      - name: Bundle SARIF report
+#        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
+#
+#      - name: Upload SARIF report
+#        uses: github/codeql-action/upload-sarif@v1.1.5
+#        continue-on-error: true
+#        with:
+#          # Path to SARIF file relative to the root of the repository
+#          sarif_file: sarif
+#
   publish:
     needs: build
     env:
@@ -92,37 +87,29 @@ jobs:
         cache: 'gradle'
 
     - name: Publish alpha/beta/rc artifacts and gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
 
     - name: Publish final artifacts and gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         !contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
 
     - name: Publish alpha/beta/rc gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         contains(needs.build.outputs.analysis-version, 'alpha') ||
         contains(needs.build.outputs.analysis-version, 'beta') ||
         contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishPlugins
+      run: ./gradlew --full-stacktrace publishPlugins
 
     - name: Publish final gradle plugins
-      uses: gradle/gradle-build-action@v2.1.3
       if: |
         !contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')
-      with:
-        arguments: --full-stacktrace publishPlugins
+      run: ./gradlew --full-stacktrace publishPlugins
