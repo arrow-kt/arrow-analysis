@@ -96,10 +96,10 @@ jobs:
 
     - name: Publish final artifacts
       if: |
-        !contains(needs.build.outputs.analysis-version, 'alpha') ||
-        !contains(needs.build.outputs.analysis-version, 'beta') ||
+        !contains(needs.build.outputs.analysis-version, 'alpha') &&
+        !contains(needs.build.outputs.analysis-version, 'beta') &&
         !contains(needs.build.outputs.analysis-version, 'rc')
-      run: echo "shouldn't run but did with version ${{ needs.build.outputs.analysis-version }}"
+      run: ./gradlew --full-stacktrace publishToSonatype closeAndReleaseSonatypeStagingRepository
 
     - name: Publish alpha/beta/rc gradle plugins
       if: |
@@ -110,10 +110,10 @@ jobs:
 
     - name: Publish final gradle plugins
       if: |
-        !contains(needs.build.outputs.analysis-version, 'alpha') ||
-        !contains(needs.build.outputs.analysis-version, 'beta') ||
+        !contains(needs.build.outputs.analysis-version, 'alpha') &&
+        !contains(needs.build.outputs.analysis-version, 'beta') &&
         !contains(needs.build.outputs.analysis-version, 'rc')
-      run: echo "shouldn't run but did with version ${{ needs.build.outputs.analysis-version }}"
+      run: ./gradlew --full-stacktrace publishPlugins
 
     - name: Stop Gradle daemons
       run: ./gradlew --stop
