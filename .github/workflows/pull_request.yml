@@ -30,7 +30,7 @@ jobs:
           java-version: '15'
 
       - name: Build and test with Gradle
-        uses: gradle/gradle-build-action@v2.1.3
+        uses: gradle/gradle-build-action@v2.1.4
         with:
           arguments: -PkotlinVersion=${{ matrix.kotlin }} -PjvmTargetVersion=${{ matrix.jvm_target }} build --scan --stacktrace
 
