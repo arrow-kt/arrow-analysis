@@ -1,7 +1,5 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
-import io.gitlab.arturbosch.detekt.Detekt
-
 plugins {
   id(libs.plugins.kotlin.multiplatform.get().pluginId)
   alias(libs.plugins.arrowGradleConfig.kotlin)
@@ -9,7 +7,6 @@ plugins {
   alias(libs.plugins.arrowGradleConfig.versioning)
   alias(libs.plugins.arrowGradleConfig.formatter)
   alias(libs.plugins.kotlin.binaryCompatibilityValidator)
-  alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -58,18 +55,4 @@ tasks.compileKotlinJs {
 
 tasks.compileKotlinMetadata {
   kotlinOptions.suppressWarnings = true
-}
-
-detekt {
-  buildUponDefaultConfig = true
-  allRules = true
-}
-
-tasks.withType<Detekt>().configureEach {
-  reports {
-    html.required.set(true)
-    sarif.required.set(true)
-    txt.required.set(false)
-    xml.required.set(false)
-  }
 }
