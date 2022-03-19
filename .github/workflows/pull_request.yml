@@ -39,16 +39,12 @@ jobs:
         with:
           name: 'reports-${{ matrix.os }}'
           path: '**/build/reports/**'
-#
-#      - name: Bundle SARIF report
-#        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
-#
-#      - name: Upload SARIF report
-#        uses: github/codeql-action/upload-sarif@v1.1.5
-#        continue-on-error: true
-#        with:
-#        # Path to SARIF file relative to the root of the repository
-#          sarif_file: sarif
+
+      - name: Upload Code Scanning code analysis report
+        if: always()
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: 'build/reports/detekt/main.sarif'
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop
