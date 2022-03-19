@@ -76,11 +76,7 @@ jobs:
     env:
       JAVA_OPTS: -Xms512m -Xmx1024m
 
-    strategy:
-      matrix:
-        os: [macos-11, ubuntu-latest, windows-latest]
-
-    runs-on: '${{ matrix.os }}'
+    runs-on: macos-11
 
     steps:
     - uses: actions/checkout@v3.0.0
@@ -103,7 +99,7 @@ jobs:
         (!contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')) && !contains(needs.build.outputs.analysis-version, 'Z')
-      run: ./gradlew --full-stacktrace publishToSonatype closeSonatypeStagingRepository
+      run: echo "shouldn't run but did"
 
     - name: Publish alpha/beta/rc gradle plugins
       if: |
@@ -117,7 +113,7 @@ jobs:
         (!contains(needs.build.outputs.analysis-version, 'alpha') ||
         !contains(needs.build.outputs.analysis-version, 'beta') ||
         !contains(needs.build.outputs.analysis-version, 'rc')) && !contains(needs.build.outputs.analysis-version, 'Z')
-      run: ./gradlew --full-stacktrace publishPlugins
+      run: echo "shouldn't run but did"
 
     - name: Stop Gradle daemons
       run: ./gradlew --stop
