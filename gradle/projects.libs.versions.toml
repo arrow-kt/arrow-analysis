@@ -12,6 +12,8 @@ javaSmt = "3.12.0"
 javaCompileTesting = "0.19"
 apacheCommonsText = "1.9"
 sarif4k = "0.0.1"
+kotlinBinaryCompatibilityValidator = "0.8.0"
+detekt = "1.19.0"
 
 [libraries]
 arrowAnnotations = { module = "io.arrow-kt:arrow-annotations", version.ref = "arrow" }
@@ -44,3 +46,5 @@ arrowGradleConfig-kotlin = { id = "io.arrow-kt.arrow-gradle-config-kotlin", vers
 arrowGradleConfig-nexus = { id = "io.arrow-kt.arrow-gradle-config-nexus", version.ref = "arrowGradleConfig" }
 arrowGradleConfig-publish = { id = "io.arrow-kt.arrow-gradle-config-publish", version.ref = "arrowGradleConfig" }
 arrowGradleConfig-versioning = { id = "io.arrow-kt.arrow-gradle-config-versioning", version.ref = "arrowGradleConfig" }
+kotlin-binaryCompatibilityValidator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "kotlinBinaryCompatibilityValidator" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

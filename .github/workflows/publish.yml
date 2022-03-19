@@ -89,30 +89,30 @@ jobs:
 
     - name: Publish alpha/beta/rc artifacts
       if: |
-        contains(needs.build.outputs.analysis-version, alpha) ||
-        contains(needs.build.outputs.analysis-version, beta) ||
-        contains(needs.build.outputs.analysis-version, rc)
+        contains(needs.build.outputs.analysis-version, 'alpha') ||
+        contains(needs.build.outputs.analysis-version, 'beta') ||
+        contains(needs.build.outputs.analysis-version, 'rc')
       run: ./gradlew --full-stacktrace publishToSonatype closeAndReleaseSonatypeStagingRepository
 
     - name: Publish final artifacts
       if: |
-        !contains(needs.build.outputs.analysis-version, alpha) ||
-        !contains(needs.build.outputs.analysis-version, beta) ||
-        !contains(needs.build.outputs.analysis-version, rc)
+        !contains(needs.build.outputs.analysis-version, 'alpha') ||
+        !contains(needs.build.outputs.analysis-version, 'beta') ||
+        !contains(needs.build.outputs.analysis-version, 'rc')
       run: echo "shouldn't run but did with version ${{ needs.build.outputs.analysis-version }}"
 
     - name: Publish alpha/beta/rc gradle plugins
       if: |
-        contains(needs.build.outputs.analysis-version, alpha) ||
-        contains(needs.build.outputs.analysis-version, beta) ||
-        contains(needs.build.outputs.analysis-version, rc)
+        contains(needs.build.outputs.analysis-version, 'alpha') ||
+        contains(needs.build.outputs.analysis-version, 'beta') ||
+        contains(needs.build.outputs.analysis-version, 'rc')
       run: ./gradlew --full-stacktrace publishPlugins
 
     - name: Publish final gradle plugins
       if: |
-        !contains(needs.build.outputs.analysis-version, alpha) ||
-        !contains(needs.build.outputs.analysis-version, beta) ||
-        !contains(needs.build.outputs.analysis-version, rc)
+        !contains(needs.build.outputs.analysis-version, 'alpha') ||
+        !contains(needs.build.outputs.analysis-version, 'beta') ||
+        !contains(needs.build.outputs.analysis-version, 'rc')
       run: echo "shouldn't run but did with version ${{ needs.build.outputs.analysis-version }}"
 
     - name: Stop Gradle daemons

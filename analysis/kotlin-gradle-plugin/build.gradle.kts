@@ -1,11 +1,15 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
+import io.gitlab.arturbosch.detekt.Detekt
+
 plugins {
   id(libs.plugins.kotlin.jvm.get().pluginId)
   `java-gradle-plugin`
   alias(libs.plugins.arrowGradleConfig.kotlin)
   alias(libs.plugins.arrowGradleConfig.formatter)
   alias(libs.plugins.arrowGradleConfig.publish)
+  alias(libs.plugins.kotlin.binaryCompatibilityValidator)
+  alias(libs.plugins.detekt)
 }
 
 tasks.processResources {
@@ -39,4 +43,18 @@ pluginBundle {
   vcsUrl = "https://github.com/arrow-kt/arrow-meta"
   description = "Functional companion to Kotlin's Compiler"
   tags = listOf("kotlin", "compiler", "arrow", "plugin", "meta")
+}
+
+detekt {
+  buildUponDefaultConfig = true
+  allRules = true
+}
+
+tasks.withType<Detekt>().configureEach {
+  reports {
+    html.required.set(true)
+    sarif.required.set(true)
+    txt.required.set(false)
+    xml.required.set(false)
+  }
 }
