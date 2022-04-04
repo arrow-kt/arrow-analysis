@@ -47,11 +47,11 @@ jobs:
         if: always()
         run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
 
-      - name: Upload analysis report
-        if: always()
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: sarif # path relative to root
+#      - name: Upload analysis report
+#        if: always()
+#        uses: github/codeql-action/upload-sarif@v1
+#        with:
+#          sarif_file: sarif # path relative to root
 
   update_api:
     runs-on: ubuntu-latest
