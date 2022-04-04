@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kotlin: ['1.6.0', '1.6.10']
+        kotlin: ['1.6.0', '1.6.10', '1.6.20']
         jvm_target: ['1.8', '11', '15']
 
     steps:
@@ -40,14 +40,18 @@ jobs:
           name: 'reports-${{ matrix.os }}'
           path: '**/build/reports/**'
 
-#      - name: Upload Code Scanning code analysis report
-#        if: always()
-#        uses: github/codeql-action/upload-sarif@v1
-#        with:
-#          sarif_file: 'build/reports/detekt/main.sarif'
-
       - name: Stop Gradle daemons
         run: ./gradlew --stop
+
+      - name: Bundle analysis report
+        if: always()
+        run: mkdir sarif && find . -name '*.sarif' | xargs -I{} cp "{}" ./sarif/
+
+      - name: Upload analysis report
+        if: always()
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: sarif # path relative to root
 
   update_api:
     runs-on: ubuntu-latest
