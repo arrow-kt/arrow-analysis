@@ -18,6 +18,22 @@ allprojects {
   group = property("projects.group").toString()
 }
 
+tasks {
+  create<Exec>("generateDoc") {
+    commandLine("sh", "gradlew", "dokkaJekyll")
+  }
+
+  create("buildMetaDoc") {
+    group = "documentation"
+    description = "Generates API Doc and validates all the documentation"
+    dependsOn("generateDoc")
+  }
+}
+
+allprojects {
+  extra.set("dokka.outputDirectory", rootDir.resolve("docs/docs/apidocs"))
+}
+
 allprojects {
   this.tasks.withType<Test>() {
     useJUnitPlatform()

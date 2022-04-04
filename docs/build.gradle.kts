@@ -11,7 +11,7 @@ plugins {
 
 dependencies {
   runtimeOnly(libs.kotlin.stdlibJDK8)
-  runtimeOnly(libs.arrowAnalysisTypes)
+  runtimeOnly(projects.arrowAnalysisTypes)
 }
 
 tasks {
