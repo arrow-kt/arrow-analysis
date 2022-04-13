@@ -6,7 +6,6 @@ on:
 
 jobs:
   publish_documentation:
-    needs: build
     runs-on: ubuntu-latest
 
     env:
