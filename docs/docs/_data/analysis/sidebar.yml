@@ -1,0 +1,30 @@
+options:
+    - title: Quick Start
+      url: /
+
+    - title: Pre and post-conditions
+      url: /conditions
+
+    - title: Control operators (if, when)
+      url: /control
+
+    - title: Mutability and loops
+      url: /mutability
+
+    - title: Types and invariants
+      url: /types
+
+    - title: Wrappers
+      url: /wrappers
+
+    - title: Fields
+      url: /fields
+
+    - title: 3rd-party libraries
+      url: /laws
+
+    - title: Java support
+      url: /java
+
+    - title: GitHub Actions / SARIF
+      url: /sarif
