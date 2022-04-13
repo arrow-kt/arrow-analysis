@@ -141,6 +141,7 @@ jobs:
 
       - name: Prepare environment
         run: |
+          sudo gem install bundler
           bundle config set --local path 'vendor/bundle'
           bundle install --gemfile docs/Gemfile
 
