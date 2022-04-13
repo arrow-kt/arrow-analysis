@@ -23,7 +23,7 @@ tasks {
     commandLine("sh", "gradlew", "dokkaJekyll")
   }
 
-  create("buildMetaDoc") {
+  create("buildDoc") {
     group = "documentation"
     description = "Generates API Doc and validates all the documentation"
     dependsOn("generateDoc")
