@@ -56,3 +56,7 @@ tasks.compileKotlinJs {
 tasks.compileKotlinMetadata {
   kotlinOptions.suppressWarnings = true
 }
+
+apiValidation {
+  validationDisabled = true
+}
