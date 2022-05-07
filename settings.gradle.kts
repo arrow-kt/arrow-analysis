@@ -48,3 +48,9 @@ project(":arrow-analysis-example").projectDir = File("analysis/example")
 
 include(":arrow-analysis-java-example")
 project(":arrow-analysis-java-example").projectDir = File("analysis/java-example")
+
+
+// Docs
+
+include(":arrow-analysis-docs")
+project(":arrow-analysis-docs").projectDir = File("docs")
