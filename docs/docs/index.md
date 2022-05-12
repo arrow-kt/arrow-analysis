@@ -32,13 +32,17 @@ Open your Gradle build file, and add the following lines:
 <div id="gradle-kotlin" class="tabcontent" markdown="1">
 
 ```kotlin
-buildscript {
-  dependencies {
-    classpath("io.arrow-kt.analysis.kotlin:io.arrow-kt.analysis.kotlin.gradle.plugin:2.0")
-  }
+plugins {
+  kotlin("multiplatform") version "1.6.21"
+  // other plugins
+  id("io.arrow-kt.analysis.kotlin") version "2.0.2"
 }
 
-apply(plugin = "io.arrow-kt.analysis.kotlin")
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
 ```
 
 </div>
@@ -46,13 +50,17 @@ apply(plugin = "io.arrow-kt.analysis.kotlin")
 <div id="gradle-groovy" class="tabcontent" markdown="1">
 
 ```groovy
-buildscript {
-  dependencies {
-    classpath 'io.arrow-kt.analysis.kotlin:io.arrow-kt.analysis.kotlin.gradle.plugin:2.0'
-  }
+plugins {
+  id 'org.jetbrains.kotlin.multiplatform' version '1.6.21'
+  // other plugins
+  id 'io.arrow-kt.analysis.kotlin' version '2.0.2'
 }
 
-apply plugin: 'io.arrow-kt.analysis.kotlin'
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+}
 ```
 
 </div>
