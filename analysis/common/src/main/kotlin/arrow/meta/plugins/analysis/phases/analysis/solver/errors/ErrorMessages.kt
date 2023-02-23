@@ -329,7 +329,7 @@ object ErrorMessages {
         ?.joinToString(separator = System.lineSeparator()) { referencedElement ->
           val el = referencedElement.element
           val argsMapping = referencedElement.reference
-          argsMapping?.let { (param, resolvedArg) ->
+          argsMapping?.let { (param, _) ->
             val paramPsi = param.element()
             val location = paramPsi?.let { paramPsi.location() }
             "`${el.text}` bound to param `${param.name}` in `${param.containingDeclaration?.fqNameSafe}` ${location?.link() ?: ""}"

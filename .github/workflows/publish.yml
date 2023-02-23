@@ -25,26 +25,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kotlin: [ '1.6.0', '1.6.10' ]
-        jvm_target: [ '1.8', '11', '15' ]
+        jvm_target: [ '1.8', '11', '17' ]
 
     outputs:
       analysis-version: ${{ steps.get-analysis-version.outputs.analysis-version }}
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-java@v3.3.0
+      - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: '15'
+          distribution: 'temurin'
+          java-version: '17'
 
       - name: Build and test with Gradle
-        uses: gradle/gradle-build-action@v2.1.5
+        uses: gradle/gradle-build-action@v2
         with:
-          arguments: -PkotlinVersion=${{ matrix.kotlin }} -PjvmTargetVersion=${{ matrix.jvm_target }} build --scan --stacktrace
+          arguments: -PjvmTargetVersion=${{ matrix.jvm_target }} build --scan --stacktrace
 
       - id: get-analysis-version
         name: Get Analysis version
@@ -53,7 +52,7 @@ jobs:
           echo "::set-output name=analysis-version::$(head -n 1 build/semver/version.txt)"
 
       - name: Upload reports
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3
         with:
           name: 'reports-${{ matrix.os }}'
           path: '**/build/reports/**'
@@ -73,18 +72,16 @@ jobs:
 #
   publish:
     needs: build
-    env:
-      JAVA_OPTS: -Xms512m -Xmx1024m
 
     runs-on: macos-11
 
     steps:
-    - uses: actions/checkout@v3.0.2
+    - uses: actions/checkout@v3
 
-    - uses: actions/setup-java@v3.3.0
+    - uses: actions/setup-java@v3
       with:
-        distribution: 'adopt'
-        java-version: '15'
+        distribution: 'temurin'
+        java-version: '17'
         cache: 'gradle'
 
     - name: Publish alpha/beta/rc artifacts
@@ -131,12 +128,12 @@ jobs:
       S3_BUCKET: ${{ secrets.S3_BUCKET }}
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3
 
-      - uses: actions/setup-java@v3.3.0
+      - uses: actions/setup-java@v3
         with:
-          distribution: 'adopt'
-          java-version: '15'
+          distribution: 'temurin'
+          java-version: '17'
           cache: 'gradle'
 
       - name: Prepare environment

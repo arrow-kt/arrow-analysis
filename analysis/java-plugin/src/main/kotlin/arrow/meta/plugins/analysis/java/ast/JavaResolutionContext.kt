@@ -120,8 +120,7 @@ public class JavaResolutionContext(
     (declaration as? JavaElement)?.let { ctx.resolver.resolve(it.impl())?.model(ctx) }
 
   private val diagnosticSource: DiagnosticSource
-    get() =
-      ctx.unit?.let { DiagnosticSource(it.sourceFile, ctx.logger) } ?: DiagnosticSource.NO_SOURCE
+    get() = DiagnosticSource(ctx.unit.sourceFile, ctx.logger)
 
   private fun report(element: Element, builder: (JCTree) -> JCDiagnostic) {
     (element as? JavaElement)?.let { elt ->

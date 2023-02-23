@@ -1,19 +1,22 @@
 [versions]
-arrow = "1.1.2"
-arrowMeta = "1.6.1-alpha.5"
-arrowGradleConfig = "0.10.1"
-classgraph = "4.8.146"
-dokka = "1.6.21"
-junit = "5.8.2"
-junitLauncher = "1.8.2"
-kotlin = "1.6.21"
-kotest = "3.4.2"
-javaSmt = "3.12.0"
-javaCompileTesting = "0.19"
+arrow = "1.1.5"
+arrowMeta = "1.6.1-alpha.7"
+arrowGradleConfig = "0.11.0"
+classgraph = "4.8.154"
+dokka = "1.7.20"
+junit = "5.9.2"
+junitLauncher = "1.9.2"
+kotlin = "1.8.10"
+kotest = "5.5.5"
+javaSmt = "3.14.3"
+javaCompileTesting = "0.21.0"
 apacheCommonsText = "1.9"
-sarif4k = "0.0.1"
-kotlinBinaryCompatibilityValidator = "0.9.0"
-detekt = "1.20.0"
+sarif4k = "0.3.0"
+kotlinBinaryCompatibilityValidator = "0.13.0"
+detekt = "1.22.0"
+kotlinxSerialization = "1.5.0-RC"
+ksp = "1.8.10-1.0.9"
+okio = "3.2.0"
 
 [libraries]
 arrowAnnotations = { module = "io.arrow-kt:arrow-annotations", version.ref = "arrow" }
@@ -36,6 +39,10 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 javaCompileTesting = { module = "com.google.testing.compile:compile-testing", version.ref = "javaCompileTesting" }
 apacheCommonsText = { module = "org.apache.commons:commons-text", version.ref = "apacheCommonsText" }
 sarif4k = { module = "io.github.detekt.sarif4k:sarif4k", version.ref = "sarif4k" }
+kotlinx-serialization-core = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
+ksp-api = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+ksp-lib = { module = "com.google.devtools.ksp:symbol-processing", version.ref = "ksp" }
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }

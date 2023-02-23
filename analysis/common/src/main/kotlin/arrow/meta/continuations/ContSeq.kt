@@ -50,8 +50,8 @@ sealed class ContSeq<out A> {
    */
   fun <B> map(f: suspend ContSyntax.(A) -> B): ContSeq<B> = ContSeq {
     // Weird hack for RestrictSuspension
-    val f = f as suspend ContSeqSyntax<B>.(A) -> B
-    forEach { a -> yield(f(a)) }
+    val g = f as suspend ContSeqSyntax<B>.(A) -> B
+    forEach { a -> yield(g(a)) }
   }
 
   /** Side-effecting version of map */

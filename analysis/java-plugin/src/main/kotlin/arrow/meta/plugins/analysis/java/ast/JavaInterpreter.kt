@@ -1,4 +1,4 @@
-@file:Suppress("JAVA_MODULE_DOES_NOT_EXPORT_PACKAGE")
+@file:Suppress("JAVA_MODULE_DOES_NOT_EXPORT_PACKAGE", "UNCHECKED_CAST")
 
 package arrow.meta.plugins.analysis.java.ast
 

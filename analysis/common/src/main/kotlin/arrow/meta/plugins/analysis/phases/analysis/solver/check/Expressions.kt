@@ -1271,7 +1271,7 @@ private fun SolverState.checkBinaryExpression(
     (operator == "ANDAND" || operator == "OROR") -> {
       val lhs = solver.makeObjectVariable(newName(data.context, "left", left))
       val rhs = solver.makeObjectVariable(newName(data.context, "right", right))
-      checkExpressionConstraints(lhs, left, data).checkReturnInfo { stateAfterLhs ->
+      checkExpressionConstraints(lhs, left, data).checkReturnInfo { _ ->
         checkExpressionConstraints(rhs, right, data).checkReturnInfo { stateAfterRhs ->
           cont {
             when (operator) {
