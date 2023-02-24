@@ -1,6 +1,6 @@
 [versions]
 arrow = "1.1.5"
-arrowMeta = "1.6.1-alpha.7"
+arrowMeta = "1.6.1"
 arrowGradleConfig = "0.11.0"
 classgraph = "4.8.154"
 dokka = "1.7.20"
