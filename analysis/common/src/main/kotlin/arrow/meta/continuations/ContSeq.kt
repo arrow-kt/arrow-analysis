@@ -223,7 +223,8 @@ private class ContSeqBuilder<T> : ContSeqSyntax<T>, Iterator<T>, Continuation<Un
             nextIterator = null
           }
         State_Done -> return false
-        State_Ready, State_ManyReady -> return true
+        State_Ready,
+        State_ManyReady -> return true
         else -> throw exceptionalState()
       }
 
@@ -236,7 +237,8 @@ private class ContSeqBuilder<T> : ContSeqSyntax<T>, Iterator<T>, Continuation<Un
 
   override fun next(): T =
     when (state) {
-      State_NotReady, State_ManyNotReady -> nextNotReady()
+      State_NotReady,
+      State_ManyNotReady -> nextNotReady()
       State_ManyReady -> {
         state = State_ManyNotReady
         nextIterator!!.next()

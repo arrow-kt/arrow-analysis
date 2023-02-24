@@ -57,7 +57,8 @@ public class JavaResolutionContext(
         object : OurTreeVisitor<Unit>(Unit) {
           override fun visitMethodInvocation(node: MethodInvocationTree, p: Unit?) {
             node.methodSelect?.toString()?.let { calleeText ->
-              if (calleeText == "pre" ||
+              if (
+                calleeText == "pre" ||
                   calleeText.endsWith(".pre") ||
                   calleeText == "post" ||
                   calleeText.endsWith(".post") ||
