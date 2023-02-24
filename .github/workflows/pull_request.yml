@@ -62,7 +62,7 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: apiDump
+          arguments: -PjvmTargetVersion=8 apiDump
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop
