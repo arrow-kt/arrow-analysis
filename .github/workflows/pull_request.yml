@@ -13,8 +13,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        jvm_target: ['1.8', '11', '17']
 
     steps:
       - uses: actions/checkout@v3
@@ -29,7 +27,7 @@ jobs:
       - name: Build and test with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: -PjvmTargetVersion=${{ matrix.jvm_target }} build --scan --stacktrace
+          arguments: build --scan --stacktrace
 
       - name: Upload reports
         uses: actions/upload-artifact@v3
@@ -62,7 +60,7 @@ jobs:
       - name: Build
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: -PjvmTargetVersion=8 apiDump
+          arguments: apiDump
 
       - name: Stop Gradle daemons
         run: ./gradlew --stop

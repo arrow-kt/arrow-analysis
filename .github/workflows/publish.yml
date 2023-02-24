@@ -24,8 +24,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix:
-        jvm_target: [ '1.8', '11', '17' ]
 
     outputs:
       analysis-version: ${{ steps.get-analysis-version.outputs.analysis-version }}
@@ -43,7 +41,7 @@ jobs:
       - name: Build and test with Gradle
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: -PjvmTargetVersion=${{ matrix.jvm_target }} build --scan --stacktrace
+          arguments: build --scan --stacktrace
 
       - id: get-analysis-version
         name: Get Analysis version
