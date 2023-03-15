@@ -28,9 +28,6 @@ dependencies {
   testRuntimeOnly(projects.arrowAnalysisKotlinPlugin)
   testRuntimeOnly(libs.arrowCore)
 
-  testImplementation(files("../../vendor/kotlin-compile-testing-1.4.10-SNAPSHOT.jar"))
-  testImplementation(files("../../vendor/kotlin-compile-testing-ksp-1.4.10-SNAPSHOT.jar"))
   testImplementation(libs.ksp.api)
   testImplementation(libs.ksp.lib)
-  testImplementation(libs.okio)
 }
