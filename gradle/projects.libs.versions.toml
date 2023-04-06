@@ -1,12 +1,12 @@
 [versions]
-arrow = "1.1.5"
+arrow = "1.2.0-RC"
 arrowMeta = "1.6.2-alpha.5"
 arrowGradleConfig = "0.11.0"
 classgraph = "4.8.157"
 dokka = "1.8.10"
 junit = "5.9.2"
 junitLauncher = "1.9.2"
-kotlin = "1.8.10"
+kotlin = "1.8.20"
 kotest = "5.5.5"
 javaSmt = "3.14.3"
 javaCompileTesting = "0.21.0"
@@ -15,7 +15,7 @@ sarif4k = "0.3.0"
 kotlinBinaryCompatibilityValidator = "0.13.0"
 detekt = "1.22.0"
 kotlinxSerialization = "1.5.0-RC"
-ksp = "1.8.10-1.0.9"
+ksp = "1.8.20-1.0.10"
 
 [libraries]
 arrowAnnotations = { module = "io.arrow-kt:arrow-annotations", version.ref = "arrow" }
