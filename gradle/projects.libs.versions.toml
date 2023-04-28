@@ -1,7 +1,7 @@
 [versions]
 arrow = "1.2.0-RC"
 arrowMeta = "1.6.2-alpha.5"
-arrowGradleConfig = "0.11.0"
+arrowGradleConfig = "0.12.0-rc.3"
 classgraph = "4.8.157"
 dokka = "1.8.10"
 junit = "5.9.2"
@@ -15,7 +15,7 @@ sarif4k = "0.3.0"
 kotlinBinaryCompatibilityValidator = "0.13.0"
 detekt = "1.22.0"
 kotlinxSerialization = "1.5.0"
-ksp = "1.8.20-1.0.11"
+ksp = "1.8.21-1.0.11"
 
 [libraries]
 arrowAnnotations = { module = "io.arrow-kt:arrow-annotations", version.ref = "arrow" }
