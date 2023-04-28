@@ -70,11 +70,11 @@ allprojects {
   tasks.withType<JavaCompile>().configureEach {
     javaCompiler.set(
       toolchain.compilerFor {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(11))
       }
     )
   }
   tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
+    compilerOptions.jvmTarget.set(JvmTarget.JVM_11)
   }
 }
