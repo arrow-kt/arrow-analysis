@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 @Suppress("DSL_SCOPE_VIOLATION")
 
 plugins {
@@ -52,6 +49,7 @@ allprojects {
     )
     systemProperty("CURRENT_VERSION", "$version")
     systemProperty("arrowVersion", libs.versions.arrow.get())
+    systemProperty("jvmTargetVersion", "11")
     jvmArgs = listOf(
       """-Dkotlin.compiler.execution.strategy="in-process"""",
       "--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
@@ -62,19 +60,5 @@ allprojects {
       "--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
       "--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED"
     )
-  }
-}
-
-val toolchain = project.extensions.getByType<JavaToolchainService>()
-allprojects {
-  tasks.withType<JavaCompile>().configureEach {
-    javaCompiler.set(
-      toolchain.compilerFor {
-        languageVersion.set(JavaLanguageVersion.of(8))
-      }
-    )
-  }
-  tasks.withType<KotlinCompile>().configureEach {
-    compilerOptions.jvmTarget.set(JvmTarget.JVM_1_8)
   }
 }
