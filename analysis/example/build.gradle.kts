@@ -4,6 +4,7 @@ plugins {
   id(libs.plugins.kotlin.multiplatform.get().pluginId)
   alias(libs.plugins.arrowGradleConfig.kotlin)
   alias(libs.plugins.arrowGradleConfig.formatter)
+  alias(libs.plugins.arrowGradleConfig.versioning)
 }
 
 
