@@ -62,3 +62,10 @@ allprojects {
     )
   }
 }
+
+val projects = listOf("common", "laws", "types", "kotlin-plugin", "kotlin-gradle-plugin", "java-plugin", "java-gradle-plugin")
+projects.forEach { thing ->
+  projects.forEach { dep ->
+    tasks.getByPath(":arrow-analysis-$thing:docsJar").dependsOn(":arrow-analysis-$dep:dokkaHtml")
+  }
+}
