@@ -8,8 +8,10 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.kotlin.ast.model
 class KotlinValueArgumentName(val impl: org.jetbrains.kotlin.psi.ValueArgumentName) :
   ValueArgumentName {
   fun impl(): org.jetbrains.kotlin.psi.ValueArgumentName = impl
+
   override val asName: Name
     get() = Name(impl().asName.asString())
+
   override val referenceExpression: SimpleNameExpression?
     get() = impl().referenceExpression?.model()
 }

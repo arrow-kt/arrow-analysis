@@ -4,7 +4,7 @@ enum class SeverityLevel {
   Error,
   Warning,
   Info,
-  Unsupported
+  Unsupported,
 }
 
 sealed interface ErrorIds {
@@ -12,9 +12,11 @@ sealed interface ErrorIds {
   val name: String
   val id: String
     get() = name
+
   val shortDescription: String
   val fullDescription: String?
     get() = null
+
   val level: SeverityLevel
     get() = SeverityLevel.Error
 
@@ -135,7 +137,7 @@ sealed interface ErrorIds {
           ```
         """
             .trimIndent()
-    }
+    },
   }
 
   enum class Inconsistency : ErrorIds {
@@ -261,7 +263,7 @@ sealed interface ErrorIds {
             (Liskov Substitution Principle).
           """
             .trimIndent()
-    }
+    },
   }
 
   enum class Exception : ErrorIds {

@@ -12,7 +12,7 @@ import javax.lang.model.element.ExecutableElement
 
 public class JavaConstructorDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: ExecutableElement
+  private val impl: ExecutableElement,
 ) : ConstructorDescriptor, JavaFunctionDescriptor(ctx, impl) {
   init {
     require(impl.kind == ElementKind.CONSTRUCTOR)
@@ -20,5 +20,6 @@ public class JavaConstructorDescriptor(
 
   override val constructedClass: ClassDescriptor
     get() = (impl as? Symbol.MethodSymbol)?.owner?.model(ctx)!!
+
   override val isPrimary: Boolean = false
 }

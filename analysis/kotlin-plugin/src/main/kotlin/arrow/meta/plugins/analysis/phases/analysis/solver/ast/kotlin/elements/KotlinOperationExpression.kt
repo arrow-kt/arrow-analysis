@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtOperationExpression
 
 fun interface KotlinOperationExpression : OperationExpression, KotlinExpression {
   override fun impl(): KtOperationExpression
+
   override val operationReference: SimpleNameExpression
     get() = impl().operationReference.model()
 }

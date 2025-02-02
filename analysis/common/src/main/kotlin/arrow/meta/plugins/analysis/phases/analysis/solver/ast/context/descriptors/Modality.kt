@@ -4,5 +4,5 @@ enum class Modality {
   FINAL,
   SEALED,
   OPEN,
-  ABSTRACT
+  ABSTRACT,
 }

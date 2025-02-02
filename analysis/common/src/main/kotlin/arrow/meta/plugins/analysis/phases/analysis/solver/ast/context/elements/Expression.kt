@@ -5,5 +5,6 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.types.Type
 
 interface Expression : Element {
   fun type(context: ResolutionContext): Type?
+
   fun lastBlockStatementOrThis(): Expression
 }

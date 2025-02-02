@@ -18,7 +18,7 @@ public class AnalysisGradlePlugin : ArrowMetaGradlePlugin {
     if (
       kotlinCompilation.compilationName.endsWith(
         KotlinCompilation.TEST_COMPILATION_NAME,
-        ignoreCase = true
+        ignoreCase = true,
       )
     )
       false

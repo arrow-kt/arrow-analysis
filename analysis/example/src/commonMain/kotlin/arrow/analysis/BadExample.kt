@@ -8,6 +8,7 @@ fun bar(x: Int): Int {
   pre(x > 0) { "x positive" }
   return 1 / x
 }
+
 // val other: Int = emptyList<Int>().get(1)
 
 fun increment(x: Int): Int {

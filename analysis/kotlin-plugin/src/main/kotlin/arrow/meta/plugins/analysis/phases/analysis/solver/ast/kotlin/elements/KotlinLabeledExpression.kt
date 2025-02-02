@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtLabeledExpression
 
 fun interface KotlinLabeledExpression : LabeledExpression, KotlinExpressionWithLabel {
   override fun impl(): KtLabeledExpression
+
   override val baseExpression: Expression?
     get() = impl().baseExpression?.model()
 }

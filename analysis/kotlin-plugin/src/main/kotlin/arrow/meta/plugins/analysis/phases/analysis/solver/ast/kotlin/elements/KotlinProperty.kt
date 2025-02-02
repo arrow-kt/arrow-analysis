@@ -9,16 +9,22 @@ import org.jetbrains.kotlin.psi.KtProperty
 
 class KotlinProperty(val impl: KtProperty) : Property, KotlinVariableDeclaration {
   override fun impl(): KtProperty = impl
+
   override val isLocal: Boolean
     get() = impl().isLocal
+
   override val isMember: Boolean
     get() = impl().isMember
+
   override val isTopLevel: Boolean
     get() = impl().isTopLevel
+
   override val accessors: List<PropertyAccessor?>
     get() = impl().accessors.map { it.model() }
+
   override val getter: PropertyAccessor?
     get() = impl().getter?.model()
+
   override val setter: PropertyAccessor?
     get() = impl().setter?.model()
 

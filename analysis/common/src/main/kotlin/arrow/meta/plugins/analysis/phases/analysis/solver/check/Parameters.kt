@@ -15,7 +15,7 @@ data class ParamInfo(
   val smtName: String,
   val type: Type?,
   val element: Element?,
-  val thisFromConstructor: Boolean = false
+  val thisFromConstructor: Boolean = false,
 ) {
   companion object {
     public operator fun invoke(
@@ -24,7 +24,7 @@ data class ParamInfo(
       smtName: String,
       type: Type?,
       element: Element?,
-      thisFromConstructor: Boolean = false
+      thisFromConstructor: Boolean = false,
     ): ParamInfo = ParamInfo(name, solver.escape(smtName), type, element, thisFromConstructor)
   }
 }
@@ -34,7 +34,7 @@ internal fun SolverState.initialParameters(
   thisParam: ParamInfo?,
   valueParams: List<ParamInfo>,
   result: ParamInfo?,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): List<VarInfo> {
   val things = listOfNotNull(thisParam) + valueParams + listOfNotNull(result)
   return things.mapNotNull { param ->

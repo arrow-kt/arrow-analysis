@@ -25,7 +25,7 @@ public class AnalysisJavaGradlePlugin : Plugin<Project> {
         task.options.compilerArgs.addAll(
           listOf(
             "-parameters", // IMPORTANT! otherwise we have no parameter names
-            "-Xplugin:ArrowAnalysisJavaPlugin generatedSrcOutputDir=${p.buildDir} baseDir=${p.rootProject.rootDir.path}"
+            "-Xplugin:ArrowAnalysisJavaPlugin generatedSrcOutputDir=${p.buildDir} baseDir=${p.rootProject.rootDir.path}",
           )
         )
       }

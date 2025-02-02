@@ -8,5 +8,6 @@ import org.jetbrains.kotlin.psi.KtLambdaArgument
 open class KotlinLambdaArgument(override val impl: KtLambdaArgument) :
   LambdaArgument, KotlinExpressionValueArgument(impl) {
   override fun impl(): KtLambdaArgument = impl
+
   override fun getLambdaExpression(): LambdaExpression? = impl().getLambdaExpression()?.model()
 }

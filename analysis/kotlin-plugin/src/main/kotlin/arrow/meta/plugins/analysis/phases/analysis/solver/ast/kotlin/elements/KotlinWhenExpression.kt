@@ -13,10 +13,13 @@ class KotlinWhenExpression(val impl: KtWhenExpression) : WhenExpression, KotlinE
 
   override val entries: List<WhenEntry>
     get() = impl().entries.map { it.model() }
+
   override val subjectVariable: Property?
     get() = impl().subjectVariable?.model()
+
   override val subjectExpression: Expression?
     get() = impl().subjectExpression?.model()
+
   override val elseExpression: Expression?
     get() = impl().subjectExpression?.model()
 }

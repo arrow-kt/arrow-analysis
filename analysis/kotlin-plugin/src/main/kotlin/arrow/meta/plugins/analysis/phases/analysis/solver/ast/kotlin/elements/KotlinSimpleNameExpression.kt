@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.psi.KtSimpleNameExpression
 
 fun interface KotlinSimpleNameExpression : SimpleNameExpression, KotlinReferenceExpression {
   override fun impl(): KtSimpleNameExpression
+
   override fun getReferencedName(): String = impl().getReferencedName()
 
   override fun getReferencedNameAsName(): Name = Name(impl().getReferencedNameAsName().asString())

@@ -20,6 +20,7 @@ public class JavaDoWhile(private val ctx: AnalysisContext, private val impl: DoW
   DoWhileExpression, JavaElement(ctx, impl) {
   override val condition: Expression
     get() = impl.condition.model(ctx)
+
   override val body: Expression
     get() = impl.statement.model(ctx)
 }
@@ -28,20 +29,24 @@ public class JavaWhile(private val ctx: AnalysisContext, private val impl: While
   WhileExpression, JavaElement(ctx, impl) {
   override val condition: Expression
     get() = impl.condition.model(ctx)
+
   override val body: Expression
     get() = impl.statement.model(ctx)
 }
 
 public class JavaEnhancedFor(
   private val ctx: AnalysisContext,
-  private val impl: EnhancedForLoopTree
+  private val impl: EnhancedForLoopTree,
 ) : ForExpression, JavaElement(ctx, impl) {
   override val loopParameter: Parameter
     get() = JavaParameter(ctx, impl.variable, null)
+
   override val destructuringDeclaration: DestructuringDeclaration?
     get() = null
+
   override val loopRange: Expression
     get() = impl.expression.model(ctx)
+
   override val body: Expression
     get() = impl.statement.model(ctx)
 }
@@ -50,10 +55,13 @@ public class JavaFor(private val ctx: AnalysisContext, private val impl: ForLoop
   ThreePieceForExpression, JavaElement(ctx, impl) {
   override val initializer: List<Expression>
     get() = impl.initializer.map { it.model(ctx) }
+
   override val condition: Expression
     get() = impl.condition.model(ctx)
+
   override val update: List<Expression>
     get() = impl.update.map { it.model(ctx) }
+
   override val body: Expression
     get() = impl.statement.model(ctx)
 }

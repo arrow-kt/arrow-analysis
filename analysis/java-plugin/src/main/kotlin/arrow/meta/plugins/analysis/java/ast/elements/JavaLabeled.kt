@@ -19,5 +19,6 @@ public class JavaLabeled(private val ctx: AnalysisContext, private val impl: Lab
   override fun getTargetLabel(): SimpleNameExpression? = null
 
   override fun getLabelName(): String? = impl.label?.toString()
+
   override fun getLabelNameAsName(): Name? = impl.label?.name()
 }

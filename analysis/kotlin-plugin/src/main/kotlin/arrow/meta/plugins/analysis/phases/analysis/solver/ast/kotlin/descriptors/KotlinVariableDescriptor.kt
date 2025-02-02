@@ -10,8 +10,10 @@ abstract class KotlinVariableDescriptor(
 
   override val isVar: Boolean
     get() = impl().isVar
+
   override val isConst: Boolean
     get() = impl().isConst
+
   override val isLateInit: Boolean
     get() = impl().isLateInit
 }

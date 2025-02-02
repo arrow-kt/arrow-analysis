@@ -11,10 +11,11 @@ import javax.lang.model.element.PackageElement
 
 public class JavaPackageDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: PackageElement
+  private val impl: PackageElement,
 ) : PackageViewDescriptor, PackageFragmentDescriptor, JavaDescriptor(ctx, impl) {
   override val fqName: FqName
     get() = FqName(impl.fqName)
+
   override val memberScope: MemberScope
     get() = JavaMemberScope(ctx, impl.enclosedElements)
 }

@@ -122,8 +122,11 @@ fun DeclarationDescriptor.gather(
     object : MemberScope {
       override fun getClassifierNames(): Set<Name> =
         throw IllegalStateException("not available here")
+
       override fun getFunctionNames(): Set<Name> = throw IllegalStateException("not available here")
+
       override fun getVariableNames(): Set<Name> = throw IllegalStateException("not available here")
+
       override fun getContributedDescriptors(
         filter: (name: String) -> Boolean
       ): List<DeclarationDescriptor> =
@@ -159,7 +162,7 @@ fun DeclarationDescriptor.gather(
 fun ModuleDescriptor.gather(
   initialPackages: List<FqName> = listOf(FqName("")),
   addSubPackages: Boolean,
-  predicate: (DeclarationDescriptor) -> Boolean
+  predicate: (DeclarationDescriptor) -> Boolean,
 ): List<DeclarationDescriptor> {
   // initialize worklists
   val packagesWorklist = LinkedList(initialPackages)
@@ -203,7 +206,7 @@ fun ModuleDescriptor.gather(
 /** Rename the conditions from one descriptor to the names of another */
 internal fun Solver.renameConditions(
   constraints: DeclarationConstraints,
-  to: DeclarationDescriptor
+  to: DeclarationDescriptor,
 ): DeclarationConstraints {
   val fromParams =
     (constraints.descriptor as? CallableDescriptor)?.valueParameters?.map { it.name.value }
@@ -216,7 +219,7 @@ internal fun Solver.renameConditions(
       to,
       constraints.pre,
       constraints.post,
-      constraints.doNotLookAtArgumentsWhen
+      constraints.doNotLookAtArgumentsWhen,
     )
   }
 }

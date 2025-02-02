@@ -32,7 +32,7 @@ public fun AnalysisContext.annArrays(type: String, vararg args: List<String>): J
     ty(type),
     args
       .map { strings -> factory.NewArray(null, null, strings.map { factory.Literal(it) }.javac()) }
-      .javac()
+      .javac(),
   )
 }
 
@@ -66,7 +66,7 @@ public fun AnalysisContext.hintsPackage(
       emptyJavacList(),
       null,
       emptyJavacList(),
-      emptyJavacList()
+      emptyJavacList(),
     )
   predefClassDef.sym = symbolTable.predefClass
 
@@ -96,7 +96,7 @@ public fun AnalysisContext.hintsClass(hints: List<FqName>): JCTree.JCClassDecl {
     emptyJavacList(),
     null,
     emptyJavacList(),
-    emptyJavacList()
+    emptyJavacList(),
   )
 }
 

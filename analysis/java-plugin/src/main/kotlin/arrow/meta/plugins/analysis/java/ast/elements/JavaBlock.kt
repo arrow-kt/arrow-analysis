@@ -14,12 +14,14 @@ import com.sun.source.tree.Tree
 public open class JavaBlockParent(
   private val ctx: AnalysisContext,
   private val elements: List<Tree>,
-  owner: Tree
+  owner: Tree,
 ) : BlockExpression, JavaElement(ctx, owner) {
   override val statements: List<Expression>
     get() = elements.map { it.model(ctx) }
+
   override val firstStatement: Expression?
     get() = statements.firstOrNull()
+
   override val implicitReturnFromLast: Boolean = false
 }
 

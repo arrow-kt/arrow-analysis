@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeArgumentList
 
 class KotlinTypeArgumentList(val impl: KtTypeArgumentList) : TypeArgumentList, KotlinElement {
   override fun impl(): KtTypeArgumentList = impl
+
   override val arguments: List<TypeProjection>
     get() = impl().arguments.map { it.model() }
 }

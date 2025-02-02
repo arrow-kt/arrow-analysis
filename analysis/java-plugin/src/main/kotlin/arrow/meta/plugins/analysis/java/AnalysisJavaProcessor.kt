@@ -20,6 +20,7 @@ public object AnalysisJavaProcessorKey : Context.Key<MutableList<Element>>() {
   override fun equals(other: Any?): Boolean {
     return other?.javaClass?.name == "arrow.meta.plugins.analysis.java.AnalysisJavaProcessorKey"
   }
+
   override fun hashCode(): Int = 12345
 }
 
@@ -28,7 +29,9 @@ public class AnalysisJavaProcessor : Processor {
   public val todo: MutableList<Element> = mutableListOf()
 
   override fun getSupportedOptions(): MutableSet<String> = mutableSetOf()
+
   override fun getSupportedAnnotationTypes(): MutableSet<String> = mutableSetOf("*")
+
   override fun getSupportedSourceVersion(): SourceVersion = SourceVersion.latestSupported()
 
   override fun init(processingEnv: ProcessingEnvironment) {
@@ -37,7 +40,7 @@ public class AnalysisJavaProcessor : Processor {
 
   override fun process(
     annotations: MutableSet<out TypeElement>,
-    roundEnv: RoundEnvironment
+    roundEnv: RoundEnvironment,
   ): Boolean {
     todo.addAll(roundEnv.rootElements)
     return false
@@ -47,6 +50,6 @@ public class AnalysisJavaProcessor : Processor {
     element: Element?,
     annotation: AnnotationMirror?,
     member: ExecutableElement?,
-    userText: String?
+    userText: String?,
   ): MutableIterable<Completion> = mutableListOf()
 }

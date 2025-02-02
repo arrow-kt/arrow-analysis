@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtTypeConstraint
 
 class KotlinTypeConstraint(val impl: KtTypeConstraint) : TypeConstraint, KotlinElement {
   override fun impl(): KtTypeConstraint = impl
+
   override val subjectTypeParameterName: SimpleNameExpression?
     get() = impl().subjectTypeParameterName?.model()
+
   override val boundTypeReference: TypeReference?
     get() = impl().boundTypeReference?.model()
 }

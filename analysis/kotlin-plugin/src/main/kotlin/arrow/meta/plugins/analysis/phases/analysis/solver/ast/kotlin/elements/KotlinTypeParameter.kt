@@ -11,6 +11,7 @@ import org.jetbrains.kotlin.types.Variance.OUT_VARIANCE
 
 class KotlinTypeParameter(val impl: KtTypeParameter) : TypeParameter, KotlinNamedDeclaration {
   override fun impl(): KtTypeParameter = impl
+
   override val variance: Variance
     get() =
       when (impl().variance) {
@@ -18,6 +19,7 @@ class KotlinTypeParameter(val impl: KtTypeParameter) : TypeParameter, KotlinName
         IN_VARIANCE -> Variance.In
         OUT_VARIANCE -> Variance.Out
       }
+
   override val extendsBounds: List<TypeReference>
     get() = listOfNotNull(impl().extendsBound?.model())
 }

@@ -112,6 +112,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/SpecialKin
 	public static final field Pre Larrow/meta/plugins/analysis/phases/analysis/solver/SpecialKind;
 	public static final field TrustBlock Larrow/meta/plugins/analysis/phases/analysis/solver/SpecialKind;
 	public static final field TrustCall Larrow/meta/plugins/analysis/phases/analysis/solver/SpecialKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/SpecialKind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/SpecialKind;
 }
@@ -142,6 +143,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field Completed Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/AnalysisResult;
 	public static final field ParsingError Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/AnalysisResult;
 	public static final field Retry Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/AnalysisResult;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/AnalysisResult;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/AnalysisResult;
 }
@@ -214,6 +216,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field DELEGATION Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/CallableMemberDescriptor$Kind;
 	public static final field FAKE_OVERRIDE Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/CallableMemberDescriptor$Kind;
 	public static final field SYNTHESIZED Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/CallableMemberDescriptor$Kind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/CallableMemberDescriptor$Kind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/CallableMemberDescriptor$Kind;
 }
@@ -245,6 +248,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field ENUM_ENTRY Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ClassDescriptor$ClassKind;
 	public static final field INTERFACE Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ClassDescriptor$ClassKind;
 	public static final field OBJECT Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ClassDescriptor$ClassKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ClassDescriptor$ClassKind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ClassDescriptor$ClassKind;
 }
@@ -396,6 +400,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field FINAL Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/Modality;
 	public static final field OPEN Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/Modality;
 	public static final field SEALED Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/Modality;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/Modality;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/Modality;
 }
@@ -645,6 +650,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field PROPERTY_SETTER Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/AnnotationUseSiteTarget;
 	public static final field RECEIVER Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/AnnotationUseSiteTarget;
 	public static final field SETTER_PARAMETER Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/AnnotationUseSiteTarget;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/AnnotationUseSiteTarget;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/AnnotationUseSiteTarget;
 }
@@ -1049,6 +1055,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field NONE Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/ProjectionKind;
 	public static final field OUT Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/ProjectionKind;
 	public static final field STAR Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/ProjectionKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/ProjectionKind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/ProjectionKind;
 }
@@ -1212,6 +1219,7 @@ public abstract interface class arrow/meta/plugins/analysis/phases/analysis/solv
 public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/TypeCastExpresionKind : java/lang/Enum {
 	public static final field POSITIVE_TYPE_CAST Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/TypeCastExpresionKind;
 	public static final field QUESTION_TYPE_CAST Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/TypeCastExpresionKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/TypeCastExpresionKind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/TypeCastExpresionKind;
 }
@@ -1366,6 +1374,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/contex
 	public static final field In Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Variance;
 	public static final field Invariant Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Variance;
 	public static final field Out Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Variance;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Variance;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Variance;
 }
@@ -1452,6 +1461,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/check/mode
 public final class arrow/meta/plugins/analysis/phases/analysis/solver/check/model/ControlFlowFn$ReturnBehavior : java/lang/Enum {
 	public static final field RETURNS_ARGUMENT Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/ControlFlowFn$ReturnBehavior;
 	public static final field RETURNS_BLOCK_RESULT Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/ControlFlowFn$ReturnBehavior;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/ControlFlowFn$ReturnBehavior;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/ControlFlowFn$ReturnBehavior;
 }
@@ -1525,6 +1535,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/check/mode
 public final class arrow/meta/plugins/analysis/phases/analysis/solver/check/model/LoopPlace : java/lang/Enum {
 	public static final field AFTER_LOOP Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/LoopPlace;
 	public static final field INSIDE_LOOP Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/LoopPlace;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/LoopPlace;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/check/model/LoopPlace;
 }
@@ -1688,6 +1699,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Exception : java/lang/Enum, arrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds {
 	public static final field IllegalState Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Exception;
 	public static final field OtherException Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Exception;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1704,6 +1716,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 	public static final field InconsistentDefaultValues Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Inconsistency;
 	public static final field InconsistentInvariants Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Inconsistency;
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1718,6 +1731,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 	public static final field LawMustCallFunction Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Laws;
 	public static final field LawMustHaveParametersInOrder Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Laws;
 	public static final field SubjectWithoutName Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Laws;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1731,6 +1745,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 	public static final field NotStrongerPostcondition Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Liskov;
 	public static final field NotWeakerPrecondition Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Liskov;
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1744,6 +1759,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 	public static final field UnexpectedFieldInitBlock Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Parsing;
 	public static final field UnexpectedReference Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Parsing;
 	public static final field WarningParsingPredicate Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Parsing;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1758,6 +1774,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 	public static final field UnsatCallPre Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Unsatisfiability;
 	public static final field UnsatInvariants Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Unsatisfiability;
 	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1768,6 +1785,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Err
 
 public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Unsupported : java/lang/Enum, arrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds {
 	public static final field UnsupportedExpression Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds$Unsupported;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public fun getFullDescription ()Ljava/lang/String;
 	public fun getId ()Ljava/lang/String;
 	public fun getLevel ()Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
@@ -1810,6 +1828,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/errors/Sev
 	public static final field Info Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
 	public static final field Unsupported Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
 	public static final field Warning Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/errors/SeverityLevel;
 }
@@ -2054,6 +2073,7 @@ public final class arrow/meta/plugins/analysis/types/PrimitiveType : java/lang/E
 	public static final field INTEGRAL Larrow/meta/plugins/analysis/types/PrimitiveType;
 	public static final field RATIONAL Larrow/meta/plugins/analysis/types/PrimitiveType;
 	public static final field STRING Larrow/meta/plugins/analysis/types/PrimitiveType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/types/PrimitiveType;
 	public static fun values ()[Larrow/meta/plugins/analysis/types/PrimitiveType;
 }

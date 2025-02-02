@@ -2,7 +2,7 @@ package arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements
 
 enum class TypeCastExpresionKind {
   POSITIVE_TYPE_CAST,
-  QUESTION_TYPE_CAST
+  QUESTION_TYPE_CAST,
 }
 
 interface TypeCastExpression : OperationExpression {

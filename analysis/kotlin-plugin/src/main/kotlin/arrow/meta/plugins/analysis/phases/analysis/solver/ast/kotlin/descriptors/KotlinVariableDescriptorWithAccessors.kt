@@ -9,10 +9,13 @@ abstract class KotlinVariableDescriptorWithAccessors(
 ) : VariableDescriptorWithAccessors, KotlinVariableDescriptor(impl) {
 
   override fun impl(): org.jetbrains.kotlin.descriptors.VariableDescriptorWithAccessors = impl
+
   override val getter: VariableAccessorDescriptor?
     get() = impl().getter?.model()
+
   override val isDelegated: Boolean
     get() = impl().isDelegated
+
   override val setter: VariableAccessorDescriptor?
     get() = impl().setter?.model()
 }

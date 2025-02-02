@@ -41,7 +41,7 @@ import org.sosy_lab.java_smt.api.visitors.FormulaTransformationVisitor
 public fun Declaration.collectConstraintsFromDSL(
   solverState: SolverState,
   context: ResolutionContext,
-  descriptor: DeclarationDescriptor
+  descriptor: DeclarationDescriptor,
 ) {
   if (
     this is ClassOrObject &&
@@ -55,7 +55,7 @@ public fun Declaration.collectConstraintsFromDSL(
         solverState,
         context,
         getPrimaryConstructorParameterList()?.parameters.orEmpty(),
-        this
+        this,
       )
     if (preConstraints.isNotEmpty() || postConstraints.isNotEmpty()) {
       solverState.addConstraints(
@@ -63,7 +63,7 @@ public fun Declaration.collectConstraintsFromDSL(
         preConstraints,
         postConstraints,
         arrayListOf(),
-        context
+        context,
       )
     }
   } else {
@@ -73,7 +73,7 @@ public fun Declaration.collectConstraintsFromDSL(
           solverState,
           context,
           valueParameters,
-          getContainingClassOrObject()
+          getContainingClassOrObject(),
         )
       is DeclarationWithBody ->
         constraintsFromFunctionLike(solverState, context, valueParameters.filterNotNull())
@@ -91,7 +91,7 @@ public fun Declaration.collectConstraintsFromDSL(
           preConstraints,
           postConstraints,
           notLookConstraints,
-          context
+          context,
         )
       }
     }
@@ -106,7 +106,7 @@ public fun Declaration.collectConstraintsFromDSL(
 private fun Declaration.constraintsFromGenericDeclaration(
   solverState: SolverState,
   context: ResolutionContext,
-  parameters: List<Parameter>
+  parameters: List<Parameter>,
 ): List<Pair<ResolvedCall, NamedConstraint>> =
   context.run {
     constraintsDSLElements().mapNotNull { it.elementToConstraint(solverState, context, parameters) }
@@ -116,7 +116,7 @@ private fun Declaration.constraintsFromGenericDeclaration(
 private fun Declaration.constraintsFromFunctionLike(
   solverState: SolverState,
   context: ResolutionContext,
-  parameters: List<Parameter>
+  parameters: List<Parameter>,
 ): Triple<ArrayList<NamedConstraint>, ArrayList<NamedConstraint>, ArrayList<NamedConstraint>> {
   val preConstraints = arrayListOf<NamedConstraint>()
   val postConstraints = arrayListOf<NamedConstraint>()
@@ -140,7 +140,7 @@ private fun <A : Constructor<A>> Constructor<A>?.constraintsFromConstructor(
   solverState: SolverState,
   context: ResolutionContext,
   parameters: List<Parameter>,
-  containingClassOrObject: ClassOrObject
+  containingClassOrObject: ClassOrObject,
 ): Triple<ArrayList<NamedConstraint>, ArrayList<NamedConstraint>, ArrayList<NamedConstraint>> {
   val preConstraints = arrayListOf<NamedConstraint>()
   val postConstraints = arrayListOf<NamedConstraint>()
@@ -155,7 +155,7 @@ private fun <A : Constructor<A>> Constructor<A>?.constraintsFromConstructor(
             parameters,
             !isRequireOrAssert,
             call,
-            formula.formula
+            formula.formula,
           )
           ?.let { preConstraints.add(NamedConstraint(formula.msg, it)) }
       }
@@ -176,7 +176,7 @@ private fun rewritePrecondition(
   parameters: List<Parameter>,
   raiseErrorWhenUnexpected: Boolean,
   call: ResolvedCall,
-  formula: BooleanFormula
+  formula: BooleanFormula,
 ): BooleanFormula? {
   val mgr = solverState.solver.formulaManager
   var errorSignaled = false
@@ -187,7 +187,7 @@ private fun rewritePrecondition(
         override fun visitFunction(
           f: Formula?,
           args: MutableList<Formula>?,
-          fn: FunctionDeclaration<*>?
+          fn: FunctionDeclaration<*>?,
         ): Formula =
           if (fn?.name == Solver.FIELD_FUNCTION_NAME) {
             val fieldName = args?.getOrNull(0)?.let { mgr.extractSingleVariable(it) }
@@ -212,7 +212,7 @@ private fun rewritePrecondition(
                   context.handleError(
                     ErrorIds.Parsing.UnexpectedFieldInitBlock,
                     call.callElement,
-                    msg
+                    msg,
                   )
                 }
                 super.visitFunction(f, args, fn)
@@ -223,7 +223,7 @@ private fun rewritePrecondition(
           } else {
             super.visitFunction(f, args, fn)
           }
-      }
+      },
     )
   return result.takeIf { !errorSignaled }
 }
@@ -231,7 +231,7 @@ private fun rewritePrecondition(
 /** Turn references to 'this' into references to '$result' */
 private fun rewritePostcondition(
   solverState: SolverState,
-  formula: BooleanFormula
+  formula: BooleanFormula,
 ): BooleanFormula {
   val mgr = solverState.solver.formulaManager
   return mgr.transformRecursively(
@@ -243,7 +243,7 @@ private fun rewritePostcondition(
         } else {
           super.visitFreeVariable(f, name)
         }
-    }
+    },
   )
 }
 
@@ -251,7 +251,7 @@ private fun rewritePostcondition(
 private fun Element.elementToConstraint(
   solverState: SolverState,
   context: ResolutionContext,
-  parameters: List<Parameter>
+  parameters: List<Parameter>,
 ): Pair<ResolvedCall, NamedConstraint>? {
   val call = getResolvedCall(context)
   val kind = call?.specialKind

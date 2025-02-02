@@ -19,7 +19,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("not parse predicate") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -34,7 +34,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("unexpected reference") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -48,7 +48,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -62,7 +62,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesWith { it.contains("not parse predicate") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -79,7 +79,7 @@ class AnalysisTests {
       val result = bar(1)
       """(
       withPlugin = { failsWith { it.contains("inconsistent pre-conditions") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -91,7 +91,7 @@ class AnalysisTests {
         3.post({ it > 0 }) { "greater than 0" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -107,7 +107,7 @@ class AnalysisTests {
           it.contains("declaration `bar` fails to satisfy the post-condition: ${'$'}result < 0")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -124,7 +124,7 @@ class AnalysisTests {
             it.contains("in branch: !(x > 0)")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -136,7 +136,7 @@ class AnalysisTests {
         0.let { it + 1 }.post({ it > 0 }) { "greater than 0" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -148,7 +148,7 @@ class AnalysisTests {
         1.run { this - 1 }.post({ it > 0 }) { "greater than 0" }
       """(
       withPlugin = { failsWith { it.contains("fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -167,7 +167,7 @@ class AnalysisTests {
           it.contains("declaration `bar` fails to satisfy the post-condition: ${'$'}result > 0")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -182,7 +182,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("invariants are not satisfied in `z = 0`") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -201,7 +201,7 @@ class AnalysisTests {
           it.contains("declaration `bar` fails to satisfy the post-condition: ${'$'}result > 0")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -216,7 +216,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -232,7 +232,7 @@ class AnalysisTests {
       withPlugin = {
         compilesWith { it.contains("unreachable code due to conflicting conditions") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -249,7 +249,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -265,7 +265,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -279,7 +279,7 @@ class AnalysisTests {
       }.post({ it >= 0 }) { "result >= 0" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -297,7 +297,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `x is 42` is not satisfied in `bar(1)`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -313,7 +313,7 @@ class AnalysisTests {
       val result = unsafeCall(bar(1))
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -329,7 +329,7 @@ class AnalysisTests {
       val result = unsafeBlock { bar(1) }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -345,7 +345,7 @@ class AnalysisTests {
       val result = unsafeBlock { bar(1) + 1 }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -362,7 +362,7 @@ class AnalysisTests {
       val result = bar(1)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -384,7 +384,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `(< (int x) 0)` is not satisfied in `bar(1)") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -406,7 +406,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `(< (int x) 0)` is not satisfied in `bar(1)`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -422,7 +422,7 @@ class AnalysisTests {
       val result = bar(1)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -440,7 +440,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `x less than 10` is not satisfied in `bar(30)`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -457,7 +457,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `not zero divisor` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -474,7 +474,7 @@ class AnalysisTests {
       val x: Result<Int> = success(3)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -487,7 +487,7 @@ class AnalysisTests {
       fun <E> Collection<E>.minusLaw(element: E) = minus(element)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -500,7 +500,7 @@ class AnalysisTests {
       fun <E> List<E>.firstLaw(predicate: (x: E) -> Boolean) = first(predicate)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -520,7 +520,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `other is not zero` is not satisfied in `1 / 0`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -541,7 +541,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -564,7 +564,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `other is not zero` is not satisfied in `1 / 0`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -585,7 +585,7 @@ class AnalysisTests {
       val result = 1 / 2
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -605,7 +605,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `other is not zero` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -625,7 +625,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `other is not zero` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -642,7 +642,7 @@ class AnalysisTests {
           it.contains("pre-condition `initial capacity should be non-negative` is not satisfied")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -655,7 +655,7 @@ class AnalysisTests {
       val result = ArrayList<Int>(1)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -680,7 +680,7 @@ class AnalysisTests {
           it.contains("pre-condition `initial capacity should be non-negative` is not satisfied")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -696,7 +696,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("must use the arguments in order") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -723,7 +723,7 @@ class AnalysisTests {
           it.contains("pre-condition `index smaller than size` is not satisfied in `get(0)`")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -752,7 +752,7 @@ class AnalysisTests {
           )
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -778,7 +778,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -805,7 +805,7 @@ class AnalysisTests {
         else entries.all { entry -> entry.id == entries[0].id }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -822,7 +822,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -838,8 +838,12 @@ class AnalysisTests {
         }) { "smaller than 0" }
       }
       """(
-      withPlugin = { failsWith { it.contains("`nully1b` fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withPlugin = {
+        failsWith {
+          it.contains("`nully1b` fails to satisfy the post-condition")
+        }
+      },
+      withoutPlugin = { compiles },
     )
   }
 
@@ -858,7 +862,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("`nully1b` fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -873,7 +877,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -887,7 +891,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -901,7 +905,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("`nully3` fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -915,7 +919,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -929,7 +933,7 @@ class AnalysisTests {
       }
     """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -943,7 +947,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("`try2` fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -960,7 +964,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("`f` fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -981,7 +985,7 @@ class AnalysisTests {
           it.contains("post-condition `greater than 0` from overridden member is not satisfied")
         }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1006,7 +1010,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1029,7 +1033,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("declaration `f` fails to satisfy the post-condition") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1052,7 +1056,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `n must be positive` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1073,7 +1077,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("declaration `A` fails to satisfy the post-condition") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1093,7 +1097,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `n must be positive` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1113,7 +1117,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1133,7 +1137,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1152,7 +1156,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `n must be positive` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1172,7 +1176,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `n must be positive` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1192,7 +1196,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("declaration `A` fails to satisfy the post-condition") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1214,7 +1218,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `ensure positive answer` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1235,7 +1239,7 @@ class AnalysisTests {
       val result: Int = Color.RED.rgb.post({ it != 0 }) { "check this" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1254,7 +1258,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("pre-condition `positive` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1274,7 +1278,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `greater than ten` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1292,7 +1296,7 @@ class AnalysisTests {
       val result = f(emptyList<Int>())
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1306,7 +1310,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("has inconsistent default values") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1323,7 +1327,7 @@ class AnalysisTests {
       val result2 = f(3)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1337,7 +1341,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { failsWith { it.contains("fails to satisfy the post-condition") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1358,7 +1362,7 @@ class AnalysisTests {
         failure<T>(e).post({ it.isFailure == true }) { "create a failure" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1372,7 +1376,7 @@ class AnalysisTests {
         lazyOf(value).post({ it.value == value }) { "lazy value is argument" }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1385,7 +1389,7 @@ class AnalysisTests {
       val problem = emptyList<Int>().map { it + 1 }.first()
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1398,7 +1402,7 @@ class AnalysisTests {
       val oki = emptyList<Int>().map { it + 1 }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1412,7 +1416,7 @@ class AnalysisTests {
       val problem = emptyList<Int>().map(::addOne).first()
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1437,7 +1441,7 @@ class AnalysisTests {
       val oki = emptyList<Int>().first()
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1455,7 +1459,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `not empty name` is not satisfied in `bar(\"\")`") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1471,7 +1475,7 @@ class AnalysisTests {
       val result = bar("alex")
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1488,7 +1492,7 @@ class AnalysisTests {
       val result = bar("${'$'}{1 + 2}")
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty name` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1514,7 +1518,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1533,7 +1537,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1553,7 +1557,7 @@ class AnalysisTests {
       val example = A()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1575,7 +1579,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("declaration `A` fails to satisfy the post-condition") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1597,7 +1601,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("declaration `A` fails to satisfy the post-condition") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1611,7 +1615,7 @@ class AnalysisTests {
         this.all { n -> n == first() }
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1631,7 +1635,7 @@ class AnalysisTests {
         this.all { n -> n == first() }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1649,7 +1653,7 @@ class AnalysisTests {
       val l = listOf<Int>().x()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1667,7 +1671,7 @@ class AnalysisTests {
       val l = mapOf<Int, Int>().x()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1684,7 +1688,7 @@ class AnalysisTests {
         Example { content -> content.length }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1702,7 +1706,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1714,7 +1718,7 @@ class AnalysisTests {
       fun f(div: Int, floor: Int): Int = div / floor 
     """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1733,7 +1737,7 @@ class AnalysisTests {
       val other = g(String::capitalize)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1748,7 +1752,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1761,7 +1765,7 @@ class AnalysisTests {
       fun g(x: Any): Int? = (x as? Int)?.let { it + 1 }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1777,7 +1781,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1795,7 +1799,7 @@ class AnalysisTests {
       withPlugin = {
         failsWith { it.contains("pre-condition `n must be positive` is not satisfied") }
       },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1807,7 +1811,7 @@ class AnalysisTests {
       val p by lazy { object : Any() {} }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1820,7 +1824,7 @@ class AnalysisTests {
       val p: Int by lazy { emptyList<Int>().first() }
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1835,7 +1839,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1854,7 +1858,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1867,7 +1871,7 @@ class AnalysisTests {
       val ok = listOf(1).first()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1880,7 +1884,7 @@ class AnalysisTests {
       val ok = listOf(1, 2).first()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1893,7 +1897,7 @@ class AnalysisTests {
       val ok = listOf<Int>().first()
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1906,7 +1910,7 @@ class AnalysisTests {
       val ok = listOf(-1).map { it + 1 }.first()
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1924,7 +1928,7 @@ class AnalysisTests {
       """(
       withPlugin = { failsWith { it.contains("pre-condition `not empty` is not satisfied") } },
       withoutPlugin = { compiles },
-      isMultiplatform = true
+      isMultiplatform = true,
     )
   }
 
@@ -1939,7 +1943,7 @@ class AnalysisTests {
          Field(tag, field)
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1969,7 +1973,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 
@@ -1997,7 +2001,7 @@ class AnalysisTests {
       }
       """(
       withPlugin = { compilesNoUnreachable },
-      withoutPlugin = { compiles }
+      withoutPlugin = { compiles },
     )
   }
 }
@@ -2105,7 +2109,7 @@ fun CharSequence.isNotEmptyLaw(): Boolean =
 private operator fun String.invoke(
   withPlugin: AssertSyntax.() -> Assert,
   withoutPlugin: AssertSyntax.() -> Assert,
-  isMultiplatform: Boolean = false
+  isMultiplatform: Boolean = false,
 ) {
   assertThis(
     CompilerTest(
@@ -2115,7 +2119,10 @@ private operator fun String.invoke(
         // "value"))
       },
       code = { this@invoke.source },
-      assert = { withPlugin() }
+      assert = {
+        val result = withPlugin()
+        result
+      },
     )
   )
   assertThis(
@@ -2125,7 +2132,10 @@ private operator fun String.invoke(
           listOf(addArguments("-Xmulti-platform")).filter { isMultiplatform }
       },
       code = { this@invoke.source },
-      assert = { withoutPlugin() }
+      assert = {
+        val result = withoutPlugin()
+        result
+      },
     )
   )
 }

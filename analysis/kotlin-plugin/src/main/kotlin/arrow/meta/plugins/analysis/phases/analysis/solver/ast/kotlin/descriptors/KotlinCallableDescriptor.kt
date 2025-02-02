@@ -29,18 +29,25 @@ fun interface KotlinCallableDescriptor : CallableDescriptor, KotlinDeclarationDe
 
   override val fqNameSafe: FqName
     get() = FqName(impl().fqNameSafe.asString())
+
   override val name: Name
     get() = Name(impl().name.asString())
+
   override val extensionReceiverParameter: ReceiverParameterDescriptor?
     get() = impl().extensionReceiverParameter?.model()
+
   override val dispatchReceiverParameter: ReceiverParameterDescriptor?
     get() = impl().dispatchReceiverParameter?.model()
+
   override val typeParameters: List<TypeParameterDescriptor>
     get() = impl().typeParameters.map { it.model() }
+
   override val returnType: Type?
     get() = impl().returnType?.let { KotlinType(it) }
+
   override val valueParameters: List<ValueParameterDescriptor>
     get() = impl().valueParameters.map { it.model() }
+
   override val overriddenDescriptors: Collection<CallableDescriptor>
     get() = impl().overriddenDescriptors.map { it.model() }
 

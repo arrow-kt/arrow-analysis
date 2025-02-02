@@ -122,14 +122,14 @@ inline fun doOnlyWhen(condition: Boolean, crossinline f: () -> ContSeq<Unit>): C
 inline fun <A> doOnlyWhen(
   condition: Boolean,
   value: A,
-  crossinline f: () -> ContSeq<A>
+  crossinline f: () -> ContSeq<A>,
 ): ContSeq<A> = if (condition) f() else cont { value }
 
 /** Execute a side effect only when some condition holds. */
 inline fun <T, A> doOnlyWhenNotNull(
   thing: T?,
   value: A,
-  crossinline f: (T) -> ContSeq<A>
+  crossinline f: (T) -> ContSeq<A>,
 ): ContSeq<A> {
   return if (thing != null) f(thing) else cont { value }
 }
@@ -155,13 +155,16 @@ sealed interface ContSyntax {
 @RestrictsSuspension
 sealed interface ContSeqSyntax<in A> : ContSyntax {
   suspend fun yield(value: A)
+
   suspend fun yieldAll(iterator: Iterator<A>)
+
   suspend fun yieldAll(elements: Iterable<A>) {
     if (elements is Collection && elements.isEmpty()) return
     return yieldAll(elements.iterator())
   }
 
   suspend fun yieldAll(sequence: Sequence<A>) = yieldAll(sequence.iterator())
+
   suspend fun yieldAll(sequence: ContSeq<A>) = yieldAll(sequence.iterator())
 }
 

@@ -35,6 +35,7 @@ fun interface KotlinCallableMemberDescriptor :
 
   override val fqNameSafe: FqName
     get() = FqName(impl().fqNameSafe.asString())
+
   override val name: Name
     get() = Name(impl().name.asString())
 }

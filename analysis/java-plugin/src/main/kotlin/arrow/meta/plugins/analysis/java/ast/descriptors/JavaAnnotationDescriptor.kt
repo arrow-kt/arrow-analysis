@@ -13,7 +13,7 @@ import javax.lang.model.element.AnnotationValue
 
 public class JavaAnnotationDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: AnnotationMirror
+  private val impl: AnnotationMirror,
 ) : AnnotationDescriptor {
   private val inside: Map<String, AnnotationValue>
     get() =
@@ -36,6 +36,7 @@ public class JavaAnnotationDescriptor(
 
   override val fqName: FqName
     get() = FqName(impl.annotationType.asElement().fqName)
+
   override val type: Type
     get() = impl.annotationType.model(ctx)
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicReference
 data class ReferencedElement(
   val element: Element,
   val reference: Pair<ValueParameterDescriptor, ResolvedValueArgument>?,
-  val type: Type?
+  val type: Type?,
 )
 
 class NameProvider {

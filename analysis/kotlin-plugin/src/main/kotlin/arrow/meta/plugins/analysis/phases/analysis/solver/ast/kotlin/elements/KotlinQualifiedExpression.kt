@@ -7,8 +7,10 @@ import org.jetbrains.kotlin.psi.KtQualifiedExpression
 
 fun interface KotlinQualifiedExpression : QualifiedExpression, KotlinExpression {
   override fun impl(): KtQualifiedExpression
+
   override val receiverExpression: Expression
     get() = impl().receiverExpression.model()
+
   override val selectorExpression: Expression?
     get() = impl().selectorExpression?.model()
 }

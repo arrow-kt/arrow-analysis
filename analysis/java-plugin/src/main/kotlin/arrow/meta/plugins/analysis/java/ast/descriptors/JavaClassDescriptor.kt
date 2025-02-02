@@ -27,8 +27,10 @@ public class JavaClassDescriptor(private val ctx: AnalysisContext, private val i
 
   override val unsubstitutedMemberScope: MemberScope
     get() = memberScope { it !is TypeElement && !it.modifiers.contains(Modifier.STATIC) }
+
   override val staticScope: MemberScope
     get() = memberScope { it !is TypeElement && it.modifiers.contains(Modifier.STATIC) }
+
   override val unsubstitutedInnerClassesScope: MemberScope
     get() = memberScope { it is TypeElement }
 
@@ -51,13 +53,16 @@ public class JavaClassDescriptor(private val ctx: AnalysisContext, private val i
       (listOfNotNull(impl.superclass.takeIf { it.kind != TypeKind.NONE }) + impl.interfaces).map {
         it.model(ctx)
       }
+
   override val declaredTypeParameters: List<TypeParameterDescriptor>
     get() = impl.typeParameters.map { it.model(ctx) }
 
   override val typeConstructor: TypeConstructor
     get() = JavaTypeConstructor(ctx, impl)
+
   override val defaultType: Type
     get() = ctx.types.getDeclaredType(impl).model(ctx)
+
   override val thisAsReceiverParameter: ReceiverParameterDescriptor
     get() = JavaReceiverParameterDescriptor(ctx, impl.asType(), impl.enclosingElement)
 
@@ -66,6 +71,7 @@ public class JavaClassDescriptor(private val ctx: AnalysisContext, private val i
   override val isInline: Boolean = false
   override val isFun: Boolean
     get() = ctx.types.isSubtype(impl.asType(), ctx.symbolTable.functionalInterfaceType)
+
   override val isValue: Boolean = false
   override val isEnumEntry: Boolean = false
   override val isInner: Boolean = impl.nestingKind == NestingKind.MEMBER

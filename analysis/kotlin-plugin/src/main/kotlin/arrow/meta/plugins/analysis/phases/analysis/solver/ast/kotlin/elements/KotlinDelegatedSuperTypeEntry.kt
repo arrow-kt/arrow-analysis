@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtDelegatedSuperTypeEntry
 class KotlinDelegatedSuperTypeEntry(val impl: KtDelegatedSuperTypeEntry) :
   DelegatedSuperTypeEntry, KotlinSuperTypeListEntry {
   override fun impl(): KtDelegatedSuperTypeEntry = impl
+
   override val delegateExpression: Expression?
     get() = impl().delegateExpression?.model()
 }

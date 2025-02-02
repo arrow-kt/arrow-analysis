@@ -8,6 +8,7 @@ interface AnnotationDescriptor {
   val allValueArguments: Map<Name, Any?>
 
   fun argumentValueAsString(argName: String): String?
+
   fun argumentValueAsArrayOfString(argName: String): List<String>
 
   val fqName: FqName?

@@ -10,7 +10,7 @@ fun ConfigSyntax.newMetaDependencies(): List<Config> {
   val analysisPlugin =
     CompilerPlugin(
       "AnalysisPlugin",
-      listOf(Dependency("arrow-analysis-kotlin-plugin:$currentVersion"))
+      listOf(Dependency("arrow-analysis-kotlin-plugin:$currentVersion")),
     )
   return metaDependencies +
     addCompilerPlugins(analysisPlugin) +

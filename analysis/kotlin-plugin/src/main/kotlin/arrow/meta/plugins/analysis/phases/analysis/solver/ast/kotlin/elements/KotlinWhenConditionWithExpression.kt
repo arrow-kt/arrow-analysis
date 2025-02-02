@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtWhenConditionWithExpression
 class KotlinWhenConditionWithExpression(val impl: KtWhenConditionWithExpression) :
   WhenConditionWithExpression, KotlinWhenCondition {
   override fun impl(): KtWhenConditionWithExpression = impl
+
   override val expression: Expression?
     get() = impl().expression?.model()
 }

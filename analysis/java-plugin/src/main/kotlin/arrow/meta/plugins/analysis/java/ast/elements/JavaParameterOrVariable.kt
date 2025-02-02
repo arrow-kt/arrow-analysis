@@ -25,24 +25,29 @@ import javax.lang.model.element.Modifier
 
 public open class JavaParameterOrVariable(
   private val ctx: AnalysisContext,
-  private val impl: VariableTree
+  private val impl: VariableTree,
 ) : CallableDeclaration, JavaElement(ctx, impl) {
   override val text: String
     get() = name
 
   override val parents: List<Element>
     get() = ctx.resolver.parentTrees(impl).mapNotNull { it.modelCautious(ctx) }
+
   override val name: String
     get() = impl.name.toString()
+
   override val nameAsSafeName: Name
     get() = Name(name)
+
   override val fqName: FqName
     get() = FqName(impl.fqName(ctx))
+
   override val nameAsName: Name
     get() = nameAsSafeName
 
   override val typeReference: TypeReference?
     get() = impl.type.model(ctx)
+
   override val receiverTypeReference: TypeReference? = null
   override val valueParameters: List<Parameter> = emptyList()
   override val valueParameterList: ParameterList? = null
@@ -56,23 +61,28 @@ public class JavaVariable(private val ctx: AnalysisContext, private val impl: Va
   VariableDeclaration, JavaParameterOrVariable(ctx, impl) {
   override val isVar: Boolean
     get() = !impl.modifiers.flags.contains(Modifier.FINAL)
+
   override val initializer: Expression?
     get() = impl.initializer?.model(ctx)
+
   override fun hasInitializer(): Boolean = impl.initializer != null
 }
 
 public class JavaParameter(
   private val ctx: AnalysisContext,
   private val impl: VariableTree,
-  public override val ownerFunction: DeclarationWithBody?
+  public override val ownerFunction: DeclarationWithBody?,
 ) : Parameter, JavaParameterOrVariable(ctx, impl) {
   override fun hasDefaultValue(): Boolean = impl.initializer != null
+
   override val defaultValue: Expression?
     get() = impl.initializer?.model(ctx)
 
   override val isMutable: Boolean = false
   override val isVarArg: Boolean = false
+
   override fun hasValOrVar(): Boolean = false
+
   override val isLoopParameter: Boolean = false
   override val isCatchParameter: Boolean = false
 

@@ -11,8 +11,11 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.types.Type
 
 interface ResolvedCall {
   val callElement: Element
+
   fun getReceiverExpression(): Expression?
+
   fun getReturnType(): Type
+
   val dispatchReceiver: ReceiverValue?
   val extensionReceiver: ReceiverValue?
   val resultingDescriptor: CallableDescriptor

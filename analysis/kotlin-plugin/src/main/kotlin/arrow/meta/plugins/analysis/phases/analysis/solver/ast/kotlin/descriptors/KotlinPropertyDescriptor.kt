@@ -10,12 +10,16 @@ class KotlinPropertyDescriptor(
 ) :
   PropertyDescriptor, KotlinVariableDescriptorWithAccessors(impl), KotlinCallableMemberDescriptor {
   override fun impl(): org.jetbrains.kotlin.descriptors.PropertyDescriptor = impl
+
   override val isSetterProjectedOut: Boolean
     get() = impl().isSetterProjectedOut
+
   override val accessors: List<PropertyAccessorDescriptor>
     get() = impl().accessors.map { it.model() }
+
   override val backingField: FieldDescriptor?
     get() = impl().backingField?.let { KotlinFieldDescriptor { it } }
+
   override val delegateField: FieldDescriptor?
     get() = impl().delegateField?.let { KotlinFieldDescriptor { it } }
 }

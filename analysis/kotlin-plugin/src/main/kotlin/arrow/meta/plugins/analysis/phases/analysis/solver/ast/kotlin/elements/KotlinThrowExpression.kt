@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtThrowExpression
 
 class KotlinThrowExpression(val impl: KtThrowExpression) : ThrowExpression, KotlinExpression {
   override fun impl(): KtThrowExpression = impl
+
   override val thrownExpression: Expression?
     get() = impl().thrownExpression?.model()
 }

@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeParameterList
 
 class KotlinTypeParameterList(val impl: KtTypeParameterList) : TypeParameterList, KotlinElement {
   override fun impl(): KtTypeParameterList = impl
+
   override val parameters: List<TypeParameter>
     get() = impl().parameters.map { it.model() }
 }

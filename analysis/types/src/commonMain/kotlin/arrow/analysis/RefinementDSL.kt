@@ -30,21 +30,21 @@ public inline fun <A> A.invariant(predicate: Predicate<A>, msg: Messager): A {
 public annotation class Pre(
   val messages: Array<String>,
   val formulae: Array<String>,
-  val dependencies: Array<String>
+  val dependencies: Array<String>,
 )
 
 @Target(AnnotationTarget.FUNCTION)
 public annotation class Post(
   val messages: Array<String>,
   val formulae: Array<String>,
-  val dependencies: Array<String>
+  val dependencies: Array<String>,
 )
 
 @Target(AnnotationTarget.FUNCTION)
 public annotation class DoNotLookAtArguments(
   val messages: Array<String>,
   val formulae: Array<String>,
-  val dependencies: Array<String>
+  val dependencies: Array<String>,
 )
 
 /** Annotation to flag ad-hoc refinements over third party functions */

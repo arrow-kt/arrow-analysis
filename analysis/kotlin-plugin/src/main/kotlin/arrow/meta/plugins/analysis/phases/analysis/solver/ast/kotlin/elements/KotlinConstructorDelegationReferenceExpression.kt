@@ -7,6 +7,7 @@ class KotlinConstructorDelegationReferenceExpression(
   val impl: KtConstructorDelegationReferenceExpression
 ) : ConstructorDelegationReferenceExpression, KotlinExpression, KotlinReferenceExpression {
   override fun impl(): KtConstructorDelegationReferenceExpression = impl
+
   override val isThis: Boolean
     get() = impl().isThis
 }

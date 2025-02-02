@@ -61,7 +61,7 @@ internal fun <A> SolverState.checkTopLevel(
   declaration: Declaration,
   isConstructor: Boolean,
   resultName: ObjectFormula,
-  bodyCheck: (data: CheckData, checkPost: (finalData: CheckData) -> Unit) -> ContSeq<A>
+  bodyCheck: (data: CheckData, checkPost: (finalData: CheckData) -> Unit) -> ContSeq<A>,
 ): ContSeq<A> =
   continuationBracket.flatMap {
     // bring the constraints in (if there are any)
@@ -81,7 +81,7 @@ internal fun <A> SolverState.checkTopLevel(
                 THIS_VAR_NAME,
                 descriptor.constructedClass.defaultType,
                 declaration,
-                true
+                true,
               )
             else ->
               (descriptor.extensionReceiverParameter ?: descriptor.dispatchReceiverParameter)?.let {
@@ -116,7 +116,7 @@ internal fun <A> SolverState.checkTopLevel(
         context,
         ReturnPoints.new(declaration, resultName),
         CurrentVarInfo(initialVarInfo),
-        CurrentBranch.new()
+        CurrentBranch.new(),
       )
 
     ContSeq.unit
@@ -141,7 +141,7 @@ internal fun <A> SolverState.checkTopLevel(
             isConstructor,
             finalData.context,
             declaration,
-            finalData.branch.get()
+            finalData.branch.get(),
           )
         }
       }
@@ -151,7 +151,7 @@ internal fun SolverState.checkTopLevelDeclarationWithBody(
   context: ResolutionContext,
   descriptor: DeclarationDescriptor,
   declaration: Declaration,
-  body: Expression?
+  body: Expression?,
 ): ContSeq<Unit> =
   checkTopLevel(context, descriptor, declaration, isConstructor = false, solver.resultVariable) {
     data,
@@ -167,7 +167,7 @@ internal fun SolverState.checkTopLevelDeclarationWithBody(
 internal fun SolverState.checkPrimaryConstructor(
   context: ResolutionContext,
   descriptor: DeclarationDescriptor,
-  declaration: PrimaryConstructor
+  declaration: PrimaryConstructor,
 ): ContSeq<Unit> =
   checkTopLevel(context, descriptor, declaration, isConstructor = true, solver.thisVariable) {
     data,
@@ -177,14 +177,14 @@ internal fun SolverState.checkPrimaryConstructor(
       declaration.getContainingClassOrObject(),
       declaration.bodyExpression,
       data,
-      checkPost
+      checkPost,
     )
   }
 
 internal fun SolverState.checkImplicitPrimaryConstructor(
   context: ResolutionContext,
   descriptor: DeclarationDescriptor,
-  klass: ClassOrObject
+  klass: ClassOrObject,
 ): ContSeq<Unit> =
   checkTopLevel(context, descriptor, klass, isConstructor = true, solver.thisVariable) {
     data,
@@ -197,7 +197,7 @@ internal fun SolverState.postPrimaryConstructor(
   klass: ClassOrObject,
   bodyExpression: Expression?,
   data: CheckData,
-  checkPost: (finalData: CheckData) -> Unit
+  checkPost: (finalData: CheckData) -> Unit,
 ): ContSeq<Unit> =
   ContSeq.unit
     .flatMap {
@@ -214,14 +214,14 @@ internal fun SolverState.postPrimaryConstructor(
       checkClassDeclarationInConstructorContext(
           solver.thisVariable,
           klass.declarations,
-          finalState.data
+          finalState.data,
         )
         .onEach { checkPost(finalState.data) }
     }
 
 private fun SolverState.introduceImplicitProperties(
   context: ResolutionContext,
-  klass: ClassOrObject
+  klass: ClassOrObject,
 ): ContSeq<Unit> = cont {
   // if we have 'var' or 'var' in the parameters,
   // we need to assign them to fields
@@ -239,11 +239,11 @@ private fun SolverState.introduceImplicitProperties(
               solver.objects {
                 equal(
                   solver.makeObjectVariable(paramName),
-                  field(propertyDescriptor, solver.thisVariable)
+                  field(propertyDescriptor, solver.thisVariable),
                 )
-              }
+              },
             ),
-            context
+            context,
           )
         }
     }
@@ -252,7 +252,7 @@ private fun SolverState.introduceImplicitProperties(
 private fun SolverState.checkSuperTypeEntries(
   context: ResolutionContext,
   superTypeListEntries: List<SuperTypeListEntry>,
-  data: CheckData
+  data: CheckData,
 ): ContSeq<Unit> =
   superTypeListEntries
     .mapNotNull { entry ->
@@ -273,7 +273,7 @@ private fun SolverState.checkSuperTypeEntries(
 private fun SolverState.checkClassDeclarationInConstructorContext(
   thisRef: ObjectFormula,
   declarations: List<Declaration>,
-  data: CheckData
+  data: CheckData,
 ): ContSeq<Unit> =
   declarations
     .map { decl ->
@@ -294,7 +294,7 @@ private fun SolverState.checkClassDeclarationInConstructorContext(
 internal fun SolverState.checkSecondaryConstructor(
   context: ResolutionContext,
   descriptor: DeclarationDescriptor,
-  declaration: SecondaryConstructor
+  declaration: SecondaryConstructor,
 ): ContSeq<Unit> =
   checkTopLevel(context, descriptor, declaration, isConstructor = true, solver.thisVariable) {
     data,
@@ -314,7 +314,7 @@ internal fun SolverState.checkSecondaryConstructor(
         checkExpressionConstraints(
             solver.thisVariable,
             declaration.bodyExpression,
-            stateAfterPrimaryConstructorCall.data
+            stateAfterPrimaryConstructorCall.data,
           )
           .map { finalState -> checkPost(finalState.data) }
       }
@@ -323,7 +323,7 @@ internal fun SolverState.checkSecondaryConstructor(
 internal fun SolverState.checkEnumEntry(
   context: ResolutionContext,
   descriptor: DeclarationDescriptor,
-  entry: EnumEntry
+  entry: EnumEntry,
 ): ContSeq<Unit> =
   checkTopLevel(context, descriptor, entry, isConstructor = false, solver.thisVariable) {
     data,
@@ -343,7 +343,7 @@ internal fun SolverState.checkEnumEntry(
 private fun SolverState.checkLiskovConditions(
   declaration: Declaration,
   descriptor: DeclarationDescriptor,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): Boolean {
   val immediateConstraints = getImmediateConstraintsFor(descriptor)
   val overriddenConstraints = getOverriddenConstraintsFor(descriptor)
@@ -370,7 +370,7 @@ private fun SolverState.checkLiskovConditions(
 /** Check that the values of default parameters satisfy the preconditions */
 private fun SolverState.checkDefaultParameters(
   declaration: Declaration,
-  data: CheckData
+  data: CheckData,
 ): ContSeq<Unit> =
   when (declaration) {
     is DeclarationWithBody ->

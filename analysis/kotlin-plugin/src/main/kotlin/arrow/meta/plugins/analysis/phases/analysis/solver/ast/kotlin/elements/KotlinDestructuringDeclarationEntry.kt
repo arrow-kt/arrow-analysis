@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.psi.KtDestructuringDeclarationEntry
 class KotlinDestructuringDeclarationEntry(val impl: KtDestructuringDeclarationEntry) :
   DestructuringDeclarationEntry, KotlinVariableDeclaration {
   override fun impl(): KtDestructuringDeclarationEntry = impl
+
   override val isVar: Boolean
     get() = impl().isVar
 }

@@ -17,10 +17,13 @@ public class JavaTypeCast(private val ctx: AnalysisContext, private val impl: Ty
   TypeCastExpression, JavaElement(ctx, impl) {
   override val left: Expression
     get() = impl.expression.model(ctx)
+
   override val right: TypeReference
     get() = impl.type.model(ctx)
+
   override val operationToken: String
     get() = "as"
+
   override val operationReference: SimpleNameExpression
     get() = JavaFakeReference("as", this)
 
@@ -33,8 +36,10 @@ public class JavaInstanceOf(private val ctx: AnalysisContext, private val impl: 
   IsExpression, JavaElement(ctx, impl) {
   override val leftHandSide: Expression
     get() = impl.expression.model(ctx)
+
   override val typeReference: TypeReference?
     get() = JavaTypeReference(ctx, impl.type)
+
   override val operationReference: SimpleNameExpression
     get() = JavaFakeReference("instanceof", this)
 

@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtWhenConditionIsPattern
 class KotlinWhenConditionIsPattern(val impl: KtWhenConditionIsPattern) :
   WhenConditionIsPattern, KotlinWhenCondition {
   override fun impl(): KtWhenConditionIsPattern = impl
+
   override val isNegated: Boolean
     get() = impl().isNegated
+
   override val typeReference: TypeReference?
     get() = impl().typeReference?.model()
 }

@@ -6,6 +6,7 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.kotlin.types.Kotli
 
 fun interface KotlinValueDescriptor : ValueDescriptor, KotlinCallableDescriptor {
   override fun impl(): org.jetbrains.kotlin.descriptors.ValueDescriptor
+
   override val type: Type
     get() = KotlinType(impl().type)
 }

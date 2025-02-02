@@ -14,11 +14,17 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.errors.ErrorIds
 
 interface ResolutionContext {
   val types: Types
+
   fun handleError(error: ErrorIds, element: Element, msg: String): Unit
+
   fun type(typeReference: TypeReference?): Type?
+
   fun Element.constraintsDSLElements(): List<Element>
+
   fun descriptorFor(fqName: FqName): List<DeclarationDescriptor>
+
   fun descriptorFor(declaration: Declaration): DeclarationDescriptor?
+
   fun backingPropertyForConstructorParameter(
     parameter: ValueParameterDescriptor
   ): PropertyDescriptor?

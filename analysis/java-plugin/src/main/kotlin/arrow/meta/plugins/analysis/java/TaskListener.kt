@@ -19,8 +19,11 @@ public abstract class PerKindTaskListener : TaskListener {
   }
 
   public fun afterParse(e: TaskEvent): Unit {}
+
   public fun afterEnter(e: TaskEvent): Unit {}
+
   public fun afterAnalyze(e: TaskEvent): Unit {}
+
   public fun afterGenerate(e: TaskEvent): Unit {}
 }
 

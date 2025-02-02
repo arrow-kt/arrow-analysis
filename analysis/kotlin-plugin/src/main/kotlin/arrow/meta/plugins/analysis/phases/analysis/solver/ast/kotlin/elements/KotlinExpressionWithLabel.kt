@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtExpressionWithLabel
 
 fun interface KotlinExpressionWithLabel : ExpressionWithLabel, KotlinExpression {
   override fun impl(): KtExpressionWithLabel
+
   override fun getTargetLabel(): SimpleNameExpression? = impl().getTargetLabel()?.model()
 
   override fun getLabelName(): String? = impl().getLabelName()

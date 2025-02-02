@@ -18,8 +18,8 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.kotlin.descriptors
 import arrow.meta.plugins.analysis.phases.analysis.solver.ast.kotlin.types.KotlinType
 import arrow.meta.plugins.analysis.phases.analysis.solver.errors.ErrorIds
 import arrow.meta.plugins.analysis.phases.analysis.solver.state.SolverState
+import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.cfg.getDeclarationDescriptorIncludingConstructors
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.psi.KtDeclaration
 import org.jetbrains.kotlin.psi.KtElement
 import org.jetbrains.kotlin.psi.KtExpression
@@ -30,7 +30,7 @@ import org.jetbrains.kotlin.resolve.BindingTrace
 class KotlinResolutionContext(
   private val state: SolverState?,
   private val impl: BindingTrace,
-  private val moduleImpl: org.jetbrains.kotlin.descriptors.ModuleDescriptor
+  private val moduleImpl: org.jetbrains.kotlin.descriptors.ModuleDescriptor,
 ) : ResolutionContext, BindingTrace by impl {
 
   fun reportLiskovProblem(expression: Element, msg: String) {
@@ -141,6 +141,7 @@ class KotlinResolutionContext(
   }
 
   private val descriptorCache: MutableMap<String, List<DeclarationDescriptor>> = mutableMapOf()
+
   override fun descriptorFor(fqName: FqName): List<DeclarationDescriptor> {
     // add if not there yet
     if (!descriptorCache.containsKey(fqName.name)) {

@@ -7,6 +7,7 @@ open class KotlinResolvedValueArgument(
   open val impl: org.jetbrains.kotlin.resolve.calls.model.ResolvedValueArgument
 ) : ResolvedValueArgument {
   open fun impl(): org.jetbrains.kotlin.resolve.calls.model.ResolvedValueArgument = impl
+
   override val arguments: List<ValueArgument>
     get() = impl().arguments.map { KotlinValueArgument(it) }
 }

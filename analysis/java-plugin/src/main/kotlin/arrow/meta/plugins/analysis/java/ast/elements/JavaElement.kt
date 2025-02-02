@@ -28,6 +28,7 @@ public open class JavaElement(private val ctx: AnalysisContext, private val impl
     get() = impl.toString()
 
   public fun getResolvedCall(): ResolvedCall? = impl.resolvedCall(ctx)
+
   override fun getResolvedCall(context: ResolutionContext): ResolvedCall? = getResolvedCall()
 
   override fun getVariableDescriptor(context: ResolutionContext): VariableDescriptor? = null
@@ -47,6 +48,7 @@ public open class JavaElement(private val ctx: AnalysisContext, private val impl
       is JCTree -> impl.type?.modelCautious(ctx)
       else -> null
     }
+
   override fun type(context: ResolutionContext): Type? = type()
 
   override fun lastBlockStatementOrThis(): Expression =
@@ -58,6 +60,7 @@ public open class JavaElement(private val ctx: AnalysisContext, private val impl
   override val modifierList: ModifierList? = null // TODO: fix later
 
   override fun getAnnotations(): List<Annotation> = modifierList?.annotations.orEmpty()
+
   override val annotationEntries: List<AnnotationEntry>
     get() = modifierList?.annotationEntries.orEmpty()
 }

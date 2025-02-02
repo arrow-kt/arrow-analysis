@@ -6,5 +6,6 @@ import org.jetbrains.kotlin.psi.KtOperationReferenceExpression
 class KotlinOperationReferenceExpression(val impl: KtOperationReferenceExpression) :
   OperationReferenceExpression, KotlinSimpleNameExpression {
   override fun impl(): KtOperationReferenceExpression = impl
+
   override fun isConventionOperator(): Boolean = impl().isConventionOperator()
 }

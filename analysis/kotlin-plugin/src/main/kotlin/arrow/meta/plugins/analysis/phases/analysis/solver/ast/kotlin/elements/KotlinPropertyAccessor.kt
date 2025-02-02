@@ -14,16 +14,22 @@ class KotlinPropertyAccessor(val impl: KtPropertyAccessor) :
   KotlinModifierListOwner,
   KotlinDeclarationWithInitializer {
   override fun impl(): KtPropertyAccessor = impl
+
   override val isSetter: Boolean
     get() = impl().isSetter
+
   override val isGetter: Boolean
     get() = impl().isGetter
+
   override val parameterList: ParameterList?
     get() = impl().parameterList?.model()
+
   override val parameter: Parameter?
     get() = impl().parameter?.model()
+
   override val returnTypeReference: TypeReference?
     get() = impl().returnTypeReference?.model()
+
   override val property: Property
     get() = impl().property.model()
 }

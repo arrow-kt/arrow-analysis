@@ -4,5 +4,5 @@ enum class ProjectionKind {
   IN,
   OUT,
   STAR,
-  NONE
+  NONE,
 }

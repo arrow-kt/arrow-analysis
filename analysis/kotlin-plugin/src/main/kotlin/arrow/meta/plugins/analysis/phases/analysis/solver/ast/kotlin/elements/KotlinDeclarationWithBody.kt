@@ -10,6 +10,7 @@ import org.jetbrains.kotlin.psi.KtDeclarationWithBody
 
 fun interface KotlinDeclarationWithBody : DeclarationWithBody, KotlinDeclaration {
   override fun impl(): KtDeclarationWithBody
+
   override val bodyExpression: Expression?
     get() = impl().bodyExpression?.model()
 

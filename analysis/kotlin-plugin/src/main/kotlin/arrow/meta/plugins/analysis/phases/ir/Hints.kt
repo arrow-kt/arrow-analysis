@@ -9,16 +9,12 @@ import org.jetbrains.kotlin.descriptors.ModuleDescriptor
 fun CompilerContext.hintsFile(
   parentPath: String,
   descriptor: ModuleDescriptor,
-  packages: Set<FqName>
+  packages: Set<FqName>,
 ): File =
-  File(
-      parentPath,
-      "/AnalysisHints.kt",
-    )
-    .also {
-      it.createNewFile()
-      it.writeText(hints(descriptor, packages))
-    }
+  File(parentPath, "/AnalysisHints.kt").also {
+    it.createNewFile()
+    it.writeText(hints(descriptor, packages))
+  }
 
 fun hints(descriptor: ModuleDescriptor, packages: Set<FqName>): String {
   val hintPackageName =
@@ -38,5 +34,5 @@ fun hints(descriptor: ModuleDescriptor, packages: Set<FqName>): String {
 
 enum class HintState {
   NeedsProcessing,
-  Processed
+  Processed,
 }

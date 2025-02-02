@@ -118,7 +118,7 @@ public class AnalysisJavaPlugin : Plugin {
   private fun SolverState.collectFromDsl(
     todo: List<Element>,
     ctx: AnalysisContext,
-    resolutionContext: JavaResolutionContext
+    resolutionContext: JavaResolutionContext,
   ) {
     val obtainedPackages = mutableListOf<FqName>()
     todo.forEach { descriptor ->
@@ -155,7 +155,7 @@ public class AnalysisJavaPlugin : Plugin {
     descr: JavaFunctionDescriptor,
     constraints: DeclarationConstraints,
     ctx: AnalysisContext,
-    resolutionContext: JavaResolutionContext
+    resolutionContext: JavaResolutionContext,
   ) =
     (node.modifiers as? JCTree.JCModifiers)?.let { modifiers ->
       addConstraints(modifiers, "arrow.analysis.Pre", constraints.pre, ctx)
@@ -171,7 +171,7 @@ public class AnalysisJavaPlugin : Plugin {
     modifiers: JCTree.JCModifiers,
     type: String,
     constraints: List<NamedConstraint>,
-    ctx: AnalysisContext
+    ctx: AnalysisContext,
   ) {
     if (constraints.isNotEmpty()) {
       modifiers.addAnn {
@@ -181,7 +181,7 @@ public class AnalysisJavaPlugin : Plugin {
           constraints.map { it.formula.toString() },
           constraints.flatMap {
             solver.formulaManager.fieldNames(it.formula).map { fld -> fld.first }.toSet()
-          }
+          },
         )
       }
     }
@@ -190,26 +190,26 @@ public class AnalysisJavaPlugin : Plugin {
   private fun addSubjectConstraint(
     modifiers: JCTree.JCModifiers,
     subject: String,
-    ctx: AnalysisContext
+    ctx: AnalysisContext,
   ): Unit = modifiers.addAnn { ctx.annStrings("arrow.analysis.Subject", subject) }
 
   private fun SolverState.collectFromAnnotations(
     todo: List<Element>,
     ctx: AnalysisContext,
-    resolutionContext: JavaResolutionContext
+    resolutionContext: JavaResolutionContext,
   ): Unit =
     ctx.elements.allModuleElements.forEach { module ->
       collectConstraintsFromAnnotations(
         todo.map { it.model(ctx) },
         module.model(ctx),
-        resolutionContext
+        resolutionContext,
       )
     }
 
   private fun SolverState.checkConstraints(
     unit: CompilationUnitTree,
     ctx: AnalysisContext,
-    resolutionContext: JavaResolutionContext
+    resolutionContext: JavaResolutionContext,
   ) {
     if (!hadParseErrors()) {
       unit.visitRecursively(

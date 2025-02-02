@@ -147,8 +147,9 @@ public fun <A : Element, B : JavaDescriptor> A.model(ctx: AnalysisContext): B =
   }
 
 public fun <
-  A : Tree, B : arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements.Element> A
-  .modelCautious(ctx: AnalysisContext): B? =
+  A : Tree,
+  B : arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements.Element,
+> A.modelCautious(ctx: AnalysisContext): B? =
   when (this) {
     is CompilationUnitTree,
     is PackageTree,
@@ -160,8 +161,9 @@ public fun <
   }
 
 public fun <
-  A : Tree, B : arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements.Element> A
-  .model(ctx: AnalysisContext): B =
+  A : Tree,
+  B : arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements.Element,
+> A.model(ctx: AnalysisContext): B =
   when (this) {
     is ArrayTypeTree,
     is ParameterizedTypeTree,

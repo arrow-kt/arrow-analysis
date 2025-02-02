@@ -14,6 +14,7 @@ public class JavaTypeProjection(private val ctx: AnalysisContext, private val ty
   override val projectionKind: Variance = Variance.Invariant
   override val type: Type
     get() = JavaType(ctx, ty)
+
   override val isStarProjection: Boolean
     get() =
       ty.visit(

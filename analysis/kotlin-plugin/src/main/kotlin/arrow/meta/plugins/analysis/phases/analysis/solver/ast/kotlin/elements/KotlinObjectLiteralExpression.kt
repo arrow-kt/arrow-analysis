@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtObjectLiteralExpression
 class KotlinObjectLiteralExpression(val impl: KtObjectLiteralExpression) :
   ObjectLiteralExpression, KotlinExpression {
   override fun impl(): KtObjectLiteralExpression = impl
+
   override val objectDeclaration: ObjectDeclaration
     get() = impl().objectDeclaration.model()
 }

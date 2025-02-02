@@ -22,13 +22,14 @@ public class JavaResolvedCall(
   private val method: Symbol,
   private val receiver: Tree?,
   private val typeArgs: List<Tree>,
-  private val arguments: List<Tree>
+  private val arguments: List<Tree>,
 ) : ResolvedCall {
 
   override val callElement: Element
     get() = whole.model(ctx)
 
   override fun getReceiverExpression(): JavaElement? = receiver?.model(ctx)
+
   override val dispatchReceiver: ReceiverValue?
     get() =
       getReceiverExpression()?.let {
@@ -38,11 +39,13 @@ public class JavaResolvedCall(
             get() = false // TODO check later
         }
       }
+
   // there are no extension receivers in Java
   override val extensionReceiver: ReceiverValue? = null
 
   override val resultingDescriptor: CallableDescriptor
     get() = method.model(ctx)
+
   override fun getReturnType(): Type = whole.model<Tree, JavaElement>(ctx).type()!!
 
   override val typeArguments: Map<TypeParameterDescriptor, Type>
@@ -51,6 +54,7 @@ public class JavaResolvedCall(
         .zip(typeArgs)
         .map { (descr, tree) -> descr to ctx.resolver.resolveType(tree)!!.model(ctx) }
         .toMap()
+
   override val valueArguments: Map<ValueParameterDescriptor, ResolvedValueArgument>
     get() =
       resultingDescriptor.valueParameters
@@ -68,7 +72,7 @@ public class JavaResolvedCall(
 public fun Tree.resolvedCall(
   ctx: AnalysisContext,
   additionalTypeArgs: List<Tree> = emptyList(),
-  additionalArgs: List<Tree> = emptyList()
+  additionalArgs: List<Tree> = emptyList(),
 ): JavaResolvedCall? =
   when (this) {
     is JCTree.JCMethodInvocation -> // look inside
@@ -81,7 +85,7 @@ public fun Tree.resolvedCall(
           it,
           null,
           additionalTypeArgs,
-          additionalArgs + argumentsFromEverywhere
+          additionalArgs + argumentsFromEverywhere,
         )
       }
     is JCTree.JCMemberReference ->
@@ -92,7 +96,7 @@ public fun Tree.resolvedCall(
           it,
           qualifierExpression,
           additionalTypeArgs + typeArguments,
-          additionalArgs
+          additionalArgs,
         )
       }
     is JCTree.JCNewClass ->
@@ -103,7 +107,7 @@ public fun Tree.resolvedCall(
           it,
           null,
           additionalTypeArgs + typeArguments,
-          additionalArgs + arguments
+          additionalArgs + arguments,
         )
       }
     is JCTree.JCFieldAccess ->

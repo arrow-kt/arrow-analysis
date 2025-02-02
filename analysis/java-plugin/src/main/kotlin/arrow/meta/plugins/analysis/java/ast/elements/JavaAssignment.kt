@@ -17,6 +17,7 @@ public class JavaAssignment(private val ctx: AnalysisContext, private val impl: 
   AssignmentExpression, JavaElement(ctx, impl) {
   override val left: Expression
     get() = impl.variable.model(ctx)
+
   override val right: Expression
     get() = impl.expression.model(ctx)
 
@@ -31,10 +32,11 @@ public class JavaAssignment(private val ctx: AnalysisContext, private val impl: 
 // are translated as "var = var op exp"
 public class JavaCompoundAssignment(
   private val ctx: AnalysisContext,
-  private val impl: CompoundAssignmentTree
+  private val impl: CompoundAssignmentTree,
 ) : AssignmentExpression, JavaElement(ctx, impl) {
   override val left: Expression
     get() = impl.variable.model(ctx)
+
   override val right: Expression
     get() = JavaCompoundAssignmentRHS(ctx, impl)
 
@@ -47,7 +49,7 @@ public class JavaCompoundAssignment(
 
 public class JavaCompoundAssignmentRHS(
   private val ctx: AnalysisContext,
-  private val impl: CompoundAssignmentTree
+  private val impl: CompoundAssignmentTree,
 ) : BinaryExpression, JavaElement(ctx, impl) {
 
   private val operatorName: String = compoundkindNames[impl.kind] ?: "UNKNOWN"
@@ -60,10 +62,13 @@ public class JavaCompoundAssignmentRHS(
         is JCTree.JCAssignOp -> impl.operator.name.toString()
         else -> operatorName
       }
+
   override val operationTokenRpr: String
     get() = operatorName
+
   override val left: Expression
     get() = impl.variable.model(ctx)
+
   override val right: Expression
     get() = impl.expression.model(ctx)
 }

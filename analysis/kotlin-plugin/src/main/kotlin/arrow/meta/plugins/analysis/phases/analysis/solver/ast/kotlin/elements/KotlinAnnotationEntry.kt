@@ -9,10 +9,13 @@ import org.jetbrains.kotlin.psi.KtAnnotationEntry
 
 class KotlinAnnotationEntry(val impl: KtAnnotationEntry) : AnnotationEntry, KotlinCallElement {
   override fun impl(): KtAnnotationEntry = impl
+
   override val typeReference: TypeReference?
     get() = impl().typeReference?.model()
+
   override val useSiteTarget: AnnotationUseSiteTarget?
     get() = impl().useSiteTarget?.model()
+
   override val shortName: Name?
     get() = impl().shortName?.asString()?.let { Name(it) }
 }

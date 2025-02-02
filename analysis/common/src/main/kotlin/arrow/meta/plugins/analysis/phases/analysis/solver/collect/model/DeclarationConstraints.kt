@@ -6,5 +6,5 @@ data class DeclarationConstraints(
   val descriptor: DeclarationDescriptor,
   val pre: List<NamedConstraint>,
   val post: List<NamedConstraint>,
-  val doNotLookAtArgumentsWhen: List<NamedConstraint>
+  val doNotLookAtArgumentsWhen: List<NamedConstraint>,
 )

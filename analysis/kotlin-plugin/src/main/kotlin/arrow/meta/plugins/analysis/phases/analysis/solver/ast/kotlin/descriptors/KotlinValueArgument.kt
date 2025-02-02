@@ -19,6 +19,7 @@ class KotlinValueArgument(val impl: org.jetbrains.kotlin.psi.ValueArgument) :
 
   override val argumentExpression: Expression?
     get() = impl.getArgumentExpression()?.model()
+
   override val isSpread: Boolean
     get() = impl.getSpreadElement() != null
 

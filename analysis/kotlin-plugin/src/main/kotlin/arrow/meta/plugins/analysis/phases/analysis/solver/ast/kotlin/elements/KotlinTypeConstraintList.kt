@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeConstraintList
 
 class KotlinTypeConstraintList(val impl: KtTypeConstraintList) : TypeConstraintList, KotlinElement {
   override fun impl(): KtTypeConstraintList = impl
+
   override val constraints: List<TypeConstraint>
     get() = impl().constraints.map { it.model() }
 }

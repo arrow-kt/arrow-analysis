@@ -9,8 +9,10 @@ import org.jetbrains.kotlin.psi.KtConstructorCalleeExpression
 class KotlinConstructorCalleeExpression(override val impl: KtConstructorCalleeExpression) :
   ConstructorCalleeExpression, KotlinDefaultExpression(impl) {
   override fun impl(): KtConstructorCalleeExpression = impl
+
   override val typeReference: TypeReference?
     get() = impl().typeReference?.model()
+
   override val constructorReferenceExpression: SimpleNameExpression?
     get() = impl().constructorReferenceExpression?.model()
 }

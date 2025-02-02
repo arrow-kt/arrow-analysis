@@ -13,10 +13,13 @@ class KotlinTypeCastExpression(val impl: KtBinaryExpressionWithTypeRHS) :
 
   override val operationToken: String
     get() = this.operationReference.getReferencedName()
+
   override val left: Expression
     get() = impl.left.model()
+
   override val right: TypeReference?
     get() = impl.right?.model()
+
   override val kind: TypeCastExpresionKind
     get() =
       when (operationToken) {

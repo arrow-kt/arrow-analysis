@@ -23,5 +23,6 @@ public class JavaParameterDescriptor(ctx: AnalysisContext, private val impl: Var
   override val varargElementType: Type? = null
 
   override fun declaresDefaultValue(): Boolean = impl.constantValue != null
+
   override val defaultValue: Expression? = null // TODO: implement this!!
 }

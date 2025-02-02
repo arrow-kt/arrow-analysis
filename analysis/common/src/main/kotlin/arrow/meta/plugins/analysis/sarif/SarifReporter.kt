@@ -23,7 +23,7 @@ import kotlin.io.path.Path
 fun sarifFileContent(
   baseDir: String,
   analysisVersion: String,
-  errors: List<ReportedError>
+  errors: List<ReportedError>,
 ): String {
   val sarifSchema210 =
     SarifSchema210(
@@ -49,12 +49,12 @@ fun sarifFileContent(
                         .map(ErrorIds::toDescriptor),
                     organization = "arrow-kt",
                     semanticVersion = analysisVersion,
-                    version = analysisVersion
+                    version = analysisVersion,
                   )
               ),
-            results = toResults(baseDir, errors)
+            results = toResults(baseDir, errors),
           )
-        )
+        ),
     )
   return SarifSerializer.toJson(sarifSchema210)
 }
@@ -69,7 +69,7 @@ private fun ErrorIds.toDescriptor(): ReportingDescriptor =
         null -> MultiformatMessageString(text = shortDescription)
         else -> MultiformatMessageString(markdown = d, text = d)
       },
-    helpURI = "https://arrow-kt.io/docs/meta/analysis/${id}.html"
+    helpURI = "https://arrow-kt.io/docs/meta/analysis/${id}.html",
   )
 
 fun toResults(baseDir: String, errors: List<ReportedError>): List<io.github.detekt.sarif4k.Result> =
@@ -99,7 +99,7 @@ private fun ReportedError.toResult(baseDir: String) =
         .mapNotNull { it?.toLocation(baseDir) }
         .toSet()
         .toList(),
-    message = Message(text = msg)
+    message = Message(text = msg),
   )
 
 private fun rel(baseDir: String, path: String): String {
@@ -111,11 +111,7 @@ private fun CompilerMessageSourceLocation.toLocation(baseDir: String): Location 
   Location(
     physicalLocation =
       PhysicalLocation(
-        region =
-          Region(
-            startLine = line.toLong(),
-            startColumn = column.toLong(),
-          ),
-        artifactLocation = ArtifactLocation(uri = rel(baseDir, path))
+        region = Region(startLine = line.toLong(), startColumn = column.toLong()),
+        artifactLocation = ArtifactLocation(uri = rel(baseDir, path)),
       )
   )

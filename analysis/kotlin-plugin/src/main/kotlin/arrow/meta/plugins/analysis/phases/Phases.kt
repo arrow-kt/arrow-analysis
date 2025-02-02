@@ -42,7 +42,7 @@ internal fun Meta.analysisPhases(): ExtensionPhase =
                 bindingTrace.bindingContext,
                 module,
                 emptyList(),
-                listOfNotNull(path)
+                listOfNotNull(path),
               )
             }
             else -> null
@@ -72,7 +72,7 @@ internal fun Meta.analysisPhases(): ExtensionPhase =
                       bindingTrace.bindingContext,
                       module,
                       emptyList(),
-                      listOf(path.absoluteFile)
+                      listOf(path.absoluteFile),
                     )
                   } else {
                     // no need to create the hints file
@@ -81,7 +81,7 @@ internal fun Meta.analysisPhases(): ExtensionPhase =
                       bindingTrace.bindingContext,
                       module,
                       emptyList(),
-                      emptyList()
+                      emptyList(),
                     )
                   }
                 }
@@ -144,14 +144,14 @@ internal fun Meta.analysisPhases(): ExtensionPhase =
         }
         null
       },
-      irDumpKotlinLike()
+      irDumpKotlinLike(),
     )
   )
 
 enum class Stage {
   Init,
   CollectConstraints,
-  Prove
+  Prove,
 }
 
 object Keys {
@@ -199,7 +199,7 @@ internal fun CompilerContext.initialize(module: ModuleDescriptor) {
 
 internal inline fun <reified A : Any> CompilerContext.ensureInitialized(
   key: String,
-  acquire: () -> A
+  acquire: () -> A,
 ) {
   val thing: A? = get(key)
   if (thing == null) {
@@ -220,19 +220,19 @@ private fun CompilerContext.setHintsAs(module: ModuleDescriptor, state: HintStat
 
 private fun CompilerContext.isInStage(
   module: org.jetbrains.kotlin.descriptors.ModuleDescriptor,
-  stage: Stage
+  stage: Stage,
 ) = get<Stage>(Keys.stage(module)) == stage
 
 private fun CompilerContext.setStageAs(
   module: org.jetbrains.kotlin.descriptors.ModuleDescriptor,
-  stage: Stage
+  stage: Stage,
 ) {
   set(Keys.stage(module), stage)
 }
 
 private fun CompilerContext.setParseWarningsAs(
   module: org.jetbrains.kotlin.descriptors.ModuleDescriptor,
-  warnings: List<Diagnostic>
+  warnings: List<Diagnostic>,
 ) {
   set(Keys.parseWarnings(module), warnings)
 }

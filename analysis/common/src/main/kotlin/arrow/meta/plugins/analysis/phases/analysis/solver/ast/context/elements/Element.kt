@@ -6,9 +6,14 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.descriptor
 
 interface Element : PureElement {
   val text: String
+
   fun impl(): Any
+
   fun getResolvedCall(context: ResolutionContext): ResolvedCall?
+
   fun getVariableDescriptor(context: ResolutionContext): VariableDescriptor?
+
   fun parents(): List<Element>
+
   fun location(): CompilerMessageSourceLocation?
 }

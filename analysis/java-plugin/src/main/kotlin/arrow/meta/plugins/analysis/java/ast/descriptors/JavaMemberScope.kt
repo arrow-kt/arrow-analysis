@@ -15,10 +15,12 @@ import javax.lang.model.element.VariableElement
 
 public class JavaMemberScope(
   private val ctx: AnalysisContext,
-  private val enclosedElements: Collection<Element>
+  private val enclosedElements: Collection<Element>,
 ) : MemberScope {
   override fun getClassifierNames(): Set<Name> = getNames<TypeElement>()
+
   override fun getFunctionNames(): Set<Name> = getNames<ExecutableElement>()
+
   override fun getVariableNames(): Set<Name> = getNames<VariableElement>()
 
   private inline fun <reified A : Element> getNames(): Set<Name> =

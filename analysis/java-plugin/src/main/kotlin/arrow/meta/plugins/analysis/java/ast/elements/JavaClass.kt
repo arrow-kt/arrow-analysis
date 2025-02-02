@@ -30,12 +30,14 @@ import com.sun.source.tree.Tree
 public class JavaInstanceInitializer(
   private val ctx: AnalysisContext,
   private val impl: BlockTree,
-  override val containingDeclaration: Declaration
+  override val containingDeclaration: Declaration,
 ) : AnonymousInitializer, JavaElement(ctx, impl) {
   override val body: Expression
     get() = impl.model(ctx)
+
   override val name: String?
     get() = null
+
   override val parents: List<Element>
     get() = listOf(containingDeclaration) + containingDeclaration.parents
 }
@@ -45,12 +47,16 @@ public class JavaClass(private val ctx: AnalysisContext, private val impl: Class
 
   override val parents: List<Element>
     get() = ctx.resolver.parentTrees(impl).mapNotNull { it.modelCautious(ctx) }
+
   override val name: String
     get() = impl.name.toString()
+
   override val nameAsSafeName: Name
     get() = Name(name)
+
   override val fqName: FqName
     get() = FqName(impl.fqName(ctx))
+
   override val nameAsName: Name
     get() = nameAsSafeName
 
@@ -66,6 +72,7 @@ public class JavaClass(private val ctx: AnalysisContext, private val impl: Class
           else -> it.model<Tree, Declaration>(ctx)
         }
       }
+
   override fun getAnonymousInitializers(): List<AnonymousInitializer> =
     declarations.filterIsInstance<JavaInstanceInitializer>()
 
@@ -85,11 +92,14 @@ public class JavaClass(private val ctx: AnalysisContext, private val impl: Class
 
   // Java does not have many Kotlin niceties
   override fun getProperties(): List<Property> = emptyList()
+
   override val companionObjects: List<ObjectDeclaration?> = emptyList()
 
   // we map all Java constructors as "secondary"
   override fun hasExplicitPrimaryConstructor(): Boolean = false
+
   override fun hasPrimaryConstructor(): Boolean = false
+
   override val primaryConstructor: PrimaryConstructor? = null
   override val primaryConstructorModifierList: ModifierList? = null
   override val primaryConstructorParameters: List<Parameter> = emptyList()
@@ -98,14 +108,23 @@ public class JavaClass(private val ctx: AnalysisContext, private val impl: Class
     get() = declarations.filterIsInstance<JavaConstructor>()
 
   override fun isAnnotation(): Boolean = impl.kind == Tree.Kind.ANNOTATION_TYPE
+
   override fun isInterface(): Boolean = impl.kind == Tree.Kind.INTERFACE
+
   override fun isEnum(): Boolean = impl.kind == Tree.Kind.ENUM
+
   override fun isData(): Boolean = false
+
   override fun isSealed(): Boolean = false
+
   override fun isInner(): Boolean = ctx.resolver.parentTrees(impl).any { it is ClassTree }
+
   override fun isInline(): Boolean = false
+
   override fun isValue(): Boolean = false
+
   override fun isTopLevel(): Boolean = !isInner()
+
   override val isLocal: Boolean
     get() = ctx.resolver.parentTrees(impl).any { it is MethodTree }
 }

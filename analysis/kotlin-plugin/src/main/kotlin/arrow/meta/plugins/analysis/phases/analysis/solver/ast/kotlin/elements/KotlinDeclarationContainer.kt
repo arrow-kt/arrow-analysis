@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtDeclarationContainer
 
 fun interface KotlinDeclarationContainer : DeclarationContainer {
   fun impl(): KtDeclarationContainer
+
   override val declarations: List<Declaration>
     get() = impl().declarations.map { it.model() }
 }

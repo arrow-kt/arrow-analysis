@@ -17,6 +17,7 @@ public open class JavaDescriptor(private val ctx: AnalysisContext, private val i
 
   override val containingDeclaration: DeclarationDescriptor
     get() = impl.enclosingElement.model(ctx)
+
   override val containingPackage: FqName
     get() = FqName(impl.enclosingElement.fqName)
 

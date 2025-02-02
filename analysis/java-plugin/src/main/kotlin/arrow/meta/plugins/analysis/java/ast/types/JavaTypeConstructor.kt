@@ -16,13 +16,16 @@ public class JavaTypeConstructor(private val ctx: AnalysisContext, private val i
   TypeConstructor {
   override val parameters: List<TypeParameterDescriptor>
     get() = impl.typeParameters.map { it.model(ctx) }
+
   override val supertypes: Collection<Type>
     get() =
       (listOfNotNull(impl.superclass.takeIf { it.kind != TypeKind.NONE }) + impl.interfaces).map {
         it.model(ctx)
       }
+
   override val isFinal: Boolean
     get() = impl.modifiers.contains(Modifier.FINAL)
+
   override val isDenotable: Boolean = true
   override val declarationDescriptor: ClassifierDescriptor
     get() = impl.model(ctx)

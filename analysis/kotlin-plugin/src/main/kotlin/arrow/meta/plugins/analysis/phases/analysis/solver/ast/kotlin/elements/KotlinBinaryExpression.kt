@@ -9,12 +9,16 @@ import org.jetbrains.kotlin.psi.KtBinaryExpression
 class KotlinBinaryExpression(val impl: KtBinaryExpression) :
   BinaryExpression, KotlinOperationExpression {
   override fun impl(): KtBinaryExpression = impl
+
   override val operationToken: String
     get() = (impl().operationToken as KtSingleValueToken).value
+
   override val operationTokenRpr: String
     get() = impl().operationToken.toString()
+
   override val left: Expression?
     get() = impl().left?.model()
+
   override val right: Expression?
     get() = impl().right?.model()
 }

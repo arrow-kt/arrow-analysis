@@ -16,8 +16,10 @@ open class KotlinExpressionValueArgument(
   ExpressionResolvedValueArgument,
   KotlinResolvedValueArgument(impl) {
   override fun impl(): org.jetbrains.kotlin.resolve.calls.model.ExpressionValueArgument = impl
+
   override val argumentExpression: Expression?
     get() = impl().valueArgument?.getArgumentExpression()?.model()
+
   override val isSpread: Boolean
     get() = impl().valueArgument?.getSpreadElement() != null
 

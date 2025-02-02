@@ -18,14 +18,19 @@ abstract class KotlinFunctionDescriptor(
         Kind.DELEGATION -> CallableMemberDescriptor.Kind.DELEGATION
         Kind.SYNTHESIZED -> CallableMemberDescriptor.Kind.SYNTHESIZED
       }
+
   override val isOperator: Boolean
     get() = impl().isOperator
+
   override val isInfix: Boolean
     get() = impl().isInfix
+
   override val isInline: Boolean
     get() = impl().isInline
+
   override val isTailrec: Boolean
     get() = impl().isTailrec
+
   override val isSuspend: Boolean
     get() = impl().isSuspend
 }

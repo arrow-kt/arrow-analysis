@@ -20,7 +20,7 @@ import javax.lang.model.element.VariableElement
 
 public class JavaEnumConstantDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: VariableElement
+  private val impl: VariableElement,
 ) : ClassDescriptor, JavaMemberDescriptor(ctx, impl) {
 
   private val enclosingType = impl.enclosingElement.asType()
@@ -30,13 +30,15 @@ public class JavaEnumConstantDescriptor(
       ctx,
       impl.enclosingElement.enclosedElements.filter {
         it.kind != ElementKind.ENUM_CONSTANT && predicate(it)
-      }
+      },
     )
 
   override val unsubstitutedMemberScope: MemberScope
     get() = memberScope { it !is TypeElement && !it.modifiers.contains(Modifier.STATIC) }
+
   override val staticScope: MemberScope
     get() = memberScope { it !is TypeElement && it.modifiers.contains(Modifier.STATIC) }
+
   override val unsubstitutedInnerClassesScope: MemberScope
     get() = memberScope { it is TypeElement }
 
@@ -46,12 +48,15 @@ public class JavaEnumConstantDescriptor(
 
   override val superTypes: Collection<Type>
     get() = listOf(enclosingType.model(ctx))
+
   override val declaredTypeParameters: List<TypeParameterDescriptor> = emptyList()
 
   override val typeConstructor: TypeConstructor
     get() = JavaTypeConstructor(ctx, impl.enclosingElement as TypeElement)
+
   override val defaultType: Type
     get() = enclosingType.model(ctx)
+
   override val thisAsReceiverParameter: ReceiverParameterDescriptor
     get() = JavaReceiverParameterDescriptor(ctx, enclosingType, impl.enclosingElement)
 
@@ -60,6 +65,7 @@ public class JavaEnumConstantDescriptor(
   override val isInline: Boolean = false
   override val isFun: Boolean
     get() = ctx.types.isSubtype(impl.asType(), ctx.symbolTable.functionalInterfaceType)
+
   override val isValue: Boolean = false
   override val isEnumEntry: Boolean = false
   override val isInner: Boolean = true
