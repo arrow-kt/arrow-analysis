@@ -29,8 +29,10 @@ public class JavaAssert(private val ctx: AnalysisContext, private val impl: Asse
   AssertExpression, JavaElement(ctx, impl) {
   override fun getResolvedCall(context: ResolutionContext): ResolvedCall =
     JavaAssertFakeCall(ctx, impl)
+
   override val condition: Expression
     get() = impl.condition.model(ctx)
+
   override val detail: Expression?
     get() = impl.detail?.model(ctx)
 }
@@ -39,6 +41,7 @@ public class JavaAssertFakeCall(private val ctx: AnalysisContext, private val im
   ResolvedCall {
   override val callElement: Element
     get() = impl.model(ctx)
+
   override val typeArguments: Map<TypeParameterDescriptor, Type>
     get() = emptyMap()
 
@@ -54,7 +57,7 @@ public class JavaAssertFakeCall(private val ctx: AnalysisContext, private val im
           fakeDescriptor.predicateParameter to
             JavaExpressionValueArgument(ctx, impl.condition, fakeDescriptor.predicateParameter),
           fakeDescriptor.messageParameter to
-            JavaExpressionValueArgument(ctx, impl.detail, fakeDescriptor.messageParameter)
+            JavaExpressionValueArgument(ctx, impl.detail, fakeDescriptor.messageParameter),
         )
       } else {
         mapOf(
@@ -66,13 +69,14 @@ public class JavaAssertFakeCall(private val ctx: AnalysisContext, private val im
   override fun getReturnType(): Type = ctx.symbolTable.voidType.model(ctx)
 
   override fun getReceiverExpression(): Expression? = null
+
   override val dispatchReceiver: ReceiverValue? = null
   override val extensionReceiver: ReceiverValue? = null
 }
 
 public class JavaAssertFakeDescriptor(
   private val ctx: AnalysisContext,
-  private val withDetail: Boolean
+  private val withDetail: Boolean,
 ) : CallableDescriptor {
   override fun impl(): Any = this
 
@@ -94,9 +98,11 @@ public class JavaAssertFakeDescriptor(
   override val allParameters: List<ParameterDescriptor> = valueParameters
 
   override fun annotations(): Annotations = JavaAnnotations(ctx, emptyList())
+
   override val overriddenDescriptors: Collection<CallableDescriptor> = emptyList()
   override val containingDeclaration: DeclarationDescriptor? = null
   override val containingPackage: FqName? = null
+
   override fun element(): Element? = null
 }
 
@@ -105,21 +111,25 @@ public class JavaAssertFakeParameter(
   public override val index: Int,
   name: String,
   private val typeMirror: TypeMirror,
-  override val containingDeclaration: DeclarationDescriptor
+  override val containingDeclaration: DeclarationDescriptor,
 ) : ValueParameterDescriptor {
   override fun impl(): Any = this
 
   override val type: Type
     get() = typeMirror.model(ctx)
+
   override val returnType: Type
     get() = type
+
   override val fqNameSafe: FqName = FqName(name)
   override val name: Name = Name(name)
 
   override val isCrossinline: Boolean = false
   override val isNoinline: Boolean = false
   override val varargElementType: Type? = null
+
   override fun declaresDefaultValue(): Boolean = false
+
   override val defaultValue: Expression? = null
   override val isVar: Boolean = false
   override val isConst: Boolean = false
@@ -133,6 +143,8 @@ public class JavaAssertFakeParameter(
   override val overriddenDescriptors: Collection<CallableDescriptor> = emptyList()
 
   override val containingPackage: FqName? = null
+
   override fun element(): Element? = null
+
   override fun annotations(): Annotations = JavaAnnotations(ctx, emptyList())
 }

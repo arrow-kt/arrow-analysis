@@ -9,10 +9,13 @@ import org.jetbrains.kotlin.psi.KtLambdaExpression
 
 class KotlinLambdaExpression(val impl: KtLambdaExpression) : LambdaExpression, KotlinExpression {
   override fun impl(): KtLambdaExpression = impl
+
   override val functionLiteral: FunctionLiteral
     get() = impl().functionLiteral.model()
+
   override val valueParameters: List<Parameter>
     get() = impl().valueParameters.map { it.model() }
+
   override val bodyExpression: BlockExpression?
     get() = impl().bodyExpression?.model()
 

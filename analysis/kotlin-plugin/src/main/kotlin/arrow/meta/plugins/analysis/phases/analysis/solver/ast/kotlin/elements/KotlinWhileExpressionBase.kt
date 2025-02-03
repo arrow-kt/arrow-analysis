@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtWhileExpressionBase
 
 fun interface KotlinWhileExpressionBase : WhileExpressionBase, KotlinLoopExpression {
   override fun impl(): KtWhileExpressionBase
+
   override val condition: Expression?
     get() = impl().condition?.model()
 }

@@ -10,6 +10,7 @@ fun interface KotlinClassifierDescriptor : ClassifierDescriptor {
 
   override val typeConstructor: TypeConstructor
     get() = KotlinTypeConstructor { impl().typeConstructor }
+
   override val defaultType: Type
     get() = KotlinType(impl().defaultType)
 }

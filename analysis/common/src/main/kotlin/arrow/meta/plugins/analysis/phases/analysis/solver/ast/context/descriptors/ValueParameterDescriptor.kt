@@ -8,6 +8,8 @@ interface ValueParameterDescriptor : VariableDescriptor, ParameterDescriptor {
   val isCrossinline: Boolean
   val isNoinline: Boolean
   val varargElementType: Type?
+
   fun declaresDefaultValue(): Boolean
+
   val defaultValue: Expression?
 }

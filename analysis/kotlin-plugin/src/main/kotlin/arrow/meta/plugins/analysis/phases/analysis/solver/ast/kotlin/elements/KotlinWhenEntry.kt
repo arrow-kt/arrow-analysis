@@ -8,10 +8,13 @@ import org.jetbrains.kotlin.psi.KtWhenEntry
 
 class KotlinWhenEntry(val impl: KtWhenEntry) : WhenEntry, KotlinElement {
   override fun impl(): KtWhenEntry = impl
+
   override val isElse: Boolean
     get() = impl().isElse
+
   override val expression: Expression?
     get() = impl().expression?.model()
+
   override val conditions: List<WhenCondition>
     get() = impl().conditions.map { it.model() }
 }

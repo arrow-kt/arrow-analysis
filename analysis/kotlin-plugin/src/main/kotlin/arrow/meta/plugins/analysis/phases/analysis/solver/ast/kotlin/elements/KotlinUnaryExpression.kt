@@ -9,8 +9,10 @@ import org.jetbrains.kotlin.psi.KtUnaryExpression
 class KotlinUnaryExpression(val impl: KtUnaryExpression) :
   UnaryExpression, KotlinExpression, KotlinOperationExpression {
   override fun impl(): KtUnaryExpression = impl
+
   override val baseExpression: Expression?
     get() = impl().baseExpression?.model()
+
   override val operationReference: SimpleNameExpression
     get() = impl().operationReference.model()
 }

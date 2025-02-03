@@ -20,7 +20,7 @@ import javax.lang.model.util.Types
 public open class AnalysisContextWithoutResolver(
   public val context: Context,
   public val types: Types,
-  public val elements: Elements
+  public val elements: Elements,
 ) {
   public val logger: Log = Log.instance(context)
   public val messages: JavacMessages =
@@ -47,7 +47,7 @@ public class AnalysisContext(
   types: Types,
   elements: Elements,
   public val unit: CompilationUnitTree,
-  public val resolver: Resolver
+  public val resolver: Resolver,
 ) : AnalysisContextWithoutResolver(context, types, elements) {
   public companion object {
     public operator fun invoke(task: BasicJavacTask, unit: CompilationUnitTree): AnalysisContext =

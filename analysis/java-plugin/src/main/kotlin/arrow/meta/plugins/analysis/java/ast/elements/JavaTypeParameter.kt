@@ -11,7 +11,7 @@ import com.sun.source.tree.TypeParameterTree
 
 public class JavaTypeParameter(
   private val ctx: AnalysisContext,
-  private val impl: TypeParameterTree
+  private val impl: TypeParameterTree,
 ) : TypeParameter {
   override val variance: Variance = Variance.Invariant
   override val extendsBounds: List<TypeReference>

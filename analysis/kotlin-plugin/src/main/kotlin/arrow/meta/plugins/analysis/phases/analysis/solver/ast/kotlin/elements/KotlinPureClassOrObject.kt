@@ -17,10 +17,13 @@ fun interface KotlinPureClassOrObject : PureClassOrObject, KotlinDeclarationCont
 
   override val name: String?
     get() = impl().name
+
   override val isLocal: Boolean
     get() = impl().isLocal
+
   override val superTypeListEntries: List<SuperTypeListEntry>
     get() = impl().superTypeListEntries.map { it.model() }
+
   override val companionObjects: List<ObjectDeclaration?>
     get() = impl().companionObjects.map { it.model() }
 
@@ -30,14 +33,19 @@ fun interface KotlinPureClassOrObject : PureClassOrObject, KotlinDeclarationCont
 
   override val primaryConstructor: PrimaryConstructor?
     get() = impl().primaryConstructor?.model()
+
   override val primaryConstructorModifierList: ModifierList?
     get() = impl().primaryConstructorModifierList?.model()
+
   override val primaryConstructorParameters: List<Parameter>
     get() = impl().primaryConstructorParameters.map { it.model() }
+
   override val secondaryConstructors: List<SecondaryConstructor?>
     get() = impl().secondaryConstructors.map { it.model() }
+
   override val body: ClassBody?
     get() = impl().body?.model()
+
   override val psiOrParent: Element
     get() = impl().psiOrParent.model()
 }

@@ -42,7 +42,7 @@ import org.sosy_lab.java_smt.api.NumeralFormula
 fun Solver.primitiveFormula(
   context: ResolutionContext,
   resolvedCall: ResolvedCall,
-  args: List<Formula>
+  args: List<Formula>,
 ): Formula? {
   val descriptor = resolvedCall.resultingDescriptor
   val returnTy = descriptor.returnType?.primitiveType()
@@ -69,7 +69,7 @@ private val comparisonNames: List<FqName> =
       "<",
       "<=",
       "==",
-      "!="
+      "!=",
     )
     .map { FqName(it) }
 
@@ -79,7 +79,7 @@ internal fun CallableDescriptor.isComparison() =
 private fun Solver.comparisonFormula(
   context: ResolutionContext,
   resolvedCall: ResolvedCall,
-  args: List<Formula>
+  args: List<Formula>,
 ): BooleanFormula? =
   resolvedCall
     .allArgumentExpressions(context)
@@ -126,7 +126,7 @@ private fun Solver.comparisonFormula(
 
 private fun Solver.booleanFormula(
   descriptor: CallableDescriptor,
-  args: List<Formula>
+  args: List<Formula>,
 ): BooleanFormula? =
   when (descriptor.fqNameSafe) {
     FqName("kotlin.Boolean.not"),
@@ -141,7 +141,7 @@ private fun Solver.booleanFormula(
 
 private fun Solver.integralFormula(
   descriptor: CallableDescriptor,
-  args: List<Formula>
+  args: List<Formula>,
 ): NumeralFormula.IntegerFormula? =
   when (descriptor.name.value) {
     "plus" -> intPlus(args)
@@ -171,7 +171,7 @@ private fun Solver.integralFormula(
 
 private fun Solver.rationalFormula(
   descriptor: CallableDescriptor,
-  args: List<Formula>
+  args: List<Formula>,
 ): NumeralFormula.RationalFormula? =
   when (descriptor.name.value) {
     "plus" -> rationalPlus(args)

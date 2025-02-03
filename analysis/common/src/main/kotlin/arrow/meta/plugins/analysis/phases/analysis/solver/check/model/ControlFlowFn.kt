@@ -10,7 +10,7 @@ data class ControlFlowFn(
   val target: Expression?,
   val body: Expression,
   val argumentName: String,
-  val returnBehavior: ReturnBehavior
+  val returnBehavior: ReturnBehavior,
 ) {
   /** Describes whether functions return their argument or whatever is done in a block */
   enum class ReturnBehavior {
@@ -18,6 +18,6 @@ data class ControlFlowFn(
     RETURNS_ARGUMENT,
 
     /** Return whatever the enclosing block returns */
-    RETURNS_BLOCK_RESULT
+    RETURNS_BLOCK_RESULT,
   }
 }

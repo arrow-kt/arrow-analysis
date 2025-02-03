@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtModifierList
 
 class KotlinModifierList(val impl: KtModifierList) : ModifierList, KotlinAnnotationsContainer {
   override fun impl(): KtModifierList = impl
+
   override val annotations: List<Annotation>
     get() = impl().annotations.map { it.model() }
+
   override val annotationEntries: List<AnnotationEntry>
     get() = impl().annotationEntries.map { it.model() }
 }

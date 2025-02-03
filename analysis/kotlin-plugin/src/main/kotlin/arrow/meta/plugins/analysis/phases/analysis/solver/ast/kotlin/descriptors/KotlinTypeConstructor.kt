@@ -13,12 +13,16 @@ fun interface KotlinTypeConstructor : TypeConstructor {
 
   override val parameters: List<TypeParameterDescriptor>
     get() = impl().parameters.map { it.model() }
+
   override val supertypes: Collection<Type>
     get() = impl().supertypes.map { KotlinType(it) }
+
   override val isFinal: Boolean
     get() = impl().isFinal
+
   override val isDenotable: Boolean
     get() = impl().isDenotable
+
   override val declarationDescriptor: ClassifierDescriptor?
     get() = impl().declarationDescriptor?.model()
 }

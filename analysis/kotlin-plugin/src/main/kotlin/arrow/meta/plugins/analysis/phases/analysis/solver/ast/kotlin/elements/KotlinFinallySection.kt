@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtFinallySection
 
 class KotlinFinallySection(val impl: KtFinallySection) : FinallySection, KotlinElement {
   override fun impl(): KtFinallySection = impl
+
   override val finalExpression: BlockExpression
     get() = impl.finalExpression.model()
 }

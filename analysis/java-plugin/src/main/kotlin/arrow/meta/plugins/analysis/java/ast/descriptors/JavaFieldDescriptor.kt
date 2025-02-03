@@ -23,7 +23,7 @@ import javax.lang.model.element.VariableElement
 
 public class JavaFieldDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: VariableElement
+  private val impl: VariableElement,
 ) : PropertyDescriptor, JavaMemberDescriptor(ctx, impl) {
   init {
     require(impl.kind == ElementKind.FIELD)
@@ -58,6 +58,7 @@ public class JavaFieldDescriptor(
     get() =
       if (impl.modifiers.contains(Modifier.STATIC)) null
       else JavaReceiverParameterDescriptor(ctx, impl.enclosingClass!!.asType(), impl)
+
   override val typeParameters: List<TypeParameterDescriptor> = emptyList()
   override val returnType: Type = type
   override val valueParameters: List<ValueParameterDescriptor> = emptyList()

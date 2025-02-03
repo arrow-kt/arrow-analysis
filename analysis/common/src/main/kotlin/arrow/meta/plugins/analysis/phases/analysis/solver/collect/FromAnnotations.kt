@@ -21,7 +21,7 @@ import org.sosy_lab.java_smt.api.BooleanFormula
 public fun SolverState.collectConstraintsFromAnnotations(
   localDeclarations: List<DeclarationDescriptor>,
   module: ModuleDescriptor,
-  bindingTrace: ResolutionContext
+  bindingTrace: ResolutionContext,
 ): Pair<AnalysisResult, Set<FqName>> {
   // check local declarations for @Laws
   collectFromLocalDeclarations(localDeclarations, bindingTrace)
@@ -44,7 +44,7 @@ public fun SolverState.collectConstraintsFromAnnotations(
 
 private fun SolverState.collectFromLocalDeclarations(
   localDeclarations: List<DeclarationDescriptor>,
-  bindingTrace: ResolutionContext
+  bindingTrace: ResolutionContext,
 ) {
   localDeclarations
     .flatMap { it.gather { it.hasInterestingAnnotation } }
@@ -53,7 +53,7 @@ private fun SolverState.collectFromLocalDeclarations(
 
 private fun SolverState.collectFromClasspath(
   module: ModuleDescriptor,
-  bindingTrace: ResolutionContext
+  bindingTrace: ResolutionContext,
 ) {
   val collectEntireClasspath =
     System.getProperty("ARROW_ANALYSIS_COLLECT_ENTIRE_CLASSPATH", "false").toBooleanStrictOrNull()
@@ -66,7 +66,7 @@ private fun SolverState.collectFromClasspath(
         module
           .gather(
             initialPackages = listOf(FqName("arrow.analysis.hints")),
-            addSubPackages = false
+            addSubPackages = false,
           ) {
             it.hasPackageWithLawsAnnotation
           }
@@ -81,7 +81,7 @@ private fun SolverState.collectFromClasspath(
 
 internal fun SolverState.addConstraintsFromAnnotations(
   descriptor: DeclarationDescriptor,
-  bindingContext: ResolutionContext
+  bindingContext: ResolutionContext,
 ) {
   val constraints =
     descriptor.annotations().iterable().mapNotNull { ann ->
@@ -109,7 +109,7 @@ internal fun SolverState.addConstraintsFromAnnotations(
 private fun SolverState.parseFormula(
   element: String,
   annotation: AnnotationDescriptor,
-  descriptor: DeclarationDescriptor
+  descriptor: DeclarationDescriptor,
 ): Pair<String, List<NamedConstraint>> {
   val dependencies = annotation.argumentValueAsArrayOfString("dependencies")
   val formulae = annotation.argumentValueAsArrayOfString("formulae")
@@ -124,7 +124,7 @@ private fun SolverState.parseFormula(
 internal fun SolverState.parseFormula(
   descriptor: DeclarationDescriptor,
   formula: String,
-  dependencies: List<String>
+  dependencies: List<String>,
 ): BooleanFormula {
   val VALUE_TYPE = "Int"
   val FIELD_TYPE = "Int"
@@ -134,8 +134,7 @@ internal fun SolverState.parseFormula(
       function.valueParameters.joinToString(separator = "\n") { param ->
         "(declare-fun ${param.name} () $VALUE_TYPE)"
       }
-    }
-      ?: ""
+    } ?: ""
   // build the dependencies
   val deps = dependencies.joinToString(separator = "\n") { "(declare-fun $it () $FIELD_TYPE)" }
   // build the rest of the environment

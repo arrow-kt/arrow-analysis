@@ -11,7 +11,7 @@ import javax.lang.model.element.PackageElement
 
 public class JavaModuleDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: ModuleElement
+  private val impl: ModuleElement,
 ) : JavaDescriptor(ctx, impl), ModuleDescriptor {
   override fun getPackage(pck: String): PackageViewDescriptor? =
     impl.enclosedElements

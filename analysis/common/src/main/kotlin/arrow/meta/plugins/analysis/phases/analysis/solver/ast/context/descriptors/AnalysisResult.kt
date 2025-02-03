@@ -3,5 +3,5 @@ package arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.descripto
 enum class AnalysisResult {
   Retry,
   Completed,
-  ParsingError
+  ParsingError,
 }

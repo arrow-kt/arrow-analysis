@@ -33,6 +33,6 @@ interface ClassDescriptor : DeclarationDescriptor, ClassifierDescriptorWithTypeP
     ENUM_CLASS,
     ENUM_ENTRY,
     ANNOTATION_CLASS,
-    OBJECT
+    OBJECT,
   }
 }

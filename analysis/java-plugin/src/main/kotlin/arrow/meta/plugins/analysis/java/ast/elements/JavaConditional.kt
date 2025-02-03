@@ -22,12 +22,14 @@ public abstract class JavaConditional(
   impl: Tree,
   private val conditionTree: ExpressionTree,
   private val thenTree: Tree,
-  private val elseTree: Tree?
+  private val elseTree: Tree?,
 ) : IfExpression, JavaElement(ctx, impl) {
   override val condition: Expression?
     get() = conditionTree.model(ctx)
+
   override val thenExpression: Expression?
     get() = thenTree.model(ctx)
+
   override val elseExpression: Expression?
     get() = elseTree?.model(ctx)
 }
@@ -44,8 +46,10 @@ public class JavaSwitch(private val ctx: AnalysisContext, private val impl: Swit
   override val subjectVariable: Property? = null
   override val subjectExpression: Expression
     get() = impl.expression.model(ctx)
+
   override val entries: List<WhenEntry>
     get() = impl.cases.map { it.model(ctx) }
+
   override val elseExpression: Expression?
     get() =
       impl.cases.firstOrNull { it.expression == null }?.model<CaseTree, JavaCase>(ctx)?.expression
@@ -55,8 +59,10 @@ public class JavaCase(private val ctx: AnalysisContext, private val impl: CaseTr
   WhenEntry, JavaElement(ctx, impl) {
   override val isElse: Boolean
     get() = impl.expression == null
+
   override val conditions: List<WhenCondition>
     get() = listOfNotNull(impl.expression?.model(ctx))
+
   override val expression: Expression
     get() = JavaBlockParent(ctx, impl.statements, impl)
 }

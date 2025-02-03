@@ -14,6 +14,7 @@ fun interface KotlinTypeParameterDescriptor : TypeParameterDescriptor, KotlinCla
 
   override val isReified: Boolean
     get() = impl().isReified
+
   override val variance: Variance
     get() =
       when (impl().variance) {
@@ -21,10 +22,13 @@ fun interface KotlinTypeParameterDescriptor : TypeParameterDescriptor, KotlinCla
         IN_VARIANCE -> Variance.In
         OUT_VARIANCE -> Variance.Out
       }
+
   override val upperBounds: List<Type>
     get() = impl().upperBounds.map { KotlinType(it) }
+
   override val index: Int
     get() = impl().index
+
   override val isCapturedFromOuterDeclaration: Boolean
     get() = impl().isCapturedFromOuterDeclaration
 }

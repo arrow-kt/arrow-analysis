@@ -8,5 +8,5 @@ data class ReportedError(
   val errorsId: ErrorIds,
   val element: Element,
   val msg: String,
-  val references: List<Element>
+  val references: List<Element>,
 )

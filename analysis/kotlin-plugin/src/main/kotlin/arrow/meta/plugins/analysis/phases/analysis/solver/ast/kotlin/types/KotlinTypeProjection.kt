@@ -12,8 +12,10 @@ class KotlinTypeProjection(val impl: org.jetbrains.kotlin.types.TypeProjection) 
         org.jetbrains.kotlin.types.Variance.OUT_VARIANCE -> Variance.Out
         org.jetbrains.kotlin.types.Variance.INVARIANT -> Variance.Invariant
       }
+
   override val type: Type
     get() = KotlinType(impl.type)
+
   override val isStarProjection: Boolean
     get() = impl.isStarProjection
 }

@@ -1,5 +1,8 @@
 @file:Suppress("DSL_SCOPE_VIOLATION")
 
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
+
 plugins {
   id(libs.plugins.kotlin.jvm.get().pluginId)
   alias(libs.plugins.arrowGradleConfig.publish)
@@ -8,6 +11,9 @@ plugins {
 }
 
 kotlin {
+  compilerOptions {
+    languageVersion.set(KotlinVersion.KOTLIN_1_9)
+  }
   explicitApi = null
   jvmToolchain {
     (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))

@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.psi.KtTypeProjection
 
 fun interface KotlinTypeProjection : TypeProjection {
   fun impl(): KtTypeProjection
+
   override val projectionKind: ProjectionKind
     get() =
       when (impl().projectionKind) {
@@ -17,6 +18,7 @@ fun interface KotlinTypeProjection : TypeProjection {
         KtProjectionKind.STAR -> ProjectionKind.STAR
         KtProjectionKind.NONE -> ProjectionKind.NONE
       }
+
   override val typeReference: TypeReference?
     get() = impl().typeReference?.model()
 }

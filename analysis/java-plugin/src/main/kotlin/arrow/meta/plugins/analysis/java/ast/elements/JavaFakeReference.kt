@@ -15,18 +15,25 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.types.Type
 public class JavaFakeReference(private val impl: String, private val parent: Element) :
   SimpleNameExpression {
   override fun getReferencedName(): String = impl
+
   override fun getReferencedNameAsName(): Name = Name(impl)
 
   override fun type(context: ResolutionContext): Type? = null
+
   override fun lastBlockStatementOrThis(): Expression = this
 
   override val text: String = impl
+
   override fun impl(): Any = impl
 
   override fun getResolvedCall(context: ResolutionContext): ResolvedCall? = null
+
   override fun getVariableDescriptor(context: ResolutionContext): VariableDescriptor? = null
+
   override fun parents(): List<Element> = listOf(parent) + parent.parents()
+
   override fun location(): CompilerMessageSourceLocation? = null
+
   override val psiOrParent: Element
     get() = this
 }

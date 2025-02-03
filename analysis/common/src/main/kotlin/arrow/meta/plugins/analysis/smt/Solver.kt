@@ -130,7 +130,7 @@ class Solver(context: SolverContext, nameProvider: NameProvider) :
       BOOL_VALUE_NAME,
       DECIMAL_VALUE_NAME,
       FIELD_FUNCTION_NAME,
-      IS_NULL_FUNCTION_NAME
+      IS_NULL_FUNCTION_NAME,
     )
 
   override fun escape(name: String): String =
@@ -144,7 +144,7 @@ class Solver(context: SolverContext, nameProvider: NameProvider) :
     operator fun invoke(nameProvider: NameProvider): Solver =
       Solver(
         SolverContextFactory.createSolverContext(SolverContextFactory.Solvers.SMTINTERPOL),
-        nameProvider
+        nameProvider,
       )
 
     val INT_VALUE_NAME = "int"

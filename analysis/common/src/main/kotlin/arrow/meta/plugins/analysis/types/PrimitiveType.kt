@@ -8,7 +8,7 @@ enum class PrimitiveType {
   INTEGRAL,
   RATIONAL,
   CHAR,
-  STRING
+  STRING,
 }
 
 fun Type.unwrapIfNullable(): Type =

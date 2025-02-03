@@ -19,18 +19,19 @@ kotlin {
     commonMain {
       dependencies {
         implementation(libs.kotlin.stdlibCommon)
+        implementation(kotlin("stdlib-common"))
         api(projects.arrowAnalysisLaws)
         api(projects.arrowAnalysisTypes)
       }
     }
 
-    named("jvmMain") {
+    jvmMain {
       dependencies {
         implementation(libs.kotlin.stdlibJDK8)
       }
     }
 
-    named("jsMain") {
+    jsMain {
       dependencies {
         implementation(libs.kotlin.stdlibJS)
       }
@@ -39,17 +40,18 @@ kotlin {
 }
 
 dependencies {
-  kotlinCompilerClasspath(projects.arrowAnalysisKotlinPlugin)
+  kotlinCompilerPluginClasspath(projects.arrowAnalysisKotlinPlugin)
+  kotlinCompilerPluginClasspath(projects.arrowAnalysisLaws)
 }
 
 tasks.compileKotlinJvm {
-  kotlinOptions {
-    dependsOn(":arrow-analysis-laws:jar")
-    freeCompilerArgs = listOf(
+  compilerOptions {
+    //dependsOn(":arrow-analysis-laws:jar")
+    freeCompilerArgs.set(listOf(
       "-Xplugin=$rootDir/analysis/kotlin-plugin/build/libs/arrow-analysis-kotlin-plugin-$version.jar",
       "-P", "plugin:arrow.meta.plugin.compiler.analysis:generatedSrcOutputDir=$buildDir/generated/meta",
       "-P", "plugin:arrow.meta.plugin.compiler.analysis:baseDir=${project.rootProject.rootDir.path}"
-    )
+    ))
   }
 }
 

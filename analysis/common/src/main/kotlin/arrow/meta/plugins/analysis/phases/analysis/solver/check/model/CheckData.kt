@@ -10,7 +10,7 @@ data class CheckData(
   val context: ResolutionContext,
   val returnPoints: ReturnPoints,
   val varInfo: CurrentVarInfo,
-  val branch: CurrentBranch
+  val branch: CurrentBranch,
 ) {
   fun addReturnPoint(scope: String, variableName: ObjectFormula) =
     this.copy(returnPoints = returnPoints.addAndReplaceTopMost(scope, variableName))
@@ -23,7 +23,7 @@ data class CheckData(
     name: String,
     smtName: String,
     origin: Element,
-    invariant: BooleanFormula? = null
+    invariant: BooleanFormula? = null,
   ): CheckData = this.copy(varInfo = varInfo.add(solver, name, smtName, origin, invariant))
 
   fun addVarInfos(vars: List<VarInfo>): CheckData = this.copy(varInfo = varInfo.add(vars))

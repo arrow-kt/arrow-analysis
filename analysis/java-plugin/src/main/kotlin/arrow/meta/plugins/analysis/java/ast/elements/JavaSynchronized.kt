@@ -11,10 +11,11 @@ import com.sun.source.tree.SynchronizedTree
 
 public class JavaSynchronized(
   private val ctx: AnalysisContext,
-  private val impl: SynchronizedTree
+  private val impl: SynchronizedTree,
 ) : SynchronizedExpression, JavaElement(ctx, impl) {
   override val subject: Expression
     get() = impl.expression.model(ctx)
+
   override val block: BlockExpression
     get() = impl.block.model(ctx)
 }

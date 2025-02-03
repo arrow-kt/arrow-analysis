@@ -9,10 +9,13 @@ import org.jetbrains.kotlin.psi.KtCatchClause
 
 class KotlinCatchClause(val impl: KtCatchClause) : CatchClause, KotlinElement {
   override fun impl(): KtCatchClause = impl
+
   override val parameterList: ParameterList?
     get() = impl().parameterList?.model()
+
   override val catchParameter: Parameter?
     get() = impl().catchParameter?.model()
+
   override val catchBody: Expression?
     get() = impl().catchBody?.model()
 }

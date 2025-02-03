@@ -45,7 +45,7 @@ internal fun SolverState.checkInconsistency(
 internal fun SolverState.addAndCheckConsistency(
   constraints: Iterable<NamedConstraint>,
   context: ResolutionContext,
-  message: (unsatCore: List<BooleanFormula>) -> Unit
+  message: (unsatCore: List<BooleanFormula>) -> Unit,
 ): Boolean {
   constraints.forEach { addConstraint(it, context) }
   additionalFieldConstraints(constraints, context).forEach { addConstraint(it, context) }
@@ -55,14 +55,14 @@ internal fun SolverState.addAndCheckConsistency(
 internal fun SolverState.checkImplicationOf(
   constraint: NamedConstraint,
   context: ResolutionContext,
-  message: (model: Model) -> Unit
+  message: (model: Model) -> Unit,
 ): Boolean = checkImplicationOf(constraint, true, context, message)
 
 internal fun SolverState.checkImplicationOf(
   constraint: NamedConstraint,
   addFieldConstraints: Boolean,
   context: ResolutionContext,
-  message: (model: Model) -> Unit
+  message: (model: Model) -> Unit,
 ): Boolean = bracket {
   solver.booleans {
     addConstraint(NamedConstraint("!(${constraint.msg})", not(constraint.formula)), context)
@@ -79,7 +79,7 @@ internal fun SolverState.checkImplicationOf(
 
 internal fun SolverState.additionalFieldConstraints(
   formulae: Iterable<NamedConstraint>,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): Set<NamedConstraint> =
   solver.formulaManager
     .fieldNames(formulae.map { it.formula })
@@ -98,8 +98,8 @@ internal fun SolverState.additionalFieldConstraints(
             constraints.post[0].msg,
             solver.substituteVariable(
               constraints.post[0].formula,
-              mapOf(RESULT_VAR_NAME to field(descriptor, appliedTo), "this" to appliedTo)
-            )
+              mapOf(RESULT_VAR_NAME to field(descriptor, appliedTo), "this" to appliedTo),
+            ),
           )
         )
       } else {
@@ -117,7 +117,7 @@ internal fun SolverState.singleConstraintsFromFqName(name: FqName): DeclarationC
 
 internal fun SolverState.checkDefaultValueInconsistency(
   context: ResolutionContext,
-  declaration: Declaration
+  declaration: Declaration,
 ): Boolean =
   solver.run {
     checkInconsistency { unsatCore ->
@@ -137,7 +137,7 @@ internal fun SolverState.checkDefaultValueInconsistency(
 internal fun SolverState.checkPreconditionsInconsistencies(
   constraints: DeclarationConstraints?,
   context: ResolutionContext,
-  declaration: Declaration
+  declaration: Declaration,
 ): Boolean =
   solver.run {
     constraints?.pre?.let {
@@ -145,8 +145,7 @@ internal fun SolverState.checkPreconditionsInconsistencies(
         val msg = inconsistentBodyPre(declaration, unsatCore)
         context.handleError(ErrorIds.Inconsistency.InconsistentBodyPre, declaration, msg)
       }
-    }
-      ?: false // if there are no preconditions, they are consistent
+    } ?: false // if there are no preconditions, they are consistent
   }
 
 /**
@@ -158,7 +157,7 @@ internal fun SolverState.checkPostConditionsImplication(
   isConstructor: Boolean,
   context: ResolutionContext,
   declaration: Declaration,
-  branch: Branch
+  branch: Branch,
 ) {
   solver.run {
     constraints?.post?.forEach { postCondition ->
@@ -176,7 +175,7 @@ internal fun SolverState.checkCallPreConditionsImplication(
   context: ResolutionContext,
   expression: Expression,
   resolvedCall: ResolvedCall,
-  branch: Branch
+  branch: Branch,
 ) =
   solver.run {
     callConstraints?.pre?.forEach { callPreCondition ->
@@ -192,7 +191,7 @@ internal fun SolverState.checkCallPostConditionsInconsistencies(
   callConstraints: DeclarationConstraints?,
   context: ResolutionContext,
   expression: Expression,
-  branch: Branch
+  branch: Branch,
 ): Boolean =
   solver.run {
     callConstraints?.post?.let {
@@ -200,8 +199,7 @@ internal fun SolverState.checkCallPostConditionsInconsistencies(
         val msg = inconsistentCallPost(unsatCore, branch)
         context.handleError(ErrorIds.Inconsistency.InconsistentCallPost, expression, msg)
       }
-    }
-      ?: false
+    } ?: false
   }
 
 /** Add the [formulae] to the set and checks that it remains consistent */
@@ -210,7 +208,7 @@ internal fun SolverState.checkConditionsInconsistencies(
   context: ResolutionContext,
   expression: Element,
   branch: Branch,
-  reportIfInconsistent: Boolean
+  reportIfInconsistent: Boolean,
 ): Boolean =
   solver.run {
     addAndCheckConsistency(formulae, context) { unsatCore ->
@@ -225,7 +223,7 @@ internal fun SolverState.checkInvariantConsistency(
   constraint: NamedConstraint,
   context: ResolutionContext,
   expression: Element,
-  branch: Branch
+  branch: Branch,
 ): Boolean =
   solver.run {
     addAndCheckConsistency(listOf(constraint), context) {
@@ -238,7 +236,7 @@ internal fun SolverState.checkInvariant(
   constraint: NamedConstraint,
   context: ResolutionContext,
   expression: Element,
-  branch: Branch
+  branch: Branch,
 ): Boolean =
   solver.run {
     checkImplicationOf(constraint, context) { model ->
@@ -250,7 +248,7 @@ internal fun SolverState.checkInvariant(
 internal fun SolverState.checkLiskovWeakerPrecondition(
   constraint: NamedConstraint,
   context: ResolutionContext,
-  expression: Element
+  expression: Element,
 ): Boolean =
   solver.run {
     checkImplicationOf(constraint, context) {
@@ -262,7 +260,7 @@ internal fun SolverState.checkLiskovWeakerPrecondition(
 internal fun SolverState.checkLiskovStrongerPostcondition(
   constraint: NamedConstraint,
   context: ResolutionContext,
-  expression: Element
+  expression: Element,
 ): Boolean =
   solver.run {
     checkImplicationOf(constraint, context) {

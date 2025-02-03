@@ -48,7 +48,7 @@ internal fun IrUtils.annotateWithConstraints(solverState: SolverState, fn: IrFun
         }
         notLookAnnotation(
             declarationConstraints.doNotLookAtArgumentsWhen,
-            solverState.solver.formulaManager
+            solverState.solver.formulaManager,
           )
           ?.let { fn.addAnnotation(it) }
         if (model.isALaw()) {
@@ -80,8 +80,7 @@ private fun getIrReturnedExpressionWithoutPostcondition(function: IrFunction): F
           else -> null
         }
       else -> null
-    }
-      ?: lastElementWithoutReturn
+    } ?: lastElementWithoutReturn
   // and finally obtain the model
   return when (veryLast) {
     is IrMemberAccessExpression<*> ->
@@ -102,35 +101,35 @@ private fun IrMutableAnnotationContainer.addAnnotation(annotation: IrConstructor
 
 private fun IrUtils.preAnnotation(
   formulae: List<NamedConstraint>,
-  manager: FormulaManager
+  manager: FormulaManager,
 ): IrConstructorCall? =
   annotationFromClassId(
     ClassId.fromString("arrow/analysis/Pre"),
     formulae.map { it.msg },
     formulae.map { it.formula.toString() },
-    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() }
+    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() },
   )
 
 private fun IrUtils.postAnnotation(
   formulae: List<NamedConstraint>,
-  manager: FormulaManager
+  manager: FormulaManager,
 ): IrConstructorCall? =
   annotationFromClassId(
     ClassId.fromString("arrow/analysis/Post"),
     formulae.map { it.msg },
     formulae.map { it.formula.toString() },
-    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() }
+    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() },
   )
 
 private fun IrUtils.notLookAnnotation(
   formulae: List<NamedConstraint>,
-  manager: FormulaManager
+  manager: FormulaManager,
 ): IrConstructorCall? =
   annotationFromClassId(
     ClassId.fromString("arrow/analysis/DoNotLookAtArguments"),
     formulae.map { it.msg },
     formulae.map { it.formula.toString() },
-    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() }
+    formulae.flatMap { manager.fieldNames(it.formula).map { fld -> fld.first }.toSet() },
   )
 
 private fun IrUtils.lawSubjectAnnotation(descriptor: FunctionDescriptor): IrConstructorCall? =
@@ -140,7 +139,7 @@ private fun IrUtils.annotationFromClassId(
   classId: ClassId,
   messages: List<String>,
   formulae: List<String>,
-  dependencies: List<String>
+  dependencies: List<String>,
 ): IrConstructorCall? =
   when {
     formulae.isEmpty() -> null
@@ -152,7 +151,7 @@ private fun IrUtils.annotationFromClassId(
 
 private fun IrUtils.lawSubjectAnnotationFromClassId(
   classId: ClassId,
-  descriptor: FunctionDescriptor
+  descriptor: FunctionDescriptor,
 ): IrConstructorCall? =
   moduleFragment.descriptor.findClassAcrossModuleDependencies(classId)?.let {
     lawSubjectAnnotation(descriptor, it)
@@ -160,7 +159,7 @@ private fun IrUtils.lawSubjectAnnotationFromClassId(
 
 private fun IrUtils.lawSubjectAnnotation(
   fnDescriptor: FunctionDescriptor,
-  descriptor: ClassDescriptor
+  descriptor: ClassDescriptor,
 ): IrConstructorCall? =
   descriptor.irConstructorCall()?.also {
     it.putValueArgument(0, constantValue(fnDescriptor.fqNameSafe.name))
@@ -170,7 +169,7 @@ private fun IrUtils.annotation(
   messages: List<String>,
   formulae: List<String>,
   dependencies: List<String>,
-  descriptor: ClassDescriptor
+  descriptor: ClassDescriptor,
 ): IrConstructorCall? =
   descriptor.irConstructorCall()?.also {
     it.putValueArgument(0, arrayOfStrings(messages))
@@ -191,15 +190,15 @@ private fun IrUtils.arrayOfStrings(values: List<String>): IrVarargImpl? =
         endOffset = UNDEFINED_OFFSET,
         type = it.returnType?.toIrType()!!,
         varargElementType = moduleFragment.irBuiltins.stringType,
-        elements = values.map(this::constantValue)
+        elements = values.map(this::constantValue),
       )
     }
 
-private fun IrUtils.constantValue(value: String): IrConst<String> =
+private fun IrUtils.constantValue(value: String): IrConst =
   IrConstImpl(
     startOffset = UNDEFINED_OFFSET,
     endOffset = UNDEFINED_OFFSET,
     type = moduleFragment.irBuiltins.stringType,
     kind = IrConstKind.String,
-    value = value
+    value = value,
   )

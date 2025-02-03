@@ -50,7 +50,7 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.state.SolverState
 public fun SolverState.checkDeclarationConstraints(
   context: ResolutionContext,
   declaration: Declaration,
-  descriptor: DeclarationDescriptor
+  descriptor: DeclarationDescriptor,
 ) {
   if (!hadParseErrors() && declaration.shouldBeAnalyzed() && descriptor.shouldBeAnalyzed()) {
     // trace
@@ -70,7 +70,7 @@ public fun SolverState.checkDeclarationConstraints(
             checkImplicitPrimaryConstructor(
               context,
               descriptor.constructors.single { it.isPrimary },
-              declaration
+              declaration,
             )
           }
         is Property ->
@@ -80,14 +80,14 @@ public fun SolverState.checkDeclarationConstraints(
                 context,
                 descriptor,
                 declaration,
-                declaration.stableBody()
+                declaration.stableBody(),
               )
             declaration.delegate != null ->
               checkTopLevelDeclarationWithBody(
                 context,
                 descriptor,
                 declaration,
-                declaration.delegate?.expression
+                declaration.delegate?.expression,
               )
             declaration.getter != null || declaration.setter != null -> {
               // no body, maybe we have getter and setter
@@ -100,7 +100,7 @@ public fun SolverState.checkDeclarationConstraints(
                         context,
                         getterDescr,
                         getterDecl,
-                        getterDecl.body()
+                        getterDecl.body(),
                       )
                     }
                   }
@@ -112,7 +112,7 @@ public fun SolverState.checkDeclarationConstraints(
                         context,
                         setterDescr,
                         setterDecl,
-                        setterDecl.body()
+                        setterDecl.body(),
                       )
                     }
                   }
@@ -125,7 +125,7 @@ public fun SolverState.checkDeclarationConstraints(
             context,
             descriptor,
             declaration,
-            declaration.stableBody()
+            declaration.stableBody(),
           )
       }.drain()
     } catch (e: IllegalStateException) {

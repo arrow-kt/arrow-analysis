@@ -22,7 +22,7 @@ fun <T : Formula> Solver.substituteVariable(formula: T, mapping: Map<String, For
 
 internal fun <T : Formula> Solver.renameObjectVariables(
   formula: T,
-  mapping: Map<String, String>
+  mapping: Map<String, String>,
 ): T =
   try {
     formulae {
@@ -36,7 +36,7 @@ internal fun <T : Formula> Solver.renameObjectVariables(
 
 internal fun <T : Formula> Solver.substituteObjectVariables(
   formula: T,
-  mapping: Map<String, ObjectFormula>
+  mapping: Map<String, ObjectFormula>,
 ): T =
   try {
     formulae {
@@ -49,27 +49,27 @@ internal fun <T : Formula> Solver.substituteObjectVariables(
 
 fun Solver.renameDeclarationConstraints(
   decl: DeclarationConstraints,
-  mapping: Map<String, String>
+  mapping: Map<String, String>,
 ): DeclarationConstraints {
   fun go(c: NamedConstraint) = NamedConstraint(c.msg, renameObjectVariables(c.formula, mapping))
   return DeclarationConstraints(
     decl.descriptor,
     decl.pre.map(::go),
     decl.post.map(::go),
-    decl.doNotLookAtArgumentsWhen.map(::go)
+    decl.doNotLookAtArgumentsWhen.map(::go),
   )
 }
 
 fun Solver.substituteDeclarationConstraints(
   decl: DeclarationConstraints,
-  mapping: Map<String, ObjectFormula>
+  mapping: Map<String, ObjectFormula>,
 ): DeclarationConstraints {
   fun go(c: NamedConstraint) = NamedConstraint(c.msg, substituteObjectVariables(c.formula, mapping))
   return DeclarationConstraints(
     decl.descriptor,
     decl.pre.map(::go),
     decl.post.map(::go),
-    decl.doNotLookAtArgumentsWhen.map(::go)
+    decl.doNotLookAtArgumentsWhen.map(::go),
   )
 }
 
@@ -78,10 +78,11 @@ fun FormulaManager.fieldNames(f: Formula): Set<Pair<String, ObjectFormula>> {
   val visitor =
     object : DefaultFormulaVisitor<TraversalProcess>() {
       override fun visitDefault(f: Formula?): TraversalProcess = TraversalProcess.CONTINUE
+
       override fun visitFunction(
         f: Formula?,
         args: MutableList<Formula>?,
-        fn: FunctionDeclaration<*>?
+        fn: FunctionDeclaration<*>?,
       ): TraversalProcess {
         val secondArg = args?.getOrNull(1) as? ObjectFormula
         if (fn?.name == Solver.FIELD_FUNCTION_NAME && secondArg != null) {
@@ -103,6 +104,7 @@ fun FormulaManager.isSingleVariable(f: Formula): Boolean {
   val visitor =
     object : DefaultFormulaVisitor<Boolean>() {
       override fun visitDefault(f: Formula?): Boolean = false
+
       override fun visitFreeVariable(f: Formula?, name: String?): Boolean = true
     }
   return visit(f, visitor)
@@ -112,10 +114,11 @@ fun Solver.isFieldCall(f: Formula): Boolean {
   val visitor =
     object : DefaultFormulaVisitor<Boolean>() {
       override fun visitDefault(f: Formula?): Boolean = false
+
       override fun visitFunction(
         f: Formula?,
         args: MutableList<Formula>?,
-        functionDeclaration: FunctionDeclaration<*>?
+        functionDeclaration: FunctionDeclaration<*>?,
       ): Boolean = functionDeclaration?.name == Solver.FIELD_FUNCTION_NAME
     }
   return visit(f, visitor)
@@ -135,7 +138,7 @@ fun <T : Formula> Solver.substituteWithFix(pF: T, pFromToMapping: Map<out Formul
       override fun visitFunction(
         f: Formula,
         newArgs: List<Formula>,
-        functionDeclaration: FunctionDeclaration<*>
+        functionDeclaration: FunctionDeclaration<*>,
       ): Formula = pFromToMapping[f] ?: makeApplicationSafe(functionDeclaration, newArgs)
 
       private fun replace(f: Formula): Formula = pFromToMapping[f] ?: f
@@ -151,11 +154,11 @@ fun <T : Formula> Solver.substituteWithFix(pF: T, pFromToMapping: Map<out Formul
               fn.kind,
               fn.argumentTypes.take(2),
               fn.type,
-              fn.solverDeclaration
+              fn.solverDeclaration,
             )
           // this happens sometimes in SMTInterpol,
           // so we try to fix it by using the function with each 2 arguments
           args.reduce { acc, f -> makeApplication(newFn, listOf(acc, f)) }
         }
-    }
+    },
   )

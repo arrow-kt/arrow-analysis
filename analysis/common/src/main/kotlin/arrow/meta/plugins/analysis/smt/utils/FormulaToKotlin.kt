@@ -9,7 +9,9 @@ import org.sosy_lab.java_smt.api.visitors.DefaultFormulaVisitor
 
 interface KotlinPrinter {
   fun Formula.dumpKotlinLike(): String
+
   fun Formula.dumpKotlinLikeOrRemove(): String?
+
   fun mirroredElement(name: String): ReferencedElement?
 
   fun List<Formula>.dumpKotlinLike(): String =
@@ -18,7 +20,7 @@ interface KotlinPrinter {
 
 internal class DefaultKotlinPrinter(
   private val fmgr: FormulaManager,
-  private val nameProvider: NameProvider
+  private val nameProvider: NameProvider,
 ) : KotlinPrinter {
 
   override fun mirroredElement(name: String): ReferencedElement? =
@@ -28,7 +30,7 @@ internal class DefaultKotlinPrinter(
     val str = StringBuilder()
     fmgr.visit(
       this,
-      KotlinPrintVisitor(fmgr, str, nameProvider, parensContext = false, negatedContext = false)
+      KotlinPrintVisitor(fmgr, str, nameProvider, parensContext = false, negatedContext = false),
     )
     return str.toString()
   }
@@ -40,7 +42,7 @@ internal class DefaultKotlinPrinter(
     private val out: StringBuilder,
     private val nameProvider: NameProvider,
     private val parensContext: Boolean,
-    private val negatedContext: Boolean
+    private val negatedContext: Boolean,
   ) : DefaultFormulaVisitor<Void?>() {
 
     override fun visitDefault(pF: Formula): Void? {
@@ -62,7 +64,7 @@ internal class DefaultKotlinPrinter(
       Binary,
       Hidden,
       Field,
-      Unsupported
+      Unsupported,
     }
 
     private fun FunctionDeclaration<*>.toKotlin(): Triple<Render, String, String?> =
@@ -94,7 +96,7 @@ internal class DefaultKotlinPrinter(
     override fun visitFunction(
       pF: Formula,
       pArgs: List<Formula>,
-      pFunctionDeclaration: FunctionDeclaration<*>
+      pFunctionDeclaration: FunctionDeclaration<*>,
     ): Void? {
       val (render, name, negatedName) = pFunctionDeclaration.toKotlin()
       when (render) {
@@ -109,12 +111,12 @@ internal class DefaultKotlinPrinter(
           val leftStringBuilder = StringBuilder()
           fmgr.visit(
             pArgs[0],
-            this.copy(out = leftStringBuilder, parensContext = true, negatedContext = false)
+            this.copy(out = leftStringBuilder, parensContext = true, negatedContext = false),
           )
           val rightStringBuilder = StringBuilder()
           fmgr.visit(
             pArgs[1],
-            this.copy(out = rightStringBuilder, parensContext = true, negatedContext = false)
+            this.copy(out = rightStringBuilder, parensContext = true, negatedContext = false),
           )
 
           if (leftStringBuilder.toString() == rightStringBuilder.toString()) {

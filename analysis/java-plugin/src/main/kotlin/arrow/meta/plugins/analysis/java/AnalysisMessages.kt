@@ -30,7 +30,7 @@ public class AnalysisMessages : ListResourceBundle() {
         UnsatInvariants,
         LiskovProblem,
         ErrorParsingPredicate,
-        AnalysisException
+        AnalysisException,
       )
 
     public val Warnings: List<String> =
@@ -38,7 +38,7 @@ public class AnalysisMessages : ListResourceBundle() {
         InconsistentCallPost,
         InconsistentConditions,
         UnsupportedElement,
-        WarningParsingPredicate
+        WarningParsingPredicate,
       )
   }
 

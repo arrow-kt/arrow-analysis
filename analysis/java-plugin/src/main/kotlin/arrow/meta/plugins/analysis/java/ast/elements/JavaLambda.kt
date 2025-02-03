@@ -37,11 +37,13 @@ public class JavaLambda(private val ctx: AnalysisContext, private val impl: Lamb
 
   override val valueParameters: List<Parameter>
     get() = impl.parameters.map { JavaParameter(ctx, it, this) }
+
   override val valueParameterList: ParameterList
     get() =
       object : ParameterList {
         override val parameters: List<Parameter>
           get() = this@JavaLambda.valueParameters
+
         override val ownerFunction: DeclarationWithBody
           get() = this@JavaLambda
       }
@@ -50,11 +52,13 @@ public class JavaLambda(private val ctx: AnalysisContext, private val impl: Lamb
 
   override val receiverTypeReference: TypeReference?
     get() = null
+
   override val typeReference: TypeReference?
     get() = null
 
   override val typeParameters: List<TypeParameter>
     get() = emptyList()
+
   override val typeParameterList: TypeParameterList
     get() =
       object : TypeParameterList {
@@ -64,6 +68,7 @@ public class JavaLambda(private val ctx: AnalysisContext, private val impl: Lamb
 
   override val typeConstraints: List<TypeConstraint>
     get() = emptyList()
+
   override val typeConstraintList: TypeConstraintList
     get() =
       object : TypeConstraintList {
@@ -72,11 +77,15 @@ public class JavaLambda(private val ctx: AnalysisContext, private val impl: Lamb
       }
 
   override fun hasBody(): Boolean = impl.body != null
+
   override fun body(): Expression = impl.body.model(ctx)
+
   override val bodyExpression: Expression
     get() = body()
+
   override val bodyBlockExpression: BlockExpression?
     get() = body() as? BlockExpression
+
   override fun hasBlockBody(): Boolean = bodyBlockExpression != null
 
   override val isLocal: Boolean = true

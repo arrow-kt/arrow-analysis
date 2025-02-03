@@ -7,8 +7,10 @@ import org.jetbrains.kotlin.psi.KtFunction
 
 interface KotlinFunction : Function, KotlinDeclarationWithBody, KotlinCallableDeclaration {
   override fun impl(): KtFunction
+
   override val isLocal: Boolean
     get() = impl().isLocal
+
   override val valueParameters: List<Parameter>
     get() = impl().valueParameters.map { it.model() }
 }

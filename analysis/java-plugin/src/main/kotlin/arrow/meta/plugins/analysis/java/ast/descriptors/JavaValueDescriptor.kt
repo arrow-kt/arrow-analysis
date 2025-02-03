@@ -16,7 +16,7 @@ import javax.lang.model.element.VariableElement
 
 public open class JavaValueDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: VariableElement
+  private val impl: VariableElement,
 ) : ValueDescriptor, JavaMemberDescriptor(ctx, impl) {
 
   override val type: Type
@@ -25,6 +25,7 @@ public open class JavaValueDescriptor(
         is Symbol -> impl.type.model(ctx)
         else -> throw IllegalStateException("this element should be a symbol")
       }
+
   override val allParameters: List<ParameterDescriptor> = emptyList()
   override val extensionReceiverParameter: ReceiverParameterDescriptor? = null
   override val dispatchReceiverParameter: ReceiverParameterDescriptor? = null

@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtAnonymousInitializer
 
 fun interface KotlinAnonymousInitializer : AnonymousInitializer, KotlinDeclaration {
   override fun impl(): KtAnonymousInitializer
+
   override val containingDeclaration: Declaration
     get() = impl().containingDeclaration.model()
+
   override val body: Expression?
     get() = impl().body?.model()
 }

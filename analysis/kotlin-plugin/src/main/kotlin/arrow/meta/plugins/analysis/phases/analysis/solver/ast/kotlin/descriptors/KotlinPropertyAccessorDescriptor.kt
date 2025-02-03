@@ -8,8 +8,10 @@ class KotlinPropertyAccessorDescriptor(
   override val impl: org.jetbrains.kotlin.descriptors.PropertyAccessorDescriptor
 ) : PropertyAccessorDescriptor, KotlinVariableAccessorDescriptor(impl) {
   override fun impl(): org.jetbrains.kotlin.descriptors.PropertyAccessorDescriptor = impl
+
   override val overriddenDescriptors: Collection<PropertyAccessorDescriptor>
     get() = impl().overriddenDescriptors.map { it.model() }
+
   override val correspondingVariable: VariableDescriptorWithAccessors
     get() = impl().correspondingVariable.model()
 }

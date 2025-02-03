@@ -21,7 +21,7 @@ import javax.lang.model.type.TypeKind
 
 public open class JavaFunctionDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: ExecutableElement
+  private val impl: ExecutableElement,
 ) : FunctionDescriptor, JavaMemberDescriptor(ctx, impl) {
 
   override val isOperator: Boolean = false
@@ -43,12 +43,16 @@ public open class JavaFunctionDescriptor(
         }
         else -> null
       }
+
   override val typeParameters: List<TypeParameterDescriptor>
     get() = impl.typeParameters.map { it.model(ctx) }
+
   override val returnType: Type?
     get() = impl.returnType?.modelCautious(ctx)
+
   override val valueParameters: List<ValueParameterDescriptor>
     get() = impl.parameters.map { it.model(ctx) }
+
   override val allParameters: List<ParameterDescriptor>
     get() = listOfNotNull(dispatchReceiverParameter) + valueParameters
 

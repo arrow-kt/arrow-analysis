@@ -5,6 +5,7 @@ import arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.elements.N
 
 fun interface KotlinNamed : Named {
   fun impl(): org.jetbrains.kotlin.descriptors.Named
+
   override val name: Name
     get() = Name(impl().name.asString())
 }

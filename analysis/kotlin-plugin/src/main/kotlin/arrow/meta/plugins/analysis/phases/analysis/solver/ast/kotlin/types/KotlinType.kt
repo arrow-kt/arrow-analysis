@@ -25,10 +25,13 @@ import org.jetbrains.kotlin.types.typeUtil.isUnsignedNumberType
 internal class KotlinType(val impl: org.jetbrains.kotlin.types.KotlinType) : Type {
   override val descriptor: ClassDescriptor?
     get() = TypeUtils.getClassDescriptor(impl)?.model()
+
   override val unwrappedNotNullableType: Type
     get() = KotlinType(impl.unwrappedNotNullableType)
+
   override val isMarkedNullable: Boolean
     get() = impl.isMarkedNullable
+
   override val arguments: List<TypeProjection>
     get() = impl.arguments.map { KotlinTypeProjection(it) }
 

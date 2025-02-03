@@ -137,8 +137,8 @@ fun <A : KtElement, B : Element> A.model(): B =
     is KtModifierList -> KotlinModifierList(this).repr()
     // fallbacks
     is KtFunction -> KotlinDefaultFunction(this).repr()
-    is KtContainerNodeForControlStructureBody -> this.expression?.model()
-        ?: KotlinDefaultElement(this).repr()
+    is KtContainerNodeForControlStructureBody ->
+      this.expression?.model() ?: KotlinDefaultElement(this).repr()
     is KtContainerNode -> KotlinDefaultElement(this).repr()
     // final fallback for expressions
     is KtExpression -> KotlinDefaultExpression(this).repr()

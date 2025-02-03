@@ -10,7 +10,7 @@ import com.sun.source.tree.ParenthesizedTree
 
 public class JavaParenthesized(
   private val ctx: AnalysisContext,
-  private val impl: ParenthesizedTree
+  private val impl: ParenthesizedTree,
 ) : ParenthesizedExpression, JavaElement(ctx, impl) {
   override val expression: Expression
     get() = impl.expression.model(ctx)

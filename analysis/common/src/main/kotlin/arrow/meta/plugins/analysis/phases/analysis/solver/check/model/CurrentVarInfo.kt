@@ -13,7 +13,7 @@ data class CurrentVarInfo(private val varInfo: List<VarInfo>) {
     name: String,
     smtName: String,
     origin: Element,
-    invariant: BooleanFormula? = null
+    invariant: BooleanFormula? = null,
   ): CurrentVarInfo = this.add(listOf(VarInfo(solver, name, smtName, origin, invariant)))
 
   fun add(vars: List<VarInfo>): CurrentVarInfo = CurrentVarInfo(vars + varInfo)

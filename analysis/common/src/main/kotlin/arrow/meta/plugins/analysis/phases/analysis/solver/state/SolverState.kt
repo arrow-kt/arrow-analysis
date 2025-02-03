@@ -34,7 +34,7 @@ data class SolverState(
   val prover: ProverEnvironment =
     solver.newProverEnvironment(
       SolverContext.ProverOptions.GENERATE_MODELS,
-      SolverContext.ProverOptions.GENERATE_UNSAT_CORE
+      SolverContext.ProverOptions.GENERATE_UNSAT_CORE,
     ),
   val callableConstraints: MutableMap<FqName, MutableList<DeclarationConstraints>> = mutableMapOf(),
   val solverTrace: MutableList<String> = mutableListOf(),
@@ -97,7 +97,7 @@ data class SolverState(
     context: ResolutionContext,
     prefix: String,
     element: Element?,
-    reference: Pair<ValueParameterDescriptor, ResolvedValueArgument>?
+    reference: Pair<ValueParameterDescriptor, ResolvedValueArgument>?,
   ): String {
     val type = (element as? Expression)?.type(context)
     val info = element?.let { ReferencedElement(it, reference, type) }

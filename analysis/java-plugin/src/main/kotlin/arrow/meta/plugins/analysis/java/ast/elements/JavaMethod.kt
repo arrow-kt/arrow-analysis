@@ -32,12 +32,16 @@ public open class JavaMethod(private val ctx: AnalysisContext, private val impl:
 
   override val parents: List<Element>
     get() = ctx.resolver.parentTrees(impl).mapNotNull { it.modelCautious(ctx) }
+
   override val name: String
     get() = impl.name.toString()
+
   override val nameAsSafeName: Name
     get() = Name(name)
+
   override val fqName: FqName
     get() = FqName(impl.fqName(ctx))
+
   override val nameAsName: Name
     get() = nameAsSafeName
 
@@ -46,25 +50,32 @@ public open class JavaMethod(private val ctx: AnalysisContext, private val impl:
 
   override val bodyExpression: Expression?
     get() = impl.body?.model(ctx)
+
   override fun hasBody(): Boolean = bodyExpression != null
+
   override fun body(): Expression? = bodyExpression
 
   override fun hasInitializer(): Boolean = bodyExpression != null
+
   override val initializer: Expression?
     get() = bodyExpression
 
   override val bodyBlockExpression: BlockExpression?
     get() = bodyExpression as? JavaBlock
+
   override fun hasBlockBody(): Boolean = bodyBlockExpression != null
 
   override fun hasDeclaredReturnType(): Boolean = impl.returnType != null
+
   override val typeReference: TypeReference?
     get() = impl.returnType?.let { JavaTypeReference(ctx, it) }
+
   override val receiverTypeReference: TypeReference?
     get() = impl.receiverParameter?.type?.let { JavaTypeReference(ctx, it) }
 
   override val typeParameters: List<TypeParameter>
     get() = impl.typeParameters.map { JavaTypeParameter(ctx, it) }
+
   override val typeParameterList: TypeParameterList
     get() =
       object : TypeParameterList {
@@ -73,6 +84,7 @@ public open class JavaMethod(private val ctx: AnalysisContext, private val impl:
 
   override val valueParameters: List<Parameter>
     get() = impl.parameters.map { JavaParameter(ctx, it, this) }
+
   override val valueParameterList: ParameterList
     get() =
       object : ParameterList {

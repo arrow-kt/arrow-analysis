@@ -10,8 +10,10 @@ import org.jetbrains.kotlin.psi.psiUtil.parents
 
 fun interface KotlinDeclaration : Declaration, KotlinExpression, KotlinModifierListOwner {
   override fun impl(): KtDeclaration
+
   override val name: String?
     get() = impl().name
+
   override val parents: List<Element>
     get() =
       impl()

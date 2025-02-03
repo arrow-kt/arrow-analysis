@@ -7,7 +7,7 @@ import arrow.meta.plugins.analysis.smt.ObjectFormula
 /** Maps return points to the SMT variables representing that place. */
 data class ReturnPoints(
   val topMostReturnPointVariableName: Pair<String?, ObjectFormula>,
-  val namedReturnPointVariableNames: Map<String, ObjectFormula>
+  val namedReturnPointVariableNames: Map<String, ObjectFormula>,
 ) {
 
   fun addAndReplaceTopMost(newScopeName: String, newVariableName: ObjectFormula) =
@@ -19,7 +19,7 @@ data class ReturnPoints(
   private fun add(returnPoint: String, variableName: ObjectFormula) =
     ReturnPoints(
       topMostReturnPointVariableName,
-      namedReturnPointVariableNames + (returnPoint to variableName)
+      namedReturnPointVariableNames + (returnPoint to variableName),
     )
 
   companion object {

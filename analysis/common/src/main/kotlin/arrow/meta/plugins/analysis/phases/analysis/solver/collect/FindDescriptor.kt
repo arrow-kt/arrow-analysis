@@ -36,7 +36,7 @@ internal fun SolverState.addConstraints(
   preConstraints: ArrayList<NamedConstraint>,
   postConstraints: ArrayList<NamedConstraint>,
   notLookConstraints: ArrayList<NamedConstraint>,
-  bindingContext: ResolutionContext
+  bindingContext: ResolutionContext,
 ) {
   val lawSubject =
     findDescriptorFromRemoteLaw(descriptor, bindingContext)
@@ -47,13 +47,13 @@ internal fun SolverState.addConstraints(
     val renamed =
       solver.renameConditions(
         DeclarationConstraints(descriptor, preConstraints, postConstraints, notLookConstraints),
-        lawSubject.withAliasUnwrapped
+        lawSubject.withAliasUnwrapped,
       )
     callableConstraints.add(
       renamed.descriptor,
       ArrayList(renamed.pre),
       ArrayList(renamed.post),
-      ArrayList(renamed.doNotLookAtArgumentsWhen)
+      ArrayList(renamed.doNotLookAtArgumentsWhen),
     )
   }
   callableConstraints.add(descriptor, preConstraints, postConstraints, notLookConstraints)
@@ -62,7 +62,7 @@ internal fun SolverState.addConstraints(
 /** Finds the target of a particular law by looking up its [arrow.analysis.Subject] annotation */
 private fun findDescriptorFromRemoteLaw(
   descriptor: DeclarationDescriptor,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): DeclarationDescriptor? =
   descriptor.annotations().findAnnotation(FqName("arrow.analysis.Subject"))?.let { lawSubject ->
     val name = lawSubject.argumentValueAsString("fqName")
@@ -81,7 +81,7 @@ private fun findDescriptorFromRemoteLaw(
 
 private fun ResolutionContext.obtainDeclaration(
   fqName: FqName,
-  compatibleWith: DeclarationDescriptor
+  compatibleWith: DeclarationDescriptor,
 ): DeclarationDescriptor? {
   val current = descriptorFor(fqName)
   // the type either strictly checks
@@ -104,7 +104,7 @@ private fun ResolutionContext.obtainDeclaration(
  */
 public fun SolverState.findDescriptorFromLocalLaw(
   descriptor: DeclarationDescriptor,
-  bindingContext: ResolutionContext
+  bindingContext: ResolutionContext,
 ): DeclarationDescriptor? {
   if (!descriptor.isALaw()) return null
 
@@ -147,7 +147,7 @@ public fun SolverState.findDescriptorFromLocalLaw(
 
 private fun getReturnedExpressionWithoutPostcondition(
   function: Function,
-  bindingContext: ResolutionContext
+  bindingContext: ResolutionContext,
 ): ResolvedCall? {
   val lastElementWithoutReturn =
     when (val lastElement = function.body()?.lastBlockStatementOrThis()) {
@@ -167,8 +167,7 @@ private fun getReturnedExpressionWithoutPostcondition(
         }
       }
       else -> null
-    }
-      ?: lastElementWithoutReturn
+    } ?: lastElementWithoutReturn
 
   return veryLast?.getResolvedCall(bindingContext)
 }
@@ -181,7 +180,7 @@ private fun MutableMap<FqName, MutableList<DeclarationConstraints>>.add(
   descriptor: DeclarationDescriptor,
   pre: ArrayList<NamedConstraint>,
   post: ArrayList<NamedConstraint>,
-  doNotLookAtArgumentsWhen: ArrayList<NamedConstraint>
+  doNotLookAtArgumentsWhen: ArrayList<NamedConstraint>,
 ) {
   val fqName = descriptor.fqNameSafe
   // create a new one if not existent
@@ -197,7 +196,7 @@ private fun MutableMap<FqName, MutableList<DeclarationConstraints>>.add(
           descriptor,
           previous.pre + pre,
           previous.post + post,
-          previous.doNotLookAtArgumentsWhen + doNotLookAtArgumentsWhen
+          previous.doNotLookAtArgumentsWhen + doNotLookAtArgumentsWhen,
         )
     }
   }

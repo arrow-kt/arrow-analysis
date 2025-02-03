@@ -11,12 +11,14 @@ import com.sun.source.tree.MemberReferenceTree
 
 public class JavaMemberReference(
   private val ctx: AnalysisContext,
-  private val impl: MemberReferenceTree
+  private val impl: MemberReferenceTree,
 ) : CallableReferenceExpression, JavaElement(ctx, impl) {
   override val callableReference: SimpleNameExpression
     get() = JavaFakeReference(impl.name.toString(), this)
+
   override val receiverExpression: Expression?
     get() = impl.qualifierExpression?.model(ctx)
+
   override val hasQuestionMarks: Boolean = false
   override val isEmptyLHS: Boolean
     get() = impl.qualifierExpression == null

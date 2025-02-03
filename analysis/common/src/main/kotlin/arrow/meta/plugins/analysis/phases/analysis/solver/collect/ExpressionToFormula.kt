@@ -61,7 +61,7 @@ internal fun SolverState.topLevelExpressionToFormula(
   ex: Expression?,
   context: ResolutionContext,
   parameters: List<Parameter>,
-  allowAnyReference: Boolean
+  allowAnyReference: Boolean,
 ): BooleanFormula? =
   expressionToFormula(ex, context, parameters, allowAnyReference)?.let {
     when (it) {
@@ -76,7 +76,7 @@ private fun SolverState.expressionToFormula(
   ex: Expression?,
   context: ResolutionContext,
   parameters: List<Parameter>,
-  allowAnyReference: Boolean
+  allowAnyReference: Boolean,
 ): Formula? {
   val argCall = ex?.getResolvedCall(context)
   val recur = { v: Expression? -> expressionToFormula(v, context, parameters, allowAnyReference) }
@@ -188,7 +188,7 @@ private fun Solver.wrap(formula: Formula, type: Type): Formula =
 
 private fun SolverState.fieldFormula(
   descriptor: CallableDescriptor,
-  args: List<Pair<Type, Formula?>>
+  args: List<Pair<Type, Formula?>>,
 ): ObjectFormula? =
   descriptor
     .takeIf { it.isField() }
@@ -226,8 +226,7 @@ internal fun Element.isResultReference(bindingContext: ResolutionContext): Boole
     val params =
       lambdaArg?.functionLiteral?.valueParameters?.map { it.text }.orEmpty() + listOf("it")
     this.text in params.distinct()
-  }
-    ?: false
+  } ?: false
 
 internal fun Element.getPostOrInvariantParent(bindingContext: ResolutionContext): ResolvedCall? =
   this.parents()

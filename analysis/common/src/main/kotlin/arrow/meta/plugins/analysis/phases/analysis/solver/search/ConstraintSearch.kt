@@ -86,13 +86,13 @@ internal fun intersectNameds(one: List<NamedConstraint>, other: List<NamedConstr
 internal fun SolverState.typeInvariants(
   type: Type,
   resultName: String,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): List<NamedConstraint> = typeInvariants(type, solver.makeObjectVariable(resultName), context)
 
 internal fun SolverState.typeInvariants(
   type: Type,
   result: ObjectFormula,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): List<NamedConstraint> {
   // invariants from the type
   val invariants =
@@ -103,11 +103,10 @@ internal fun SolverState.typeInvariants(
         constraints.map {
           NamedConstraint(
             "${it.msg} (invariant from $type)",
-            solver.substituteObjectVariables(it.formula, mapOf(RESULT_VAR_NAME to result))
+            solver.substituteObjectVariables(it.formula, mapOf(RESULT_VAR_NAME to result)),
           )
         }
-      }
-      ?: emptyList()
+      } ?: emptyList()
   // invariants from property code
   val fieldEqs = fieldEqualitiesInvariants(type, result, context)
   // invariants about nullability
@@ -123,7 +122,7 @@ internal fun SolverState.typeInvariants(
 internal fun SolverState.fieldEqualitiesInvariants(
   type: Type,
   resultName: String,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): List<NamedConstraint> =
   fieldEqualitiesInvariants(type, solver.makeObjectVariable(resultName), context)
 
@@ -134,7 +133,7 @@ internal fun SolverState.fieldEqualitiesInvariants(
 internal fun SolverState.fieldEqualitiesInvariants(
   type: Type,
   result: ObjectFormula,
-  context: ResolutionContext
+  context: ResolutionContext,
 ): List<NamedConstraint> =
   (type.descriptor?.element() as? DeclarationContainer).singleFieldGroups(context).flatMap { set ->
     when (set.size) {
@@ -146,7 +145,7 @@ internal fun SolverState.fieldEqualitiesInvariants(
         rest.map {
           NamedConstraint(
             "${it.fqNameSafe.asField} is ${first.fqNameSafe.asField}",
-            solver.objects { equal(field(it, result), field(first, result)) }
+            solver.objects { equal(field(it, result), field(first, result)) },
           )
         }
       }
@@ -174,7 +173,7 @@ internal fun SolverState.getOverriddenConstraintsFor(
         descriptor,
         overriddenConstraints.flatMap { it.pre },
         overriddenConstraints.flatMap { it.post },
-        overriddenConstraints.flatMap { it.doNotLookAtArgumentsWhen }
+        overriddenConstraints.flatMap { it.doNotLookAtArgumentsWhen },
       )
     }
 
@@ -232,21 +231,21 @@ internal fun SolverState.primitiveConstraints(
           solver.booleans {
             equivalence(
               solver.makeBooleanObjectVariable(RESULT_VAR_NAME),
-              formula as BooleanFormula
+              formula as BooleanFormula,
             )
           }
         PrimitiveType.INTEGRAL ->
           solver.ints {
             equal(
               solver.makeIntegerObjectVariable(RESULT_VAR_NAME),
-              formula as NumeralFormula.IntegerFormula
+              formula as NumeralFormula.IntegerFormula,
             )
           }
         PrimitiveType.RATIONAL ->
           solver.rationals {
             equal(
               solver.makeIntegerObjectVariable(RESULT_VAR_NAME),
-              formula as NumeralFormula.RationalFormula
+              formula as NumeralFormula.RationalFormula,
             )
           }
         else -> solver.objects { equal(solver.resultVariable, formula as ObjectFormula) }

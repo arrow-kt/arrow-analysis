@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtTypeElement
 
 fun interface KotlinTypeElement : TypeElement, KotlinElement {
   override fun impl(): KtTypeElement
+
   override val typeArgumentsAsTypes: List<TypeReference>
     get() = impl().typeArgumentsAsTypes.map { it.model() }
 }

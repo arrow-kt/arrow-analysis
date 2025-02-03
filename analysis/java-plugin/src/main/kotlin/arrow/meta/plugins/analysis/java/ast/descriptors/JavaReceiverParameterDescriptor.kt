@@ -21,7 +21,7 @@ import javax.lang.model.type.TypeMirror
 public class JavaReceiverParameterDescriptor(
   private val ctx: AnalysisContext,
   private val ty: TypeMirror,
-  private val enclosing: javax.lang.model.element.Element
+  private val enclosing: javax.lang.model.element.Element,
 ) : ReceiverParameterDescriptor {
   override fun impl(): TypeMirror = ty
 
@@ -30,6 +30,7 @@ public class JavaReceiverParameterDescriptor(
 
   override val type: Type
     get() = ty.model(ctx)
+
   override val value: ReceiverValue
     get() =
       object : ReceiverValue {
@@ -37,12 +38,14 @@ public class JavaReceiverParameterDescriptor(
         override val isClassReceiver: Boolean
           get() = false // TODO check this later
       }
+
   override val allParameters: List<ParameterDescriptor> = emptyList()
   override val extensionReceiverParameter: ReceiverParameterDescriptor? = null
   override val dispatchReceiverParameter: ReceiverParameterDescriptor? = null
   override val typeParameters: List<TypeParameterDescriptor> = emptyList()
   override val returnType: Type
     get() = type
+
   override val valueParameters: List<ValueParameterDescriptor> = emptyList()
   override val overriddenDescriptors: Collection<CallableDescriptor> = emptyList()
 
@@ -53,5 +56,6 @@ public class JavaReceiverParameterDescriptor(
     get() = containingDeclaration.containingPackage
 
   override fun element(): Element? = null
+
   override fun annotations(): Annotations = JavaAnnotations(ctx, emptyList())
 }

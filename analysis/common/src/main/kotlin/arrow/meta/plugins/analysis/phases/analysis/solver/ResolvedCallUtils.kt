@@ -17,7 +17,7 @@ enum class SpecialKind {
   Invariant,
   TrustCall,
   TrustBlock,
-  NotLookArgs
+  NotLookArgs,
 }
 
 internal val ResolvedCall.specialKind: SpecialKind?
@@ -67,7 +67,7 @@ data class ArgumentExpression(
   val type: Type,
   val isVarArg: Boolean,
   val isSpread: Boolean,
-  val expression: List<Expression>
+  val expression: List<Expression>,
 )
 
 /**
@@ -84,7 +84,7 @@ internal fun ResolvedCall.allArgumentExpressions(
         it,
         isVarArg = false,
         isSpread = false,
-        listOfNotNull(getReceiverExpression())
+        listOfNotNull(getReceiverExpression()),
       )
     }
   ) + valueArgumentExpressions(context)
@@ -120,7 +120,7 @@ internal fun ResolvedCall.valueArgumentExpressions(
             containingType,
             isVarArg = param.varargElementType != null,
             isSpread = false,
-            listOf(defaultValue)
+            listOf(defaultValue),
           )
         }
       else ->
@@ -129,7 +129,7 @@ internal fun ResolvedCall.valueArgumentExpressions(
           containingType,
           isVarArg = param.varargElementType != null,
           isSpread = resolvedArg.arguments.singleOrNull()?.isSpread ?: false,
-          resolvedArg.arguments.mapNotNull { it.argumentExpression }
+          resolvedArg.arguments.mapNotNull { it.argumentExpression },
         )
     }
   }

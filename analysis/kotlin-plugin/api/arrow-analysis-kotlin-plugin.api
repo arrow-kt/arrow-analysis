@@ -53,6 +53,7 @@ public final class arrow/meta/plugins/analysis/phases/Stage : java/lang/Enum {
 	public static final field CollectConstraints Larrow/meta/plugins/analysis/phases/Stage;
 	public static final field Init Larrow/meta/plugins/analysis/phases/Stage;
 	public static final field Prove Larrow/meta/plugins/analysis/phases/Stage;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/Stage;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/Stage;
 }
@@ -67,6 +68,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin
 	public fun getBindingContext ()Lorg/jetbrains/kotlin/resolve/BindingContext;
 	public fun getKeys (Lorg/jetbrains/kotlin/util/slicedMap/WritableSlice;)Ljava/util/Collection;
 	public fun getModule ()Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/descriptors/ModuleDescriptor;
+	public fun getProject ()Lorg/jetbrains/kotlin/com/intellij/openapi/project/Project;
 	public fun getType (Lorg/jetbrains/kotlin/psi/KtExpression;)Lorg/jetbrains/kotlin/types/KotlinType;
 	public fun getTypes ()Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/types/Types;
 	public fun handleError (Larrow/meta/plugins/analysis/phases/analysis/solver/errors/ErrorIds;Larrow/meta/plugins/analysis/phases/analysis/solver/ast/context/elements/Element;Ljava/lang/String;)V
@@ -2721,6 +2723,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin
 	public static final field NONE Larrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin/elements/KotlinProjectionKind;
 	public static final field OUT Larrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin/elements/KotlinProjectionKind;
 	public static final field STAR Larrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin/elements/KotlinProjectionKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin/elements/KotlinProjectionKind;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin/elements/KotlinProjectionKind;
 }
@@ -3651,6 +3654,7 @@ public final class arrow/meta/plugins/analysis/phases/analysis/solver/ast/kotlin
 public final class arrow/meta/plugins/analysis/phases/ir/HintState : java/lang/Enum {
 	public static final field NeedsProcessing Larrow/meta/plugins/analysis/phases/ir/HintState;
 	public static final field Processed Larrow/meta/plugins/analysis/phases/ir/HintState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Larrow/meta/plugins/analysis/phases/ir/HintState;
 	public static fun values ()[Larrow/meta/plugins/analysis/phases/ir/HintState;
 }

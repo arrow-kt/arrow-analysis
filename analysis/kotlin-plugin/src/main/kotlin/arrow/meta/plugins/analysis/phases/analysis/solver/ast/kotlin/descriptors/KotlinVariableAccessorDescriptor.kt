@@ -8,6 +8,7 @@ abstract class KotlinVariableAccessorDescriptor(
   override val impl: org.jetbrains.kotlin.descriptors.VariableAccessorDescriptor
 ) : VariableAccessorDescriptor, KotlinFunctionDescriptor(impl) {
   override fun impl(): org.jetbrains.kotlin.descriptors.VariableAccessorDescriptor = impl
+
   override val correspondingVariable: VariableDescriptorWithAccessors
     get() = impl().correspondingVariable.model()
 }

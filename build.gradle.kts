@@ -13,6 +13,7 @@ allprojects {
   repositories {
     mavenCentral()
     maven(url = "https://oss.sonatype.org/content/repositories/snapshots/")
+    mavenLocal()
   }
 
   group = property("projects.group").toString()

@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.psi.KtTypeReference
 class KotlinTypeReference(val impl: KtTypeReference) :
   TypeReference, KotlinAnnotated, KotlinAnnotationsContainer {
   override fun impl(): KtTypeReference = impl
+
   override val typeElement: TypeElement?
     get() = impl().typeElement?.model()
 }

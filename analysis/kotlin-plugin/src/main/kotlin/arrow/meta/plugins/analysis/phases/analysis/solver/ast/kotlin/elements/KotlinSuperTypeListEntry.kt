@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtSuperTypeListEntry
 
 fun interface KotlinSuperTypeListEntry : SuperTypeListEntry, KotlinElement {
   override fun impl(): KtSuperTypeListEntry
+
   override val typeReference: TypeReference?
     get() = impl().typeReference?.model()
 }

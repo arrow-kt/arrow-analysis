@@ -7,10 +7,13 @@ import org.jetbrains.kotlin.psi.KtDoubleColonExpression
 
 fun interface KotlinDoubleColonExpression : DoubleColonExpression, KotlinExpression {
   override fun impl(): KtDoubleColonExpression
+
   override val receiverExpression: Expression?
     get() = impl().receiverExpression?.model()
+
   override val hasQuestionMarks: Boolean
     get() = impl().hasQuestionMarks
+
   override val isEmptyLHS: Boolean
     get() = impl().isEmptyLHS
 }

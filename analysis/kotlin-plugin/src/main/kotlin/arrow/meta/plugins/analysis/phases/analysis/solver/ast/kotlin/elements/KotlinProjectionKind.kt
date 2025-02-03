@@ -4,5 +4,5 @@ enum class KotlinProjectionKind {
   IN,
   OUT,
   STAR,
-  NONE
+  NONE,
 }

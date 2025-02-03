@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtValueArgumentName
 
 fun interface KotlinExpressionValueArgumentName : ValueArgumentName {
   fun impl(): KtValueArgumentName
+
   override val asName: Name
     get() = Name(impl().asName.asString())
+
   override val referenceExpression: SimpleNameExpression?
     get() = impl().referenceExpression.model()
 }

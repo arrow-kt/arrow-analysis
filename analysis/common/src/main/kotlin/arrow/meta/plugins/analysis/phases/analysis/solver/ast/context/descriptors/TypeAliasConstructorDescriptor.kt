@@ -2,5 +2,6 @@ package arrow.meta.plugins.analysis.phases.analysis.solver.ast.context.descripto
 
 interface TypeAliasConstructorDescriptor : ConstructorDescriptor {
   val underlyingConstructorDescriptor: ConstructorDescriptor
+
   fun getContainingDeclaration(): TypeAliasDescriptor
 }

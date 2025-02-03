@@ -11,12 +11,16 @@ import org.jetbrains.kotlin.psi.KtCallElement
 
 fun interface KotlinCallElement : CallElement, KotlinElement {
   override fun impl(): KtCallElement
+
   override val calleeExpression: Expression?
     get() = impl().calleeExpression?.model()
+
   override val valueArguments: List<ValueArgument>
     get() = impl().valueArguments.map { KotlinValueArgument(it) }
+
   override val lambdaArguments: List<ExpressionLambdaArgument>
     get() = impl().lambdaArguments.map { it.model() }
+
   override val typeArguments: List<TypeProjection>
     get() = TODO("Not yet implemented")
 }

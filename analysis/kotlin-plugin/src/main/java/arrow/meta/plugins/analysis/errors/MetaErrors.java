@@ -1,6 +1,6 @@
 package arrow.meta.plugins.analysis.errors;
 
-import org.jetbrains.kotlin.com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.kotlin.diagnostics.DiagnosticFactory1;
 import org.jetbrains.kotlin.diagnostics.Errors;
 

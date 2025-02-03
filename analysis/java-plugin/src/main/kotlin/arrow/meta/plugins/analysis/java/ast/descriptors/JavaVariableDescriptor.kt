@@ -17,6 +17,7 @@ public open class JavaVariableDescriptor(ctx: AnalysisContext, private val impl:
         ElementKind.FIELD -> true
         else -> false
       }
+
   override val isConst: Boolean = impl.constantValue != null
   override val isLateInit: Boolean = false
 }

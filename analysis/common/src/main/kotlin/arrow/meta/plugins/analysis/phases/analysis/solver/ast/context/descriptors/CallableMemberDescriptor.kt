@@ -7,6 +7,6 @@ interface CallableMemberDescriptor : CallableDescriptor, MemberDescriptor {
     DECLARATION,
     FAKE_OVERRIDE,
     DELEGATION,
-    SYNTHESIZED
+    SYNTHESIZED,
   }
 }

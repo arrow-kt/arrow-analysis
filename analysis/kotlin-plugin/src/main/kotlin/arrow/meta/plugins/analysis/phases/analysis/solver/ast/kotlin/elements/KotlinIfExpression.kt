@@ -7,10 +7,13 @@ import org.jetbrains.kotlin.psi.KtIfExpression
 
 class KotlinIfExpression(val impl: KtIfExpression) : IfExpression, KotlinExpression {
   override fun impl(): KtIfExpression = impl
+
   override val condition: Expression?
     get() = impl().condition?.model()
+
   override val thenExpression: Expression?
     get() = impl().then?.model()
+
   override val elseExpression: Expression?
     get() = impl().`else`?.model()
 }

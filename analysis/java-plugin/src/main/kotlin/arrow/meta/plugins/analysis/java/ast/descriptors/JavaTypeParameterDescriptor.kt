@@ -13,11 +13,12 @@ import javax.lang.model.element.TypeParameterElement
 
 public class JavaTypeParameterDescriptor(
   private val ctx: AnalysisContext,
-  private val impl: TypeParameterElement
+  private val impl: TypeParameterElement,
 ) : TypeParameterDescriptor, JavaMemberDescriptor(ctx, impl) {
 
   override val upperBounds: List<Type>
     get() = impl.bounds.map { it.model(ctx) }
+
   override val index: Int
     get() = impl.enclosingElement.typeParametersFromEverywhere.indexOf(impl)
 
@@ -27,6 +28,7 @@ public class JavaTypeParameterDescriptor(
 
   override val typeConstructor: TypeConstructor
     get() = JavaTypeParameterConstructor(ctx, impl)
+
   override val defaultType: Type
     get() = impl.asType().model(ctx)
 }

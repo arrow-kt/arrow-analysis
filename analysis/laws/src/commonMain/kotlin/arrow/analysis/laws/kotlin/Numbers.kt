@@ -15,6 +15,7 @@ object ByteLaws {
     pre(other != 0) { "other is not zero" }
     return this / other
   }
+
   @Law
   inline fun Byte.divLaw(other: Long): Long {
     pre(other != 0L) { "other is not zero" }
@@ -41,6 +42,7 @@ object ShortLaws {
     pre(other != 0) { "other is not zero" }
     return this / other
   }
+
   @Law
   inline fun Short.divLaw(other: Long): Long {
     pre(other != 0L) { "other is not zero" }
@@ -67,6 +69,7 @@ object IntLaws {
     pre(other != 0) { "other is not zero" }
     return this / other
   }
+
   @Law
   inline fun Int.divLaw(other: Long): Long {
     pre(other != 0L) { "other is not zero" }
@@ -93,6 +96,7 @@ object LongLaws {
     pre(other != 0) { "other is not zero" }
     return this / other
   }
+
   @Law
   inline fun Long.divLaw(other: Long): Long {
     pre(other != 0L) { "other is not zero" }

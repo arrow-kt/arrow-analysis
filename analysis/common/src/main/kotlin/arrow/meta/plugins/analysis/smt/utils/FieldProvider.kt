@@ -10,7 +10,7 @@ class FieldProvider(
   private val solver: Solver,
   private val prover: ProverEnvironment,
   internal val basicFields: MutableMap<String, Long>,
-  private var current: Long
+  private var current: Long,
 ) {
 
   fun introduce(descriptor: DeclarationDescriptor): Long {

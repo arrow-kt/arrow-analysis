@@ -4,5 +4,6 @@ interface LambdaExpression : Expression {
   val functionLiteral: FunctionLiteral
   val valueParameters: List<Parameter>
   val bodyExpression: Expression?
+
   fun hasDeclaredReturnType(): Boolean
 }

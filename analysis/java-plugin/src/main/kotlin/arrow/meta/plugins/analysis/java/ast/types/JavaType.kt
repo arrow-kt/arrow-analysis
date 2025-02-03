@@ -23,6 +23,7 @@ public class JavaType(private val ctx: AnalysisContext, internal val ty: TypeMir
       )
 
   override fun isNullable(): Boolean = false
+
   override val unwrappedNotNullableType: Type = this
   override val isMarkedNullable: Boolean = false
 
@@ -32,6 +33,7 @@ public class JavaType(private val ctx: AnalysisContext, internal val ty: TypeMir
         object : OurTypeVisitor<List<TypeProjection>>(emptyList()) {
           override fun visitArray(t: ArrayType?, p: Unit?): List<TypeProjection> =
             listOfNotNull(t?.componentType).map { JavaTypeProjection(ctx, it) }
+
           override fun visitDeclared(t: DeclaredType?, p: Unit?): List<TypeProjection> =
             t?.typeArguments?.map { JavaTypeProjection(ctx, it) }.orEmpty()
         }
@@ -40,21 +42,32 @@ public class JavaType(private val ctx: AnalysisContext, internal val ty: TypeMir
   private fun isEqualTo(other: TypeMirror): Boolean = ctx.types.isSameType(ty, other)
 
   override fun isBoolean(): Boolean = isEqualTo(ctx.symbolTable.booleanType)
+
   override fun isInt(): Boolean = isEqualTo(ctx.symbolTable.intType)
+
   override fun isLong(): Boolean = isEqualTo(ctx.symbolTable.longType)
+
   override fun isFloat(): Boolean = isEqualTo(ctx.symbolTable.floatType)
+
   override fun isDouble(): Boolean = isEqualTo(ctx.symbolTable.doubleType)
+
   override fun isByte(): Boolean = isEqualTo(ctx.symbolTable.byteType)
+
   override fun isShort(): Boolean = isEqualTo(ctx.symbolTable.shortType)
+
   override fun isUnsignedNumberType(): Boolean = false // TODO
+
   override fun isChar(): Boolean = isEqualTo(ctx.symbolTable.charType)
+
   override fun isString(): Boolean = isEqualTo(ctx.symbolTable.stringType)
+
   override fun isAnyOrNullableAny(): Boolean = isEqualTo(ctx.symbolTable.objectType)
 
   override fun isSubtypeOf(other: Type): Boolean {
     if (other !is JavaType) return false
     return ctx.types.isSubtype(ty, other.ty)
   }
+
   override fun isEqualTo(other: Type): Boolean {
     if (other !is JavaType) return false
     return ctx.types.isSameType(ty, other.ty)

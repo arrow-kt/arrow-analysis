@@ -17,6 +17,7 @@ open class KotlinExpressionValueArgument(open val impl: org.jetbrains.kotlin.psi
 
   override val argumentExpression: Expression?
     get() = impl().getArgumentExpression()?.model()
+
   override val isSpread: Boolean
     get() = impl().isSpread
 }

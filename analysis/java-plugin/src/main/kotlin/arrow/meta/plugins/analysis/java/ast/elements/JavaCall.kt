@@ -25,10 +25,13 @@ public class JavaCall(private val ctx: AnalysisContext, private val impl: Method
   CallExpression, JavaElement(ctx, impl) {
   override val calleeExpression: Expression?
     get() = this.getResolvedCall()?.getReceiverExpression()
+
   override val typeArguments: List<TypeProjection>
     get() = impl.typeArguments.mapNotNull { JavaTypeProjection(ctx, it) }
+
   override val valueArguments: List<ValueArgument>
     get() = this.getResolvedCall()?.valueArguments?.flatMap { it.value.arguments }.orEmpty()
+
   // Java does not have final block arguments
   override val lambdaArguments: List<ExpressionLambdaArgument>
     get() = emptyList()
@@ -39,8 +42,10 @@ public class JavaConstructorCall(private val ctx: AnalysisContext, private val i
   override val calleeExpression: Expression? = null
   override val typeArguments: List<TypeProjection>
     get() = impl.typeArguments.mapNotNull { JavaTypeProjection(ctx, it) }
+
   override val valueArguments: List<ValueArgument>
     get() = this.getResolvedCall()?.valueArguments?.flatMap { it.value.arguments }.orEmpty()
+
   // Java does not have final block arguments
   override val lambdaArguments: List<ExpressionLambdaArgument>
     get() = emptyList()
@@ -48,14 +53,17 @@ public class JavaConstructorCall(private val ctx: AnalysisContext, private val i
 
 public class JavaMemberSelect(
   private val ctx: AnalysisContext,
-  private val impl: MemberSelectTree
+  private val impl: MemberSelectTree,
 ) : CallExpression, JavaElement(ctx, impl) {
   override val calleeExpression: Expression?
     get() = impl.expression?.model(ctx)
+
   override val typeArguments: List<TypeProjection>
     get() = emptyList()
+
   override val valueArguments: List<ValueArgument>
     get() = emptyList()
+
   // Java does not have final block arguments
   override val lambdaArguments: List<ExpressionLambdaArgument>
     get() = emptyList()
@@ -82,10 +90,13 @@ public class JavaBinary(private val ctx: AnalysisContext, private val impl: Bina
         is JCTree.JCOperatorExpression -> impl.operator.name.toString()
         else -> operatorName
       }
+
   override val operationTokenRpr: String
     get() = operatorName
+
   override val left: Expression
     get() = impl.leftOperand.model(ctx)
+
   override val right: Expression
     get() = impl.rightOperand.model(ctx)
 }
@@ -119,5 +130,5 @@ internal val kindNames: Map<Tree.Kind, String> =
     Tree.Kind.OR to "BITOR",
     Tree.Kind.XOR to "BITXOR",
     Tree.Kind.CONDITIONAL_AND to "ANDAND",
-    Tree.Kind.CONDITIONAL_OR to "OROR"
+    Tree.Kind.CONDITIONAL_OR to "OROR",
   )

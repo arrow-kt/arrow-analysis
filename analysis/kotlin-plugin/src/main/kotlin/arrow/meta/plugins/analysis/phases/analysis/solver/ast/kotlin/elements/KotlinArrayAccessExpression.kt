@@ -8,8 +8,10 @@ import org.jetbrains.kotlin.psi.KtArrayAccessExpression
 class KotlinArrayAccessExpression(val impl: KtArrayAccessExpression) :
   ArrayAccessExpression, KotlinReferenceExpression {
   override fun impl(): KtArrayAccessExpression = impl
+
   override val arrayExpression: Expression?
     get() = impl().arrayExpression?.model()
+
   override val indexExpressions: List<Expression>
     get() = impl().indexExpressions.map { it.model() }
 }

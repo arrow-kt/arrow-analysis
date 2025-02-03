@@ -7,6 +7,7 @@ import org.jetbrains.kotlin.psi.KtLoopExpression
 
 fun interface KotlinLoopExpression : LoopExpression, KotlinExpression {
   override fun impl(): KtLoopExpression
+
   override val body: Expression?
     get() = impl().body?.model()
 }

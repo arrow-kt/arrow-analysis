@@ -15,7 +15,7 @@ private constructor(
   val name: String,
   val smtName: String,
   val origin: Element,
-  val invariant: BooleanFormula? = null
+  val invariant: BooleanFormula? = null,
 ) {
   companion object {
     public operator fun invoke(
@@ -23,14 +23,14 @@ private constructor(
       name: String,
       smtName: String,
       origin: Element,
-      invariant: BooleanFormula? = null
+      invariant: BooleanFormula? = null,
     ): VarInfo = VarInfo(name, solver.escape(smtName), origin, invariant)
 
     public fun unsafeCreate(
       name: String,
       smtName: String,
       origin: Element,
-      invariant: BooleanFormula? = null
+      invariant: BooleanFormula? = null,
     ): VarInfo = VarInfo(name, smtName, origin, invariant)
   }
 }

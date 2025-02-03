@@ -15,21 +15,21 @@ sealed class Condition(
   val condition: Element?,
   val isElse: Boolean,
   val body: Expression,
-  val whole: Element
+  val whole: Element,
 )
 
 class SimpleCondition(
   val predicate: Expression?,
   isElse: Boolean,
   body: Expression,
-  whole: Element
+  whole: Element,
 ) : Condition(predicate, isElse, body, whole)
 
 class SubjectCondition(
   val check: WhenCondition?,
   isElse: Boolean,
   body: Expression,
-  whole: Element
+  whole: Element,
 ) : Condition(check, isElse, body, whole)
 
 // wrapping for missing else
@@ -37,20 +37,29 @@ class MissingElseBlockExpression(val whole: Expression, val thenExpression: Expr
   BlockExpression {
   override val firstStatement: Expression?
     get() = null
+
   override val statements: List<Expression>
     get() = emptyList()
+
   override val implicitReturnFromLast: Boolean
     get() = false
+
   override val text: String
     get() = "<implicit empty else block>"
 
   override fun impl(): Any = whole.impl()
+
   override val psiOrParent: Element = this
+
   override fun parents(): List<Element> = thenExpression.parents()
 
   override fun getResolvedCall(context: ResolutionContext): ResolvedCall? = null
+
   override fun getVariableDescriptor(context: ResolutionContext): VariableDescriptor? = null
+
   override fun location(): CompilerMessageSourceLocation? = whole.location()
+
   override fun type(context: ResolutionContext): Type? = thenExpression.type(context)
+
   override fun lastBlockStatementOrThis(): Expression = this
 }

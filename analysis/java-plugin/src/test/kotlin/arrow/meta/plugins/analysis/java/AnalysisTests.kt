@@ -17,7 +17,7 @@ class AnalysisTests {
     }
     """(
       withPlugin = { succeeded() },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -34,7 +34,7 @@ class AnalysisTests {
     }
     """(
       withPlugin = { succeeded() },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -54,7 +54,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("fails to satisfy the post-condition")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -76,7 +76,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("fails to satisfy the post-condition")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -97,7 +97,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("fails to satisfy the post-condition")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -119,7 +119,7 @@ class AnalysisTests {
     }
     """(
       withPlugin = { succeeded() },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -144,7 +144,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("fails to satisfy the post-condition")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -171,7 +171,7 @@ class AnalysisTests {
     }
     """(
       withPlugin = { succeeded() },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -201,7 +201,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("pre-condition `value is positive` is not satisfied")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -232,7 +232,7 @@ class AnalysisTests {
     }
     """(
       withPlugin = { succeeded() },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -266,7 +266,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("pre-condition `value is positive` is not satisfied")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 
@@ -301,7 +301,7 @@ class AnalysisTests {
         failed()
         hadErrorContaining("pre-condition `result is positive` is not satisfied")
       },
-      withoutPlugin = { succeeded() }
+      withoutPlugin = { succeeded() },
     )
   }
 }

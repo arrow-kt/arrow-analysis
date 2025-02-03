@@ -17,7 +17,9 @@ public class JavaIdentifier(ctx: AnalysisContext, private val impl: IdentifierTr
   init {
     require(impl.name != ctx.names._this)
   }
+
   override fun getReferencedName(): String = impl.name.toString()
+
   override fun getReferencedNameAsName(): Name = impl.name.name()
 }
 
@@ -28,7 +30,9 @@ public class JavaThis(ctx: AnalysisContext, impl: IdentifierTree) :
   }
 
   override fun getTargetLabel(): SimpleNameExpression? = null
+
   override fun getLabelName(): String? = null
+
   override fun getLabelNameAsName(): Name? = null
 }
 
@@ -39,7 +43,10 @@ public class JavaSuper(ctx: AnalysisContext, impl: IdentifierTree) :
   }
 
   override val superTypeQualifier: TypeReference? = null
+
   override fun getTargetLabel(): SimpleNameExpression? = null
+
   override fun getLabelName(): String? = null
+
   override fun getLabelNameAsName(): Name? = null
 }

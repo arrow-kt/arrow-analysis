@@ -7,8 +7,11 @@ interface PureClassOrObject : PureElement, DeclarationContainer {
   val superTypeListEntries: List<SuperTypeListEntry>
 
   val companionObjects: List<ObjectDeclaration?>
+
   fun hasExplicitPrimaryConstructor(): Boolean
+
   fun hasPrimaryConstructor(): Boolean
+
   val primaryConstructor: PrimaryConstructor?
   val primaryConstructorModifierList: ModifierList?
 

@@ -32,7 +32,7 @@ import com.sun.tools.javac.util.JCDiagnostic
 
 public class JavaResolutionContext(
   private val state: SolverState?,
-  private val ctx: AnalysisContext
+  private val ctx: AnalysisContext,
 ) : ResolutionContext {
   override val types: Types =
     object : Types {

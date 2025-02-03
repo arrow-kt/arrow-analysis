@@ -9,10 +9,13 @@ import org.jetbrains.kotlin.psi.KtForExpression
 
 class KotlinForExpression(val impl: KtForExpression) : ForExpression, KotlinLoopExpression {
   override fun impl(): KtForExpression = impl
+
   override val loopParameter: Parameter?
     get() = impl().loopParameter?.model()
+
   override val destructuringDeclaration: DestructuringDeclaration?
     get() = impl().destructuringDeclaration?.model()
+
   override val loopRange: Expression?
     get() = impl().loopRange?.model()
 }

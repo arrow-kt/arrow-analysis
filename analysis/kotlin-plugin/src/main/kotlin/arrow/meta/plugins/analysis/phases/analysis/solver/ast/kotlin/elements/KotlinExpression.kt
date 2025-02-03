@@ -14,6 +14,7 @@ import org.jetbrains.kotlin.utils.IDEAPluginsCompatibilityAPI
 @OptIn(IDEAPluginsCompatibilityAPI::class)
 fun interface KotlinExpression : Expression, KotlinElement {
   override fun impl(): KtExpression
+
   override fun type(context: ResolutionContext): Type? =
     if (context is KotlinResolutionContext)
       impl().getType(context.bindingContext)?.let { KotlinType(it) }
